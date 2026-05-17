@@ -3,1087 +3,1236 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CJC Intramurals — Command Center</title>
+  <title>CJC Intramurals - Command Center</title>
   <link rel="stylesheet" href="./css/style.css" />
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
+  <section class="auth-shell" id="authShell">
+    <div class="auth-layout">
+      <div class="auth-showcase">
+        <div class="auth-showcase-copy">
+          <span class="auth-kicker">Prototype Access</span>
+          <h1>Intramurals Intel System</h1>
+          <p>Enter the admin operations dashboard or the student viewer from one modern prototype screen. Authentication is simulated for the frontend phase only.</p>
+        </div>
 
-  <!-- ===== SIDEBAR ===== -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <div class="logo-mark">
-        <span class="logo-icon"><i class="fa-solid fa-fire-flame-curved"></i></span>
-        <div class="logo-text">
-          <span class="logo-title">CJC</span>
-          <span class="logo-sub">INTRAMURALS</span>
+        <div class="auth-feature-grid">
+          <article class="auth-feature-card">
+            <span class="feature-tag admin">Admin / CSG Officer</span>
+            <h3>Operations Command</h3>
+            <p>Publish scores, scan score sheets, upload official guidelines, manage attendance, and export reports.</p>
+          </article>
+          <article class="auth-feature-card">
+            <span class="feature-tag student">Student / Viewer</span>
+            <h3>Live Campus View</h3>
+            <p>Track live scores, standings, schedules, announcements, and official guidelines in a read-only dashboard.</p>
+          </article>
         </div>
       </div>
-      <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div>
 
-    <nav class="sidebar-nav">
-      <span class="nav-group-label">MAIN</span>
-      <ul class="nav-list">
-        <li class="nav-item active" data-section="dashboard">
-          <i class="fa-solid fa-gauge-high"></i>
-          <span>Dashboard</span>
-          <div class="nav-indicator"></div>
-        </li>
-        <li class="nav-item" data-section="chatbot">
-          <i class="fa-solid fa-robot"></i>
-          <span>AI Chatbot</span>
-          <span class="nav-badge pulse">AI</span>
-        </li>
-      </ul>
-
-      <span class="nav-group-label">EVENTS</span>
-      <ul class="nav-list">
-        <li class="nav-item" data-section="events">
-          <i class="fa-solid fa-calendar-days"></i>
-          <span>Event Management</span>
-        </li>
-        <li class="nav-item" data-section="scoring">
-          <i class="fa-solid fa-stopwatch"></i>
-          <span>Real-Time Scoring</span>
-          <span class="nav-badge live">LIVE</span>
-        </li>
-        <li class="nav-item" data-section="standings">
-          <i class="fa-solid fa-trophy"></i>
-          <span>Live Standings</span>
-        </li>
-        <li class="nav-item" data-section="attendance">
-          <i class="fa-solid fa-clipboard-check"></i>
-          <span>Attendance</span>
-        </li>
-      </ul>
-
-      <span class="nav-group-label">PEOPLE</span>
-      <ul class="nav-list">
-        <li class="nav-item" data-section="profiles">
-          <i class="fa-solid fa-id-card"></i>
-          <span>Participant Profiles</span>
-        </li>
-        <li class="nav-item" data-section="announcements">
-          <i class="fa-solid fa-bullhorn"></i>
-          <span>Announcements</span>
-        </li>
-      </ul>
-
-      <span class="nav-group-label">ADMIN</span>
-      <ul class="nav-list">
-        <li class="nav-item" data-section="reports">
-          <i class="fa-solid fa-chart-bar"></i>
-          <span>Reports & Analytics</span>
-        </li>
-        <li class="nav-item" data-section="settings">
-          <i class="fa-solid fa-sliders"></i>
-          <span>Settings</span>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="sidebar-footer">
-      <div class="user-chip">
-        <div class="user-avatar">CSG</div>
-        <div class="user-info">
-          <span class="user-name">CSG Officer</span>
-          <span class="user-role">Administrator</span>
+      <div class="auth-panel">
+        <div class="auth-mode-switch">
+          <button class="auth-mode-btn active" type="button" data-auth-mode="login">Login</button>
+          <button class="auth-mode-btn" type="button" data-auth-mode="register">Register</button>
         </div>
-        <i class="fa-solid fa-chevron-up user-arrow"></i>
+
+        <div class="auth-panel-copy">
+          <span class="feature-tag neutral" id="authModeTag">Login</span>
+          <h2 id="authTitle">Enter the Dashboard</h2>
+          <p id="authSubtitle">Use any sample details below to continue. No real backend authentication is connected in this prototype.</p>
+        </div>
+
+        <form class="auth-form" id="authForm">
+          <div class="auth-field-grid">
+            <div class="form-group">
+              <label for="authName">Name</label>
+              <input id="authName" type="text" class="form-input" placeholder="CSG Officer or Student Viewer" />
+            </div>
+            <div class="form-group">
+              <label for="authEmail">Email</label>
+              <input id="authEmail" type="email" class="form-input" placeholder="name@cjc.edu.ph" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="authPassword">Password</label>
+            <input id="authPassword" type="password" class="form-input" placeholder="Any sample password" />
+          </div>
+
+          <div class="form-group">
+            <label>Select Role</label>
+            <div class="role-option-grid">
+              <label class="role-option active">
+                <input type="radio" name="userRole" value="admin" checked />
+                <span class="role-option-icon"><i class="fa-solid fa-user-shield"></i></span>
+                <span class="role-option-copy">
+                  <strong>Admin / CSG Officer</strong>
+                  <small>Full access to modules, publishing, uploads, verification, and reports.</small>
+                </span>
+              </label>
+              <label class="role-option">
+                <input type="radio" name="userRole" value="student" />
+                <span class="role-option-icon"><i class="fa-solid fa-user-graduate"></i></span>
+                <span class="role-option-copy">
+                  <strong>Student / Viewer</strong>
+                  <small>Read-only access to live scores, standings, schedules, announcements, and guidelines.</small>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <button class="btn-primary auth-submit-btn" id="authSubmitBtn" type="submit">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span id="authSubmitLabel">Open Dashboard</span>
+          </button>
+        </form>
       </div>
     </div>
-  </aside>
+  </section>
 
-  <!-- ===== MAIN CONTENT ===== -->
-  <div class="main-wrapper" id="mainWrapper">
-
-    <!-- TOP HEADER -->
-    <header class="topbar">
-      <div class="topbar-left">
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
+  <div class="app-shell is-hidden" id="appShell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-mark">
+          <span class="logo-icon"><i class="fa-solid fa-fire-flame-curved"></i></span>
+          <div class="logo-text">
+            <span class="logo-title">CJC</span>
+            <span class="logo-sub">INTRAMURALS</span>
+          </div>
+        </div>
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
           <i class="fa-solid fa-bars"></i>
         </button>
-        <div class="breadcrumb">
-          <span class="breadcrumb-section" id="breadcrumbSection">Dashboard</span>
-          <span class="breadcrumb-year">— AY 2025–2026</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <span class="nav-group-label">MAIN</span>
+        <ul class="nav-list">
+          <li class="nav-item active" data-section="dashboard" data-role-visibility="admin student">
+            <i class="fa-solid fa-gauge-high"></i>
+            <span class="nav-label" data-role-copy data-admin-copy="Dashboard" data-student-copy="Dashboard">Dashboard</span>
+            <div class="nav-indicator"></div>
+          </li>
+          <li class="nav-item" data-section="chatbot" data-role-visibility="admin student">
+            <i class="fa-solid fa-robot"></i>
+            <span class="nav-label" data-role-copy data-admin-copy="AI Assistant" data-student-copy="AI Assistant">AI Assistant</span>
+            <span class="nav-badge pulse">AI</span>
+          </li>
+        </ul>
+
+        <span class="nav-group-label">LIVE</span>
+        <ul class="nav-list">
+          <li class="nav-item" data-section="scoring" data-role-visibility="admin student">
+            <i class="fa-solid fa-stopwatch"></i>
+            <span class="nav-label" data-role-copy data-admin-copy="Real-Time Scoring" data-student-copy="Live Scores">Real-Time Scoring</span>
+            <span class="nav-badge live">LIVE</span>
+          </li>
+          <li class="nav-item" data-section="standings" data-role-visibility="admin student">
+            <i class="fa-solid fa-trophy"></i>
+            <span class="nav-label" data-role-copy data-admin-copy="Live Standings" data-student-copy="Live Standings">Live Standings</span>
+          </li>
+          <li class="nav-item" data-section="events" data-role-visibility="admin student">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span class="nav-label" data-role-copy data-admin-copy="Event Management" data-student-copy="Schedule">Event Management</span>
+          </li>
+        </ul>
+
+        <span class="nav-group-label">OPERATIONS</span>
+        <ul class="nav-list">
+          <li class="nav-item" data-section="scanner" data-role-visibility="admin">
+            <i class="fa-solid fa-camera-retro"></i>
+            <span class="nav-label">Score Sheet Scanner</span>
+          </li>
+          <li class="nav-item" data-section="guidelines" data-role-visibility="admin student">
+            <i class="fa-solid fa-file-arrow-up"></i>
+            <span class="nav-label" data-role-copy data-admin-copy="Guidelines Upload" data-student-copy="Guidelines">Guidelines Upload</span>
+          </li>
+          <li class="nav-item" data-section="profiles" data-role-visibility="admin">
+            <i class="fa-solid fa-id-card"></i>
+            <span class="nav-label">Participant Profiles</span>
+          </li>
+          <li class="nav-item" data-section="attendance" data-role-visibility="admin">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <span class="nav-label">Attendance</span>
+          </li>
+          <li class="nav-item" data-section="announcements" data-role-visibility="admin student">
+            <i class="fa-solid fa-bullhorn"></i>
+            <span class="nav-label">Announcements</span>
+          </li>
+        </ul>
+
+        <span class="nav-group-label">ADMIN</span>
+        <ul class="nav-list">
+          <li class="nav-item" data-section="reports" data-role-visibility="admin">
+            <i class="fa-solid fa-chart-bar"></i>
+            <span class="nav-label">Reports</span>
+          </li>
+          <li class="nav-item" data-section="settings" data-role-visibility="admin">
+            <i class="fa-solid fa-sliders"></i>
+            <span class="nav-label">Settings</span>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-chip">
+          <div class="user-avatar" id="sidebarAvatarText">CSG</div>
+          <div class="user-info">
+            <span class="user-name" id="sidebarUserName">CSG Officer</span>
+            <span class="user-role" id="sidebarUserRole">Administrator</span>
+          </div>
+          <button class="topbar-btn topbar-btn-sm" id="sidebarRoleSwitchBtn" type="button" aria-label="Switch role">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+          </button>
         </div>
       </div>
-      <div class="topbar-right">
-        <div class="topbar-search">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" placeholder="Search events, participants…" />
+    </aside>
+
+    <div class="main-wrapper" id="mainWrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="breadcrumb">
+            <span class="breadcrumb-section" id="breadcrumbSection">Dashboard</span>
+            <span class="breadcrumb-year">AY 2025-2026</span>
+          </div>
         </div>
-        <button class="topbar-btn" id="notifBtn">
-          <i class="fa-solid fa-bell"></i>
-          <span class="notif-dot"></span>
-        </button>
-        <div class="topbar-avatar">
-          <span>CSG</span>
+        <div class="topbar-right">
+          <div class="topbar-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="globalSearchInput" placeholder="Search events, participants, guidelines..." />
+          </div>
+          <span class="header-view-pill" id="headerViewPill">Admin Only</span>
+          <button class="topbar-btn topbar-btn-wide" id="switchRoleBtn" type="button">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Switch Role</span>
+          </button>
+          <button class="topbar-btn" id="notifBtn">
+            <i class="fa-solid fa-bell"></i>
+            <span class="notif-dot"></span>
+          </button>
+          <div class="topbar-avatar">
+            <span id="topbarAvatarText">CSG</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="notif-dropdown" id="notifDropdown">
+        <div class="notif-header">Notifications <span class="notif-count">3</span></div>
+        <div class="notif-item unread">
+          <i class="fa-solid fa-star"></i>
+          <div>
+            <p>Basketball Finals score updated</p>
+            <small>2 min ago</small>
+          </div>
+        </div>
+        <div class="notif-item unread">
+          <i class="fa-solid fa-user-plus"></i>
+          <div>
+            <p>15 new participant registrations</p>
+            <small>1 hr ago</small>
+          </div>
+        </div>
+        <div class="notif-item">
+          <i class="fa-solid fa-bullhorn"></i>
+          <div>
+            <p>Cheerdance schedule updated</p>
+            <small>3 hr ago</small>
+          </div>
         </div>
       </div>
-    </header>
 
-    <!-- NOTIFICATION DROPDOWN -->
-    <div class="notif-dropdown" id="notifDropdown">
-      <div class="notif-header">Notifications <span class="notif-count">3</span></div>
-      <div class="notif-item unread">
-        <i class="fa-solid fa-star"></i>
-        <div>
-          <p>Basketball Finals score updated</p>
-          <small>2 min ago</small>
-        </div>
-      </div>
-      <div class="notif-item unread">
-        <i class="fa-solid fa-user-plus"></i>
-        <div>
-          <p>15 new participant registrations</p>
-          <small>1 hr ago</small>
-        </div>
-      </div>
-      <div class="notif-item">
-        <i class="fa-solid fa-bullhorn"></i>
-        <div>
-          <p>Cheerdance schedule updated</p>
-          <small>3 hr ago</small>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===========================
-         SECTIONS
-    =========================== -->
-    <main class="content-area">
-
-      <!-- ===== DASHBOARD ===== -->
-      <section class="section active" id="section-dashboard">
-
-        <div class="section-hero">
-          <div class="hero-text">
-            <h1 class="hero-title">INTRAMURALS <span class="hero-accent">2025–26</span></h1>
-            <p class="hero-sub">Command Center — Live Operations Active</p>
-          </div>
-          <div class="hero-meta">
-            <span class="live-indicator"><span class="live-dot"></span> LIVE</span>
-            <span class="hero-date" id="liveDate"></span>
-          </div>
-        </div>
-
-        <!-- STAT CARDS -->
-        <div class="stats-grid">
-          <div class="stat-card" data-color="crimson">
-            <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
-            <div class="stat-body">
-              <span class="stat-value counter" data-target="482">0</span>
-              <span class="stat-label">Total Participants</span>
+      <main class="content-area">
+        <section class="section active" id="section-dashboard">
+          <div class="role-view" data-role-view="admin">
+            <div class="section-view-banner">
+              <span class="view-state-badge admin-only">Admin Only</span>
+              <span class="view-state-badge live-state">Operations View</span>
             </div>
-            <div class="stat-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +24 this week</div>
-          </div>
-          <div class="stat-card" data-color="gold">
-            <div class="stat-icon"><i class="fa-solid fa-flag-checkered"></i></div>
-            <div class="stat-body">
-              <span class="stat-value counter" data-target="8">0</span>
-              <span class="stat-label">Ongoing Events</span>
-            </div>
-            <div class="stat-trend up"><i class="fa-solid fa-circle-dot"></i> Live now</div>
-          </div>
-          <div class="stat-card" data-color="blue">
-            <div class="stat-icon"><i class="fa-solid fa-medal"></i></div>
-            <div class="stat-body">
-              <span class="stat-value counter" data-target="24">0</span>
-              <span class="stat-label">Total Events</span>
-            </div>
-            <div class="stat-trend neutral">Sports & Non-Sports</div>
-          </div>
-          <div class="stat-card" data-color="green">
-            <div class="stat-icon"><i class="fa-solid fa-building-columns"></i></div>
-            <div class="stat-body">
-              <span class="stat-value counter" data-target="5">0</span>
-              <span class="stat-label">Departments</span>
-            </div>
-            <div class="stat-trend neutral">Competing teams</div>
-          </div>
-        </div>
 
-        <!-- MAIN GRID -->
-        <div class="dash-grid">
-
-          <!-- LIVE SCORES -->
-          <div class="dash-card span-2">
-            <div class="card-header">
-              <h3><i class="fa-solid fa-stopwatch"></i> Live Match Scores</h3>
-              <span class="card-badge live">● LIVE</span>
-            </div>
-            <div class="live-scores-list">
-              <div class="score-card">
-                <div class="score-meta">
-                  <span class="score-event">Basketball — Semis</span>
-                  <span class="score-timer running" id="timer1">Q3 · 04:22</span>
-                </div>
-                <div class="score-matchup">
-                  <div class="score-team">
-                    <span class="team-name"><img class="team-logo sm" src="./image/teams/CEDAS.jpg" alt="CEDAS logo" /> CEDAS</span>
-                    <span class="score-num" id="scoreA1">58</span>
-                  </div>
-                  <span class="score-vs">VS</span>
-                  <div class="score-team right">
-                    <span class="score-num" id="scoreB1">51</span>
-                    <span class="team-name"><img class="team-logo sm" src="./image/teams/CCIS.jpg" alt="CCIS logo" /> CCIS</span>
-                  </div>
-                </div>
+            <div class="section-hero">
+              <div class="hero-text">
+                <h1 class="hero-title">INTRAMURALS <span class="hero-accent">2025-26</span></h1>
+                <p class="hero-sub">Command Center - live operations and verification pipeline active</p>
               </div>
-              <div class="score-card">
-                <div class="score-meta">
-                  <span class="score-event">Volleyball — Finals</span>
-                  <span class="score-timer">Set 2 · 14–11</span>
+              <div class="hero-meta">
+                <span class="live-indicator"><span class="live-dot"></span> LIVE</span>
+                <span class="hero-date" id="liveDate"></span>
+              </div>
+            </div>
+
+            <div class="stats-grid">
+              <div class="stat-card" data-color="crimson">
+                <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                <div class="stat-body">
+                  <span class="stat-value counter" data-target="482">0</span>
+                  <span class="stat-label">Total Participants</span>
                 </div>
-                <div class="score-matchup">
-                  <div class="score-team">
-                    <span class="team-name"><img class="team-logo sm" src="./image/teams/COE.jpg" alt="COE logo" /> COE</span>
-                    <span class="score-num">1</span>
+                <div class="stat-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +24 this week</div>
+              </div>
+              <div class="stat-card" data-color="gold">
+                <div class="stat-icon"><i class="fa-solid fa-flag-checkered"></i></div>
+                <div class="stat-body">
+                  <span class="stat-value counter" data-target="8">0</span>
+                  <span class="stat-label">Ongoing Events</span>
+                </div>
+                <div class="stat-trend up"><i class="fa-solid fa-circle-dot"></i> Live now</div>
+              </div>
+              <div class="stat-card" data-color="blue">
+                <div class="stat-icon"><i class="fa-solid fa-medal"></i></div>
+                <div class="stat-body">
+                  <span class="stat-value counter" data-target="24">0</span>
+                  <span class="stat-label">Total Events</span>
+                </div>
+                <div class="stat-trend neutral">Sports and non-sports</div>
+              </div>
+              <div class="stat-card" data-color="green">
+                <div class="stat-icon"><i class="fa-solid fa-building-columns"></i></div>
+                <div class="stat-body">
+                  <span class="stat-value counter" data-target="5">0</span>
+                  <span class="stat-label">Departments</span>
+                </div>
+                <div class="stat-trend neutral">Competing teams</div>
+              </div>
+            </div>
+
+            <div class="dash-grid">
+              <div class="dash-card span-2">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-stopwatch"></i> Live Match Scores</h3>
+                  <span class="card-badge live">LIVE</span>
+                </div>
+                <div class="live-scores-list">
+                  <div class="score-card">
+                    <div class="score-meta">
+                      <span class="score-event">Basketball - Semi Finals</span>
+                      <span class="score-timer running">Q3 · 04:22</span>
+                    </div>
+                    <div class="score-matchup">
+                      <div class="score-team">
+                        <span class="team-name"><img class="team-logo sm" src="./image/teams/CEDAS.jpg" alt="CEDAS logo" /> CEDAS</span>
+                        <span class="score-num" data-score-match="basketballSemi" data-score-side="home">58</span>
+                      </div>
+                      <span class="score-vs">VS</span>
+                      <div class="score-team right">
+                        <span class="score-num" data-score-match="basketballSemi" data-score-side="away">51</span>
+                        <span class="team-name"><img class="team-logo sm" src="./image/teams/CCIS.jpg" alt="CCIS logo" /> CCIS</span>
+                      </div>
+                    </div>
                   </div>
-                  <span class="score-vs">VS</span>
-                  <div class="score-team right">
-                    <span class="score-num">0</span>
-                    <span class="team-name"><img class="team-logo sm" src="./image/teams/CABE.png" alt="CABE logo" /> CABE</span>
+                  <div class="score-card">
+                    <div class="score-meta">
+                      <span class="score-event">Volleyball - Finals</span>
+                      <span class="score-timer">Set 2 · 14-11</span>
+                    </div>
+                    <div class="score-matchup">
+                      <div class="score-team">
+                        <span class="team-name"><img class="team-logo sm" src="./image/teams/COE.jpg" alt="COE logo" /> COE</span>
+                        <span class="score-num" data-score-match="volleyballFinals" data-score-side="home">14</span>
+                      </div>
+                      <span class="score-vs">VS</span>
+                      <div class="score-team right">
+                        <span class="score-num" data-score-match="volleyballFinals" data-score-side="away">11</span>
+                        <span class="team-name"><img class="team-logo sm" src="./image/teams/CABE.png" alt="CABE logo" /> CABE</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="score-card">
+                    <div class="score-meta">
+                      <span class="score-event">Badminton - Quarterfinals</span>
+                      <span class="score-timer">Game 1</span>
+                    </div>
+                    <div class="score-matchup">
+                      <div class="score-team">
+                        <span class="team-name"><img class="team-logo sm" src="./image/teams/CHS.jpg" alt="CHS logo" /> CHS</span>
+                        <span class="score-num" data-score-match="badmintonQuarterfinal" data-score-side="home">17</span>
+                      </div>
+                      <span class="score-vs">VS</span>
+                      <div class="score-team right">
+                        <span class="score-num" data-score-match="badmintonQuarterfinal" data-score-side="away">14</span>
+                        <span class="team-name"><img class="team-logo sm" src="./image/teams/CEDAS.jpg" alt="CEDAS logo" /> CEDAS</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="score-card">
-                <div class="score-meta">
-                  <span class="score-event">Badminton — QF</span>
-                  <span class="score-timer">Game 1</span>
+
+              <div class="dash-card">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-ranking-star"></i> Dept. Rankings</h3>
+                  <a href="#" class="card-link" data-section="standings">View all</a>
                 </div>
-                <div class="score-matchup">
-                  <div class="score-team">
-                    <span class="team-name"><img class="team-logo sm" src="./image/teams/CHS.jpg" alt="CHS logo" /> CHS</span>
-                    <span class="score-num">17</span>
+                <div class="rankings-list" id="dashboardRankingsList"></div>
+              </div>
+
+              <div class="dash-card">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-clock"></i> Upcoming Schedule</h3>
+                  <a href="#" class="card-link" data-section="events">View all</a>
+                </div>
+                <div class="schedule-list" id="dashboardScheduleList"></div>
+              </div>
+
+              <div class="dash-card span-2">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-medal"></i> Medal Tally</h3>
+                </div>
+                <div class="medal-table-wrap">
+                  <table class="medal-table">
+                    <thead>
+                      <tr>
+                        <th>Rank</th>
+                        <th>Department</th>
+                        <th>Gold</th>
+                        <th>Silver</th>
+                        <th>Bronze</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody id="dashboardMedalTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="dash-card">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-bullhorn"></i> Announcements</h3>
+                  <a href="#" class="card-link" data-section="announcements">View all</a>
+                </div>
+                <div class="ann-list" id="dashboardAnnouncementPreview"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="role-view" data-role-view="student" hidden>
+            <div class="section-view-banner">
+              <span class="view-state-badge student-view">Student View</span>
+              <span class="view-state-badge live-state">Read Only</span>
+            </div>
+
+            <div class="section-hero student-hero">
+              <div class="hero-text">
+                <h1 class="hero-title">LIVE CAMPUS <span class="hero-accent">VIEW</span></h1>
+                <p class="hero-sub">Watch intramurals updates, standings, schedules, and guidelines in real time.</p>
+              </div>
+              <div class="hero-meta">
+                <span class="live-indicator"><span class="live-dot"></span> STUDENT VIEW</span>
+                <span class="hero-date" id="studentLiveDate"></span>
+              </div>
+            </div>
+
+            <div class="stats-grid">
+              <div class="stat-card" data-color="gold">
+                <div class="stat-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+                <div class="stat-body">
+                  <span class="stat-value counter" data-target="3">0</span>
+                  <span class="stat-label">Live Matches</span>
+                </div>
+                <div class="stat-trend up">Updated after verification</div>
+              </div>
+              <div class="stat-card" data-color="crimson">
+                <div class="stat-icon"><i class="fa-solid fa-trophy"></i></div>
+                <div class="stat-body">
+                  <span class="stat-value" id="studentLeaderCode">CEDAS</span>
+                  <span class="stat-label">Current Leader</span>
+                </div>
+                <div class="stat-trend neutral" id="studentLeaderPoints">142 pts overall</div>
+              </div>
+              <div class="stat-card" data-color="blue">
+                <div class="stat-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                <div class="stat-body">
+                  <span class="stat-value" id="studentNextEventDay">15</span>
+                  <span class="stat-label">Next Finals</span>
+                </div>
+                <div class="stat-trend neutral" id="studentNextEventText">Basketball Finals - 2:00 PM</div>
+              </div>
+              <div class="stat-card" data-color="green">
+                <div class="stat-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+                <div class="stat-body">
+                  <span class="stat-value counter" data-target="4">0</span>
+                  <span class="stat-label">Published Guidelines</span>
+                </div>
+                <div class="stat-trend neutral">Official records only</div>
+              </div>
+            </div>
+
+            <div class="dash-grid">
+              <div class="dash-card span-2">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-stopwatch"></i> Live Scores</h3>
+                  <a href="#" class="card-link" data-section="scoring">Open full board</a>
+                </div>
+                <div class="live-scores-list" id="studentDashboardScores"></div>
+              </div>
+
+              <div class="dash-card">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-ranking-star"></i> Live Standings</h3>
+                  <a href="#" class="card-link" data-section="standings">View all</a>
+                </div>
+                <div class="rankings-list" id="studentStandingsPreview"></div>
+              </div>
+
+              <div class="dash-card">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-clock"></i> Schedule</h3>
+                  <a href="#" class="card-link" data-section="events">View schedule</a>
+                </div>
+                <div class="schedule-list" id="studentSchedulePreview"></div>
+              </div>
+
+              <div class="dash-card">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-bullhorn"></i> Announcements</h3>
+                  <a href="#" class="card-link" data-section="announcements">View all</a>
+                </div>
+                <div class="ann-list" id="studentAnnouncementsPreview"></div>
+              </div>
+
+              <div class="dash-card span-2">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-file-lines"></i> Official Guidelines</h3>
+                  <a href="#" class="card-link" data-section="guidelines">Open guidelines</a>
+                </div>
+                <div class="student-guidelines-preview" id="studentGuidelinesPreview"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="section-chatbot">
+          <div class="section-header">
+            <div>
+              <div class="section-view-banner compact">
+                <span class="view-state-badge" id="assistantModeBadge" data-role-copy data-admin-copy="Admin Only" data-student-copy="Student View">Admin Only</span>
+              </div>
+              <h2>AI Assistant</h2>
+              <p>Ask about official guidelines, live scores, schedules, standings, and sample match results.</p>
+            </div>
+          </div>
+
+          <div class="chatbot-layout">
+            <div class="chatbot-main">
+              <div class="chat-window" id="chatWindow">
+                <div class="chat-msg bot-msg">
+                  <div class="chat-avatar bot-av"><i class="fa-solid fa-robot"></i></div>
+                  <div class="chat-bubble">
+                    <p>Hello. I am the CJC Intramurals AI Assistant. I can answer questions using this prototype's guidelines, schedules, standings, announcements, and verified score records.</p>
+                    <p>Try one of these sample prompts:</p>
+                    <div class="chat-suggestions">
+                      <button class="chat-sug-btn" type="button" onclick="insertSuggestion(this)">Who is leading overall?</button>
+                      <button class="chat-sug-btn" type="button" onclick="insertSuggestion(this)">What is the score of CEDAS vs CCIS?</button>
+                      <button class="chat-sug-btn" type="button" onclick="insertSuggestion(this)">When is the basketball finals?</button>
+                      <button class="chat-sug-btn" type="button" onclick="insertSuggestion(this)">Who won the Quiz Bee?</button>
+                      <button class="chat-sug-btn" type="button" onclick="insertSuggestion(this)">What is the dress code for cheerdance?</button>
+                    </div>
                   </div>
-                  <span class="score-vs">VS</span>
-                  <div class="score-team right">
-                    <span class="score-num">14</span>
-                    <span class="team-name"><img class="team-logo sm" src="./image/teams/CEDAS.jpg" alt="CEDAS logo" /> CEDAS</span>
+                </div>
+              </div>
+
+              <div class="chat-input-bar">
+                <input type="text" id="chatInput" placeholder="Ask about guidelines, scores, schedules, or standings..." />
+                <button class="chat-send-btn" id="chatSendBtn" type="button">
+                  <i class="fa-solid fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="chatbot-sidebar">
+              <h4>Quick Topics</h4>
+              <div class="topic-tags">
+                <span class="topic-tag" onclick="insertSuggestion(this)">Dress Code</span>
+                <span class="topic-tag" onclick="insertSuggestion(this)">Player Eligibility</span>
+                <span class="topic-tag" onclick="insertSuggestion(this)">Live Scores</span>
+                <span class="topic-tag" onclick="insertSuggestion(this)">Standings</span>
+                <span class="topic-tag" onclick="insertSuggestion(this)">Event Schedule</span>
+                <span class="topic-tag" onclick="insertSuggestion(this)">Quiz Bee Result</span>
+                <span class="topic-tag" onclick="insertSuggestion(this)">Guidelines</span>
+                <span class="topic-tag" onclick="insertSuggestion(this)">Basketball Finals</span>
+              </div>
+
+              <h4>Source Documents</h4>
+              <div class="source-docs" id="sourceDocs"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="section-events">
+          <div class="section-header-row">
+            <div>
+              <div class="section-view-banner compact">
+                <span class="view-state-badge" id="eventsModeBadge" data-role-copy data-admin-copy="Admin Only" data-student-copy="Student View">Admin Only</span>
+              </div>
+              <h2 id="eventsSectionTitle" data-role-copy data-admin-copy="Event Management" data-student-copy="Schedule">Event Management</h2>
+              <p id="eventsSectionDescription" data-role-copy data-admin-copy="Create, schedule, and manage all intramural events" data-student-copy="View the latest event schedule and call times">Create, schedule, and manage all intramural events</p>
+            </div>
+            <button class="btn-primary" type="button" onclick="openModal('addEventModal')" data-role-visibility="admin">
+              <i class="fa-solid fa-plus"></i> Add Event
+            </button>
+          </div>
+
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all" type="button">All Events</button>
+            <button class="filter-tab" data-filter="sports" type="button">Sports</button>
+            <button class="filter-tab" data-filter="socio" type="button">Socio-Cultural</button>
+            <button class="filter-tab" data-filter="academic" type="button">Academic</button>
+            <button class="filter-tab" data-filter="special" type="button">Special</button>
+          </div>
+
+          <div class="events-grid" id="eventsGrid"></div>
+        </section>
+
+        <section class="section" id="section-scoring">
+          <div class="section-header-row">
+            <div>
+              <div class="section-view-banner compact">
+                <span class="view-state-badge" id="scoringModeBadge" data-role-copy data-admin-copy="Admin Only" data-student-copy="Student View">Admin Only</span>
+              </div>
+              <h2 id="scoringSectionTitle" data-role-copy data-admin-copy="Real-Time Scoring" data-student-copy="Live Scores">Real-Time Scoring</h2>
+              <p id="scoringSectionDescription" data-role-copy data-admin-copy="Encode and publish live scores during sports events" data-student-copy="Read-only scoreboard for verified intramurals matches">Encode and publish live scores during sports events</p>
+            </div>
+            <span class="live-pill"><span class="live-dot"></span> 3 Active Matches</span>
+          </div>
+
+          <div class="scoring-grid">
+            <div class="scoring-card active-match">
+              <div class="match-header">
+                <span class="match-event">Basketball - Semi Finals</span>
+                <span class="match-status live">LIVE</span>
+              </div>
+
+              <div class="match-body">
+                <div class="match-team-score">
+                  <div class="mts-team">
+                    <span class="mts-color" style="background:#e63946"></span>
+                    <img class="team-logo sm mts-logo" src="./image/teams/CEDAS.jpg" alt="CEDAS logo" />
+                    <span class="mts-name">CEDAS</span>
+                  </div>
+                  <div class="score-control">
+                    <button class="score-btn minus" type="button" onclick="changeScore('score-a', -1)" data-role-visibility="admin">-</button>
+                    <span class="score-display" id="score-a" data-score-match="basketballSemi" data-score-side="home">58</span>
+                    <button class="score-btn plus" type="button" onclick="changeScore('score-a', 1)" data-role-visibility="admin">+</button>
+                  </div>
+                </div>
+
+                <div class="match-divider">VS</div>
+
+                <div class="match-team-score">
+                  <div class="mts-team">
+                    <span class="mts-color" style="background:#457b9d"></span>
+                    <img class="team-logo sm mts-logo" src="./image/teams/CCIS.jpg" alt="CCIS logo" />
+                    <span class="mts-name">CCIS</span>
+                  </div>
+                  <div class="score-control">
+                    <button class="score-btn minus" type="button" onclick="changeScore('score-b', -1)" data-role-visibility="admin">-</button>
+                    <span class="score-display" id="score-b" data-score-match="basketballSemi" data-score-side="away">51</span>
+                    <button class="score-btn plus" type="button" onclick="changeScore('score-b', 1)" data-role-visibility="admin">+</button>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <!-- DEPARTMENT RANKINGS -->
-          <div class="dash-card">
-            <div class="card-header">
-              <h3><i class="fa-solid fa-ranking-star"></i> Dept. Rankings</h3>
-              <a href="#" class="card-link" data-section="standings">View all</a>
+              <div class="match-footer">
+                <span class="match-period">Q3 - 4:22 remaining</span>
+                <div class="match-actions" data-role-visibility="admin">
+                  <button class="btn-sm secondary" type="button" data-reset-match="basketballSemi">Reset</button>
+                  <button class="btn-sm primary" type="button" onclick="showToast('Score published!')">Publish</button>
+                </div>
+              </div>
+              <div class="verification-caption" id="basketballVerificationNote">Last published score is the verified live result.</div>
             </div>
-            <div class="rankings-list">
-              <div class="rank-row rank-1">
-                <span class="rank-pos">01</span>
-                <span class="rank-badge"><img class="team-logo sm team-badge-logo" src="./image/teams/CEDAS.jpg" alt="CEDAS logo" /></span>
-                <div class="rank-info">
-                  <span class="rank-name">CEDAS</span>
-                  <div class="rank-bar-wrap"><div class="rank-bar" style="width:82%;background:#e63946"></div></div>
-                </div>
-                <span class="rank-pts">142 pts</span>
-              </div>
-              <div class="rank-row rank-2">
-                <span class="rank-pos">02</span>
-                <span class="rank-badge"><img class="team-logo sm team-badge-logo" src="./image/teams/CCIS.jpg" alt="CCIS logo" /></span>
-                <div class="rank-info">
-                  <span class="rank-name">CCIS</span>
-                  <div class="rank-bar-wrap"><div class="rank-bar" style="width:70%;background:#457b9d"></div></div>
-                </div>
-                <span class="rank-pts">129 pts</span>
-              </div>
-              <div class="rank-row rank-3">
-                <span class="rank-pos">03</span>
-                <span class="rank-badge"><img class="team-logo sm team-badge-logo" src="./image/teams/COE.jpg" alt="COE logo" /></span>
-                <div class="rank-info">
-                  <span class="rank-name">COE</span>
-                  <div class="rank-bar-wrap"><div class="rank-bar" style="width:65%;background:#f4a261"></div></div>
-                </div>
-                <span class="rank-pts">118 pts</span>
-              </div>
-              <div class="rank-row">
-                <span class="rank-pos">04</span>
-                <span class="rank-badge"><img class="team-logo sm team-badge-logo" src="./image/teams/CHS.jpg" alt="CHS logo" /></span>
-                <div class="rank-info">
-                  <span class="rank-name">CHS</span>
-                  <div class="rank-bar-wrap"><div class="rank-bar" style="width:57%;background:#ec4899"></div></div>
-                </div>
-                <span class="rank-pts">107 pts</span>
-              </div>
-              <div class="rank-row">
-                <span class="rank-pos">05</span>
-                <span class="rank-badge"><img class="team-logo sm team-badge-logo" src="./image/teams/CABE.png" alt="CABE logo" /></span>
-                <div class="rank-info">
-                  <span class="rank-name">CABE</span>
-                  <div class="rank-bar-wrap"><div class="rank-bar" style="width:49%;background:#e9c46a"></div></div>
-                </div>
-                <span class="rank-pts">91 pts</span>
-              </div>
-            </div>
-          </div>
 
-          <!-- UPCOMING SCHEDULE -->
-          <div class="dash-card">
-            <div class="card-header">
-              <h3><i class="fa-solid fa-clock"></i> Upcoming Schedule</h3>
-              <a href="#" class="card-link" data-section="events">View all</a>
+            <div class="scoring-card active-match">
+              <div class="match-header">
+                <span class="match-event">Volleyball - Finals</span>
+                <span class="match-status live">LIVE</span>
+              </div>
+
+              <div class="match-body">
+                <div class="match-team-score">
+                  <div class="mts-team">
+                    <span class="mts-color" style="background:#f4a261"></span>
+                    <img class="team-logo sm mts-logo" src="./image/teams/COE.jpg" alt="COE logo" />
+                    <span class="mts-name">COE</span>
+                  </div>
+                  <div class="score-control">
+                    <button class="score-btn minus" type="button" onclick="changeScore('score-c', -1)" data-role-visibility="admin">-</button>
+                    <span class="score-display" id="score-c" data-score-match="volleyballFinals" data-score-side="home">14</span>
+                    <button class="score-btn plus" type="button" onclick="changeScore('score-c', 1)" data-role-visibility="admin">+</button>
+                  </div>
+                </div>
+
+                <div class="match-divider">VS</div>
+
+                <div class="match-team-score">
+                  <div class="mts-team">
+                    <span class="mts-color" style="background:#e9c46a"></span>
+                    <img class="team-logo sm mts-logo" src="./image/teams/CABE.png" alt="CABE logo" />
+                    <span class="mts-name">CABE</span>
+                  </div>
+                  <div class="score-control">
+                    <button class="score-btn minus" type="button" onclick="changeScore('score-d', -1)" data-role-visibility="admin">-</button>
+                    <span class="score-display" id="score-d" data-score-match="volleyballFinals" data-score-side="away">11</span>
+                    <button class="score-btn plus" type="button" onclick="changeScore('score-d', 1)" data-role-visibility="admin">+</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="match-footer">
+                <span class="match-period">Set 2 of 3</span>
+                <div class="match-actions" data-role-visibility="admin">
+                  <button class="btn-sm secondary" type="button" data-reset-match="volleyballFinals">Reset</button>
+                  <button class="btn-sm primary" type="button" onclick="showToast('Score published!')">Publish</button>
+                </div>
+              </div>
             </div>
-            <div class="schedule-list">
-              <div class="schedule-item">
-                <div class="sched-time">
-                  <span class="sched-day">THU</span>
-                  <span class="sched-date">15</span>
-                </div>
-                <div class="sched-info">
-                  <span class="sched-title">Cheerdance Competition</span>
-                  <span class="sched-meta"><i class="fa-solid fa-location-dot"></i> Main Gym · 8:00 AM</span>
-                </div>
-                <span class="sched-badge">All Teams</span>
+
+            <div class="scoring-card tally-card" data-role-visibility="admin">
+              <div class="match-header">
+                <span class="match-event">Cheerdance - Tally Sheet</span>
+                <span class="match-status">IN PROGRESS</span>
               </div>
-              <div class="schedule-item">
-                <div class="sched-time">
-                  <span class="sched-day">THU</span>
-                  <span class="sched-date">15</span>
+
+              <div class="tally-body">
+                <div class="tally-row">
+                  <span class="tally-criterion">Synchronization</span>
+                  <div class="tally-score-input">
+                    <input type="number" value="88" min="0" max="100" class="tally-input" />
+                    <span class="tally-max">/ 100</span>
+                  </div>
                 </div>
-                <div class="sched-info">
-                  <span class="sched-title">Basketball Finals</span>
-                  <span class="sched-meta"><i class="fa-solid fa-location-dot"></i> Covered Court · 2:00 PM</span>
+                <div class="tally-row">
+                  <span class="tally-criterion">Choreography</span>
+                  <div class="tally-score-input">
+                    <input type="number" value="92" min="0" max="100" class="tally-input" />
+                    <span class="tally-max">/ 100</span>
+                  </div>
                 </div>
-                <span class="sched-badge sport">Sports</span>
+                <div class="tally-row">
+                  <span class="tally-criterion">Costumes and Props</span>
+                  <div class="tally-score-input">
+                    <input type="number" value="85" min="0" max="100" class="tally-input" />
+                    <span class="tally-max">/ 100</span>
+                  </div>
+                </div>
+                <div class="tally-row">
+                  <span class="tally-criterion">Crowd Impact</span>
+                  <div class="tally-score-input">
+                    <input type="number" value="90" min="0" max="100" class="tally-input" />
+                    <span class="tally-max">/ 100</span>
+                  </div>
+                </div>
+                <div class="tally-total">
+                  <span>Weighted Total</span>
+                  <span class="tally-total-val">88.75</span>
+                </div>
               </div>
-              <div class="schedule-item">
-                <div class="sched-time">
-                  <span class="sched-day">FRI</span>
-                  <span class="sched-date">16</span>
-                </div>
-                <div class="sched-info">
-                  <span class="sched-title">Mr. & Ms. Intramurals</span>
-                  <span class="sched-meta"><i class="fa-solid fa-location-dot"></i> Auditorium · 5:00 PM</span>
-                </div>
-                <span class="sched-badge special">Special</span>
-              </div>
-              <div class="schedule-item">
-                <div class="sched-time">
-                  <span class="sched-day">FRI</span>
-                  <span class="sched-date">16</span>
-                </div>
-                <div class="sched-info">
-                  <span class="sched-title">Quiz Bee Finals</span>
-                  <span class="sched-meta"><i class="fa-solid fa-location-dot"></i> Room 301 · 10:00 AM</span>
-                </div>
-                <span class="sched-badge academic">Academic</span>
+
+              <div class="match-footer">
+                <span class="match-period">CHS - Judge 1</span>
+                <button class="btn-sm primary" type="button" onclick="showToast('Tally saved!')">Save</button>
               </div>
             </div>
           </div>
+        </section>
 
-          <!-- MEDAL TALLY -->
-          <div class="dash-card span-2">
-            <div class="card-header">
-              <h3><i class="fa-solid fa-medal"></i> Medal Tally</h3>
+        <section class="section" id="section-scanner" data-role-visibility="admin">
+          <div class="section-header-row">
+            <div>
+              <div class="section-view-banner compact">
+                <span class="view-state-badge admin-only">Admin Only</span>
+                <span class="view-state-badge pending-state" id="scannerHeaderStatus">Pending Verification</span>
+              </div>
+              <h2>AI Score Sheet Scanner</h2>
+              <p>Upload a score sheet image, simulate OCR extraction, and verify results before they reach the live dashboard.</p>
             </div>
-            <div class="medal-table-wrap">
-              <table class="medal-table">
+          </div>
+
+          <div class="scanner-layout">
+            <div class="scoring-card scanner-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-image"></i> Score Sheet Upload</h3>
+              </div>
+
+              <div class="scanner-form">
+                <div class="form-group">
+                  <label for="scoreSheetUpload">Upload score sheet image</label>
+                  <input type="file" id="scoreSheetUpload" class="form-input file-input" accept="image/*" />
+                </div>
+
+                <div class="scanner-preview-box" id="scannerPreviewBox">
+                  <div class="scanner-preview-empty" id="scannerPreviewEmpty">
+                    <i class="fa-solid fa-images"></i>
+                    <p>Select an image to preview the uploaded score sheet.</p>
+                  </div>
+                  <img id="scoreSheetPreviewImage" class="scanner-preview-image" alt="Uploaded score sheet preview" />
+                </div>
+
+                <p class="scanner-note">Google Drive integration and real OCR processing will be connected in the backend phase.</p>
+
+                <div class="scanner-action-row">
+                  <button class="btn-primary" id="scanScoreBtn" type="button">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i> Scan Score Sheet
+                  </button>
+                  <button class="btn-secondary" id="clearScannerBtn" type="button">Clear Preview</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="scoring-card scanner-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-file-waveform"></i> Extracted Result Preview</h3>
+                <span class="status-badge pending-state" id="scannerStatusBadge">Pending Verification</span>
+              </div>
+
+              <div class="scanner-result-grid">
+                <div class="scanner-result-item">
+                  <span>Detected Event</span>
+                  <strong id="scannerEvent">Awaiting scan</strong>
+                </div>
+                <div class="scanner-result-item">
+                  <span>Detected Teams</span>
+                  <strong id="scannerTeams">-</strong>
+                </div>
+                <div class="scanner-result-item">
+                  <span>Detected Scores</span>
+                  <strong id="scannerScores">-</strong>
+                </div>
+                <div class="scanner-result-item">
+                  <span>Confidence</span>
+                  <strong id="scannerConfidence">-</strong>
+                </div>
+                <div class="scanner-result-item">
+                  <span>Status</span>
+                  <strong id="scannerStatusText">Pending Verification</strong>
+                </div>
+              </div>
+
+              <div class="verification-actions">
+                <button class="btn-secondary" id="rejectScoreBtn" type="button" disabled>Reject Score</button>
+                <button class="btn-primary" id="approveScoreBtn" type="button" disabled>Approve Score</button>
+              </div>
+
+              <div class="verification-caption" id="scannerResultNote">No simulated OCR result yet. Scan a score sheet image to continue.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="section-guidelines">
+          <div class="section-header-row">
+            <div>
+              <div class="section-view-banner compact">
+                <span class="view-state-badge" id="guidelinesModeBadge" data-role-copy data-admin-copy="Admin Only" data-student-copy="Student View">Admin Only</span>
+              </div>
+              <h2 id="guidelinesSectionTitle" data-role-copy data-admin-copy="Guidelines Management" data-student-copy="Official Guidelines">Guidelines Management</h2>
+              <p id="guidelinesSectionDescription" data-role-copy data-admin-copy="Upload and manage guideline files by event or category" data-student-copy="Browse the official guidelines shared by the CSG office">Upload and manage guideline files by event or category</p>
+            </div>
+          </div>
+
+          <div class="guidelines-layout">
+            <div class="dash-card guideline-form-card" data-role-visibility="admin">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-file-circle-plus"></i> Guidelines Management</h3>
+                <span class="view-state-badge admin-only">Admin Only</span>
+              </div>
+
+              <div class="guideline-form-grid">
+                <div class="form-group">
+                  <label for="guidelineTitleInput">Guideline title</label>
+                  <input id="guidelineTitleInput" type="text" class="form-input" placeholder="Basketball Finals Rules and Format" />
+                </div>
+                <div class="form-group">
+                  <label for="guidelineEventSelect">Event or category</label>
+                  <select id="guidelineEventSelect" class="form-input">
+                    <option>Basketball</option>
+                    <option>Volleyball</option>
+                    <option>Cheerdance</option>
+                    <option>Quiz Bee</option>
+                    <option>General Intramurals</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="guidelineFileInput">Upload guideline file</label>
+                  <input id="guidelineFileInput" type="file" class="form-input file-input" />
+                </div>
+                <button class="btn-primary" id="guidelineUploadBtn" type="button">
+                  <i class="fa-solid fa-upload"></i> Upload Guideline
+                </button>
+              </div>
+            </div>
+
+            <div class="dash-card guideline-library-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-folder-open"></i> Official Guidelines Library</h3>
+                <span class="view-state-badge student-view">Student View</span>
+              </div>
+              <div class="guideline-records" id="guidelineRecords"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="section-standings">
+          <div class="section-header">
+            <div>
+              <div class="section-view-banner compact">
+                <span class="view-state-badge live-state">Live Standings</span>
+              </div>
+              <h2>Live Standings and Rankings</h2>
+              <p>Official leaderboard that refreshes after verified score approvals.</p>
+            </div>
+          </div>
+
+          <div class="standings-layout">
+            <div class="podium-wrap">
+              <div class="podium" id="standingsPodium"></div>
+            </div>
+
+            <div class="standings-table-wrap">
+              <table class="standings-table">
                 <thead>
                   <tr>
-                    <th>Rank</th>
+                    <th>Pos</th>
                     <th>Department</th>
-                    <th><span class="medal gold-m">🥇</span> Gold</th>
-                    <th><span class="medal silver-m">🥈</span> Silver</th>
-                    <th><span class="medal bronze-m">🥉</span> Bronze</th>
-                    <th>Total</th>
+                    <th>W</th>
+                    <th>L</th>
+                    <th>Gold</th>
+                    <th>Silver</th>
+                    <th>Bronze</th>
+                    <th>Pts</th>
+                  </tr>
+                </thead>
+                <tbody id="standingsTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="section-profiles" data-role-visibility="admin">
+          <div class="section-header-row">
+            <div>
+              <div class="section-view-banner compact">
+                <span class="view-state-badge admin-only">Admin Only</span>
+              </div>
+              <h2>Participant Profiles</h2>
+              <p>Official demographics and event assignments</p>
+            </div>
+            <button class="btn-primary" type="button" onclick="openModal('addParticipantModal')">
+              <i class="fa-solid fa-user-plus"></i> Add Participant
+            </button>
+          </div>
+
+          <div class="profile-filters">
+            <div class="search-bar-inline">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" placeholder="Search participants..." id="profileSearch" oninput="filterProfiles()" />
+            </div>
+            <select class="filter-select" id="deptFilter" onchange="filterProfiles()">
+              <option value="">All Departments</option>
+              <option>CABE</option>
+              <option>CCIS</option>
+              <option>CEDAS</option>
+              <option>COE</option>
+              <option>CHS</option>
+            </select>
+            <select class="filter-select" id="yearFilter" onchange="filterProfiles()">
+              <option value="">All Year Levels</option>
+              <option>1st Year</option>
+              <option>2nd Year</option>
+              <option>3rd Year</option>
+              <option>4th Year</option>
+            </select>
+          </div>
+
+          <div class="profile-grid" id="profileGrid"></div>
+        </section>
+
+        <section class="section" id="section-attendance" data-role-visibility="admin">
+          <div class="section-header">
+            <div>
+              <div class="section-view-banner compact">
+                <span class="view-state-badge admin-only">Admin Only</span>
+              </div>
+              <h2>Attendance Management</h2>
+              <p>Track participant attendance per event</p>
+            </div>
+          </div>
+
+          <div class="attendance-layout">
+            <div class="att-event-list">
+              <h4>Select Event</h4>
+              <div class="att-events">
+                <div class="att-event-item active" onclick="selectAttEvent(this, 'Basketball Semi Finals')">
+                  <i class="fa-solid fa-basketball"></i>
+                  <span>Basketball Semi Finals</span>
+                </div>
+                <div class="att-event-item" onclick="selectAttEvent(this, 'Volleyball Finals')">
+                  <i class="fa-solid fa-volleyball"></i>
+                  <span>Volleyball Finals</span>
+                </div>
+                <div class="att-event-item" onclick="selectAttEvent(this, 'Cheerdance Competition')">
+                  <i class="fa-solid fa-music"></i>
+                  <span>Cheerdance Competition</span>
+                </div>
+                <div class="att-event-item" onclick="selectAttEvent(this, 'Quiz Bee Finals')">
+                  <i class="fa-solid fa-brain"></i>
+                  <span>Quiz Bee Finals</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="att-table-wrap">
+              <div class="att-table-header">
+                <h4 id="attEventTitle">Basketball Semi Finals</h4>
+                <div class="att-stats"></div>
+              </div>
+              <table class="att-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="attTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="section-announcements">
+          <div class="section-header-row">
+            <div>
+              <div class="section-view-banner compact">
+                <span class="view-state-badge" id="announcementModeBadge" data-role-copy data-admin-copy="Admin Only" data-student-copy="Student View">Admin Only</span>
+              </div>
+              <h2>Announcements</h2>
+              <p>Official communications to all participants and viewers</p>
+            </div>
+            <button class="btn-primary" type="button" onclick="openModal('addAnnModal')" data-role-visibility="admin">
+              <i class="fa-solid fa-plus"></i> New Announcement
+            </button>
+          </div>
+
+          <div class="ann-full-list" id="annFullList"></div>
+        </section>
+
+        <section class="section" id="section-reports" data-role-visibility="admin">
+          <div class="section-header">
+            <div>
+              <div class="section-view-banner compact">
+                <span class="view-state-badge admin-only">Admin Only</span>
+              </div>
+              <h2>Reports and Analytics</h2>
+              <p>Prototype export controls and activity summaries</p>
+            </div>
+          </div>
+
+          <div class="reports-grid">
+            <div class="report-card chart-card span-2">
+              <div class="card-header">
+                <h3>Points Progression</h3>
+                <select class="filter-select-sm">
+                  <option>All Departments</option>
+                  <option>CABE</option>
+                  <option>CCIS</option>
+                  <option>CEDAS</option>
+                  <option>COE</option>
+                  <option>CHS</option>
+                </select>
+              </div>
+              <div class="bar-chart-wrap">
+                <div class="bar-chart" id="barChart"></div>
+                <div class="bar-labels">
+                  <span>Day 1</span>
+                  <span>Day 2</span>
+                  <span>Day 3</span>
+                  <span>Day 4</span>
+                  <span>Day 5</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="report-card">
+              <h3>Participation Rate</h3>
+              <div class="donut-wrap">
+                <div class="donut">
+                  <svg viewBox="0 0 100 100" class="donut-svg">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="var(--surface-2)" stroke-width="12"></circle>
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="var(--accent-crimson)" stroke-width="12" stroke-dasharray="226" stroke-dashoffset="40" transform="rotate(-90 50 50)" class="donut-arc"></circle>
+                  </svg>
+                  <div class="donut-label">83%</div>
+                </div>
+              </div>
+              <p class="report-note">400 of 482 participants attended all tracked events.</p>
+            </div>
+
+            <div class="report-card">
+              <h3>Export Reports</h3>
+              <div class="export-buttons">
+                <button class="export-btn" id="exportPdfBtn" type="button">
+                  <i class="fa-solid fa-file-pdf"></i> Export PDF
+                </button>
+                <button class="export-btn" id="exportExcelBtn" type="button">
+                  <i class="fa-solid fa-file-excel"></i> Export Excel
+                </button>
+              </div>
+            </div>
+
+            <div class="report-card span-2">
+              <div class="card-header">
+                <h3>Event Summary</h3>
+              </div>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Event</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Winner</th>
+                    <th>Participants</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="top-row">
-                    <td><span class="rank-badge-sm">1</span></td>
-                    <td><span class="team-inline"><img class="team-logo xs" src="./image/teams/CEDAS.jpg" alt="CEDAS logo" /> <span>CEDAS</span></span></td>
-                    <td class="gold-val">7</td>
-                    <td class="silver-val">4</td>
-                    <td class="bronze-val">3</td>
-                    <td><strong>14</strong></td>
+                  <tr>
+                    <td>Basketball</td>
+                    <td><span class="cat-badge sport">Sport</span></td>
+                    <td><span class="status-badge ongoing">Ongoing</span></td>
+                    <td>TBD</td>
+                    <td>40</td>
                   </tr>
                   <tr>
-                    <td><span class="rank-badge-sm">2</span></td>
-                    <td><span class="team-inline"><img class="team-logo xs" src="./image/teams/CCIS.jpg" alt="CCIS logo" /> <span>CCIS</span></span></td>
-                    <td class="gold-val">5</td>
-                    <td class="silver-val">6</td>
-                    <td class="bronze-val">2</td>
-                    <td><strong>13</strong></td>
+                    <td>Volleyball</td>
+                    <td><span class="cat-badge sport">Sport</span></td>
+                    <td><span class="status-badge ongoing">Ongoing</span></td>
+                    <td>TBD</td>
+                    <td>24</td>
                   </tr>
                   <tr>
-                    <td><span class="rank-badge-sm">3</span></td>
-                    <td><span class="team-inline"><img class="team-logo xs" src="./image/teams/COE.jpg" alt="COE logo" /> <span>COE</span></span></td>
-                    <td class="gold-val">4</td>
-                    <td class="silver-val">3</td>
-                    <td class="bronze-val">5</td>
-                    <td><strong>12</strong></td>
+                    <td>Cheerdance</td>
+                    <td><span class="cat-badge socio">Socio</span></td>
+                    <td><span class="status-badge upcoming">Upcoming</span></td>
+                    <td>-</td>
+                    <td>48</td>
                   </tr>
                   <tr>
-                    <td><span class="rank-badge-sm">4</span></td>
-                    <td><span class="team-inline"><img class="team-logo xs" src="./image/teams/CHS.jpg" alt="CHS logo" /> <span>CHS</span></span></td>
-                    <td class="gold-val">2</td>
-                    <td class="silver-val">3</td>
-                    <td class="bronze-val">4</td>
-                    <td><strong>9</strong></td>
+                    <td>Quiz Bee</td>
+                    <td><span class="cat-badge academic">Academic</span></td>
+                    <td><span class="status-badge done">Completed</span></td>
+                    <td>CEDAS</td>
+                    <td>16</td>
                   </tr>
                   <tr>
-                    <td><span class="rank-badge-sm">5</span></td>
-                    <td><span class="team-inline"><img class="team-logo xs" src="./image/teams/CABE.png" alt="CABE logo" /> <span>CABE</span></span></td>
-                    <td class="gold-val">2</td>
-                    <td class="silver-val">2</td>
-                    <td class="bronze-val">3</td>
-                    <td><strong>7</strong></td>
+                    <td>Mr. and Ms. Intramurals</td>
+                    <td><span class="cat-badge special">Special</span></td>
+                    <td><span class="status-badge upcoming">Upcoming</span></td>
+                    <td>-</td>
+                    <td>8</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
+        </section>
 
-          <!-- RECENT ANNOUNCEMENTS -->
-          <div class="dash-card">
-            <div class="card-header">
-              <h3><i class="fa-solid fa-bullhorn"></i> Announcements</h3>
-              <a href="#" class="card-link" data-section="announcements">View all</a>
-            </div>
-            <div class="ann-list">
-              <div class="ann-item urgent">
-                <span class="ann-tag urgent">URGENT</span>
-                <p>Basketball Finals venue moved to Main Gymnasium</p>
-                <small>Today, 10:32 AM</small>
+        <section class="section" id="section-settings" data-role-visibility="admin">
+          <div class="section-header">
+            <div>
+              <div class="section-view-banner compact">
+                <span class="view-state-badge admin-only">Admin Only</span>
               </div>
-              <div class="ann-item">
-                <span class="ann-tag">UPDATE</span>
-                <p>Cheerdance costumes must be submitted for inspection by 7 AM tomorrow</p>
-                <small>Today, 8:15 AM</small>
-              </div>
-              <div class="ann-item">
-                <span class="ann-tag info">INFO</span>
-                <p>Official scoresheets now available for download in the reports section</p>
-                <small>Yesterday, 4:00 PM</small>
-              </div>
+              <h2>Settings</h2>
+              <p>System configuration and account preferences</p>
             </div>
           </div>
 
-        </div><!-- end dash-grid -->
-      </section>
+          <div class="settings-grid">
+            <div class="settings-card">
+              <h4><i class="fa-solid fa-palette"></i> Appearance</h4>
+              <div class="setting-row">
+                <label>Theme</label>
+                <div class="toggle-group">
+                  <button class="toggle-btn active" id="themeLight" type="button" onclick="setTheme('light')">Light</button>
+                  <button class="toggle-btn" id="themeDark" type="button" onclick="setTheme('dark')">Dark</button>
+                </div>
+              </div>
+              <div class="setting-row">
+                <label>Accent Color</label>
+                <div class="color-swatches">
+                  <span class="swatch active" style="background:#c1121f" onclick="setAccent('#c1121f', this)"></span>
+                  <span class="swatch" style="background:#457b9d" onclick="setAccent('#457b9d', this)"></span>
+                  <span class="swatch" style="background:#f4a261" onclick="setAccent('#f4a261', this)"></span>
+                  <span class="swatch" style="background:#e9c46a" onclick="setAccent('#e9c46a', this)"></span>
+                  <span class="swatch" style="background:#ec4899" onclick="setAccent('#ec4899', this)"></span>
+                </div>
+              </div>
+            </div>
 
-      <!-- ===== AI CHATBOT ===== -->
-      <section class="section" id="section-chatbot">
-        <div class="section-header">
-          <h2>AI Guidelines Chatbot</h2>
-          <p>Ask anything about official intramural rules, dress codes, schedules, and criteria.</p>
-        </div>
-        <div class="chatbot-layout">
-          <div class="chatbot-main">
-            <div class="chat-window" id="chatWindow">
-              <!-- Bot welcome message -->
-              <div class="chat-msg bot-msg">
-                <div class="chat-avatar bot-av"><i class="fa-solid fa-robot"></i></div>
-                <div class="chat-bubble">
-                  <p>👋 Hello! I'm the <strong>CJC Intramurals AI Assistant</strong>. I can answer questions based on official guidelines posted by the CSG Officer.</p>
-                  <p>Try asking me something like:</p>
-                  <div class="chat-suggestions">
-                    <button class="chat-sug-btn" onclick="insertSuggestion(this)">What is the dress code for cheerdance?</button>
-                    <button class="chat-sug-btn" onclick="insertSuggestion(this)">How many players in volleyball?</button>
-                    <button class="chat-sug-btn" onclick="insertSuggestion(this)">What are the judging criteria for Mr. & Ms. Intramurals?</button>
-                    <button class="chat-sug-btn" onclick="insertSuggestion(this)">What happens if a team arrives late?</button>
-                  </div>
-                </div>
+            <div class="settings-card">
+              <h4><i class="fa-solid fa-bell"></i> Notifications</h4>
+              <div class="setting-row">
+                <label>Score Updates</label>
+                <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+              </div>
+              <div class="setting-row">
+                <label>Announcements</label>
+                <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+              </div>
+              <div class="setting-row">
+                <label>Email Notifications</label>
+                <label class="switch"><input type="checkbox" /><span class="slider"></span></label>
               </div>
             </div>
-            <div class="chat-input-bar">
-              <input type="text" id="chatInput" placeholder="Ask about guidelines, rules, schedules…" />
-              <button class="chat-send-btn" id="chatSendBtn">
-                <i class="fa-solid fa-paper-plane"></i>
-              </button>
-            </div>
-          </div>
-          <div class="chatbot-sidebar">
-            <h4>📋 Quick Topics</h4>
-            <div class="topic-tags">
-              <span class="topic-tag" onclick="insertSuggestion(this)">Dress Code</span>
-              <span class="topic-tag" onclick="insertSuggestion(this)">Player Eligibility</span>
-              <span class="topic-tag" onclick="insertSuggestion(this)">Scoring System</span>
-              <span class="topic-tag" onclick="insertSuggestion(this)">Tardiness Rules</span>
-              <span class="topic-tag" onclick="insertSuggestion(this)">Protest Procedure</span>
-              <span class="topic-tag" onclick="insertSuggestion(this)">Event Schedule</span>
-              <span class="topic-tag" onclick="insertSuggestion(this)">Judging Criteria</span>
-              <span class="topic-tag" onclick="insertSuggestion(this)">Disqualification Rules</span>
-            </div>
-            <h4>📁 Source Documents</h4>
-            <div class="source-docs">
-              <div class="source-doc">
-                <i class="fa-solid fa-file-pdf"></i>
-                <div>
-                  <span>Official Intramurals Rulebook</span>
-                  <small>Updated May 10, 2025</small>
-                </div>
-              </div>
-              <div class="source-doc">
-                <i class="fa-solid fa-file-pdf"></i>
-                <div>
-                  <span>Sports Events Guidelines</span>
-                  <small>Updated May 8, 2025</small>
-                </div>
-              </div>
-              <div class="source-doc">
-                <i class="fa-solid fa-file-pdf"></i>
-                <div>
-                  <span>Socio-Cultural Criteria</span>
-                  <small>Updated May 5, 2025</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <!-- ===== EVENT MANAGEMENT ===== -->
-      <section class="section" id="section-events">
-        <div class="section-header-row">
-          <div>
-            <h2>Event Management</h2>
-            <p>Create, schedule, and manage all intramural events</p>
-          </div>
-          <button class="btn-primary" onclick="openModal('addEventModal')">
-            <i class="fa-solid fa-plus"></i> Add Event
-          </button>
-        </div>
-        <!-- Filter Tabs -->
-        <div class="filter-tabs">
-          <button class="filter-tab active" data-filter="all">All Events</button>
-          <button class="filter-tab" data-filter="sports">Sports</button>
-          <button class="filter-tab" data-filter="socio">Socio-Cultural</button>
-          <button class="filter-tab" data-filter="academic">Academic</button>
-          <button class="filter-tab" data-filter="special">Special</button>
-        </div>
-        <!-- Events Grid -->
-        <div class="events-grid" id="eventsGrid">
-          <!-- Cards injected by JS -->
-        </div>
-      </section>
+            <div class="settings-card">
+              <h4><i class="fa-solid fa-user-shield"></i> Account</h4>
+              <div class="setting-row">
+                <label>Name</label>
+                <input class="setting-input" id="settingsNameInput" value="CSG Officer" type="text" />
+              </div>
+              <div class="setting-row">
+                <label>Email</label>
+                <input class="setting-input" id="settingsEmailInput" value="csg@cjc.edu.ph" type="email" />
+              </div>
+              <button class="btn-primary mt-1" type="button" onclick="showToast('Settings saved!')">Save Changes</button>
+            </div>
 
-      <!-- ===== REAL-TIME SCORING ===== -->
-      <section class="section" id="section-scoring">
-        <div class="section-header-row">
-          <div>
-            <h2>Real-Time Scoring</h2>
-            <p>Encode and publish live scores during sports events</p>
-          </div>
-          <span class="live-pill"><span class="live-dot"></span> 3 Active Matches</span>
-        </div>
-        <div class="scoring-grid">
-          <!-- Match 1 -->
-          <div class="scoring-card active-match">
-            <div class="match-header">
-              <span class="match-event">🏀 Basketball — Semi Finals</span>
-              <span class="match-status live">LIVE</span>
-            </div>
-            <div class="match-body">
-              <div class="match-team-score">
-                <div class="mts-team">
-                  <span class="mts-color" style="background:#e63946"></span>
-                  <img class="team-logo sm mts-logo" src="./image/teams/CEDAS.jpg" alt="CEDAS logo" />
-                  <span class="mts-name">CEDAS</span>
-                </div>
-                <div class="score-control">
-                  <button class="score-btn minus" onclick="changeScore('score-a', -1)">−</button>
-                  <span class="score-display" id="score-a">58</span>
-                  <button class="score-btn plus" onclick="changeScore('score-a', 1)">+</button>
-                </div>
+            <div class="settings-card">
+              <h4><i class="fa-solid fa-gear"></i> System</h4>
+              <div class="setting-row">
+                <label>Auto-publish Scores</label>
+                <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
               </div>
-              <div class="match-divider">VS</div>
-              <div class="match-team-score">
-                <div class="mts-team">
-                  <span class="mts-color" style="background:#457b9d"></span>
-                  <img class="team-logo sm mts-logo" src="./image/teams/CCIS.jpg" alt="CCIS logo" />
-                  <span class="mts-name">CCIS</span>
-                </div>
-                <div class="score-control">
-                  <button class="score-btn minus" onclick="changeScore('score-b', -1)">−</button>
-                  <span class="score-display" id="score-b">51</span>
-                  <button class="score-btn plus" onclick="changeScore('score-b', 1)">+</button>
-                </div>
+              <div class="setting-row">
+                <label>AI Assistant Active</label>
+                <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
               </div>
-            </div>
-            <div class="match-footer">
-              <span class="match-period">Q3 — 4:22 remaining</span>
-              <div class="match-actions">
-                <button class="btn-sm secondary">Reset</button>
-                <button class="btn-sm primary" onclick="showToast('Score published!')">Publish</button>
+              <div class="setting-row">
+                <label>QR Attendance</label>
+                <label class="switch"><input type="checkbox" /><span class="slider"></span></label>
               </div>
             </div>
           </div>
+        </section>
+      </main>
+    </div>
+  </div>
 
-          <!-- Match 2 -->
-          <div class="scoring-card active-match">
-            <div class="match-header">
-              <span class="match-event">🏐 Volleyball — Finals</span>
-              <span class="match-status live">LIVE</span>
-            </div>
-            <div class="match-body">
-              <div class="match-team-score">
-                <div class="mts-team">
-                  <span class="mts-color" style="background:#f4a261"></span>
-                  <img class="team-logo sm mts-logo" src="./image/teams/COE.jpg" alt="COE logo" />
-                  <span class="mts-name">COE</span>
-                </div>
-                <div class="score-control">
-                  <button class="score-btn minus" onclick="changeScore('score-c', -1)">−</button>
-                  <span class="score-display" id="score-c">14</span>
-                  <button class="score-btn plus" onclick="changeScore('score-c', 1)">+</button>
-                </div>
-              </div>
-              <div class="match-divider">VS</div>
-              <div class="match-team-score">
-                <div class="mts-team">
-                  <span class="mts-color" style="background:#e9c46a"></span>
-                  <img class="team-logo sm mts-logo" src="./image/teams/CABE.png" alt="CABE logo" />
-                  <span class="mts-name">CABE</span>
-                </div>
-                <div class="score-control">
-                  <button class="score-btn minus" onclick="changeScore('score-d', -1)">−</button>
-                  <span class="score-display" id="score-d">11</span>
-                  <button class="score-btn plus" onclick="changeScore('score-d', 1)">+</button>
-                </div>
-              </div>
-            </div>
-            <div class="match-footer">
-              <span class="match-period">Set 2 of 3</span>
-              <div class="match-actions">
-                <button class="btn-sm secondary">Reset</button>
-                <button class="btn-sm primary" onclick="showToast('Score published!')">Publish</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tally Sheet -->
-          <div class="scoring-card tally-card">
-            <div class="match-header">
-              <span class="match-event">📋 Cheerdance — Tally Sheet</span>
-              <span class="match-status">IN PROGRESS</span>
-            </div>
-            <div class="tally-body">
-              <div class="tally-row">
-                <span class="tally-criterion">Synchronization</span>
-                <div class="tally-score-input">
-                  <input type="number" value="88" min="0" max="100" class="tally-input" />
-                  <span class="tally-max">/ 100</span>
-                </div>
-              </div>
-              <div class="tally-row">
-                <span class="tally-criterion">Choreography</span>
-                <div class="tally-score-input">
-                  <input type="number" value="92" min="0" max="100" class="tally-input" />
-                  <span class="tally-max">/ 100</span>
-                </div>
-              </div>
-              <div class="tally-row">
-                <span class="tally-criterion">Costumes & Props</span>
-                <div class="tally-score-input">
-                  <input type="number" value="85" min="0" max="100" class="tally-input" />
-                  <span class="tally-max">/ 100</span>
-                </div>
-              </div>
-              <div class="tally-row">
-                <span class="tally-criterion">Crowd Impact</span>
-                <div class="tally-score-input">
-                  <input type="number" value="90" min="0" max="100" class="tally-input" />
-                  <span class="tally-max">/ 100</span>
-                </div>
-              </div>
-              <div class="tally-total">
-                <span>Weighted Total</span>
-                <span class="tally-total-val">88.75</span>
-              </div>
-            </div>
-            <div class="match-footer">
-              <span class="match-period">CHS · Judge 1</span>
-              <button class="btn-sm primary" onclick="showToast('Tally saved!')">Save</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===== LIVE STANDINGS ===== -->
-      <section class="section" id="section-standings">
-        <div class="section-header">
-          <h2>Live Standings & Rankings</h2>
-          <p>Official leaderboard — updates after every confirmed score</p>
-        </div>
-        <div class="standings-layout">
-          <div class="podium-wrap">
-            <div class="podium">
-              <div class="podium-slot second">
-                <div class="podium-avatar"><img class="podium-logo" src="./image/teams/CCIS.jpg" alt="CCIS logo" /></div>
-                <div class="podium-name">CCIS</div>
-                <div class="podium-pts">129 pts</div>
-                <div class="podium-block" style="height:100px; background: linear-gradient(180deg, #457b9d, #1d3557)">
-                  <span class="podium-rank">2</span>
-                </div>
-              </div>
-              <div class="podium-slot first">
-                <div class="podium-crown">👑</div>
-                <div class="podium-avatar"><img class="podium-logo" src="./image/teams/CEDAS.jpg" alt="CEDAS logo" /></div>
-                <div class="podium-name">CEDAS</div>
-                <div class="podium-pts">142 pts</div>
-                <div class="podium-block" style="height:140px; background: linear-gradient(180deg, #e63946, #9b0000)">
-                  <span class="podium-rank">1</span>
-                </div>
-              </div>
-              <div class="podium-slot third">
-                <div class="podium-avatar"><img class="podium-logo" src="./image/teams/COE.jpg" alt="COE logo" /></div>
-                <div class="podium-name">COE</div>
-                <div class="podium-pts">118 pts</div>
-                <div class="podium-block" style="height:70px; background: linear-gradient(180deg, #f4a261, #e76f51)">
-                  <span class="podium-rank">3</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="standings-table-wrap">
-            <table class="standings-table">
-              <thead>
-                <tr>
-                  <th>Pos</th>
-                  <th>Department</th>
-                  <th>W</th>
-                  <th>L</th>
-                  <th>🥇</th>
-                  <th>🥈</th>
-                  <th>🥉</th>
-                  <th>Pts</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="highlight-row">
-                  <td><span class="pos-badge gold-pos">1</span></td>
-                  <td><span class="team-inline"><img class="team-logo xs" src="./image/teams/CEDAS.jpg" alt="CEDAS logo" /> <span>CEDAS</span></span></td>
-                  <td>12</td><td>3</td>
-                  <td class="gold-val">7</td><td class="silver-val">4</td><td class="bronze-val">3</td>
-                  <td><strong>142</strong></td>
-                </tr>
-                <tr>
-                  <td><span class="pos-badge silver-pos">2</span></td>
-                  <td><span class="team-inline"><img class="team-logo xs" src="./image/teams/CCIS.jpg" alt="CCIS logo" /> <span>CCIS</span></span></td>
-                  <td>10</td><td>5</td>
-                  <td class="gold-val">5</td><td class="silver-val">6</td><td class="bronze-val">2</td>
-                  <td><strong>129</strong></td>
-                </tr>
-                <tr>
-                  <td><span class="pos-badge bronze-pos">3</span></td>
-                  <td><span class="team-inline"><img class="team-logo xs" src="./image/teams/COE.jpg" alt="COE logo" /> <span>COE</span></span></td>
-                  <td>9</td><td>6</td>
-                  <td class="gold-val">4</td><td class="silver-val">3</td><td class="bronze-val">5</td>
-                  <td><strong>118</strong></td>
-                </tr>
-                <tr>
-                  <td><span class="pos-badge">4</span></td>
-                  <td><span class="team-inline"><img class="team-logo xs" src="./image/teams/CHS.jpg" alt="CHS logo" /> <span>CHS</span></span></td>
-                  <td>8</td><td>7</td>
-                  <td class="gold-val">2</td><td class="silver-val">3</td><td class="bronze-val">4</td>
-                  <td><strong>107</strong></td>
-                </tr>
-                <tr>
-                  <td><span class="pos-badge">5</span></td>
-                  <td><span class="team-inline"><img class="team-logo xs" src="./image/teams/CABE.png" alt="CABE logo" /> <span>CABE</span></span></td>
-                  <td>7</td><td>8</td>
-                  <td class="gold-val">2</td><td class="silver-val">2</td><td class="bronze-val">3</td>
-                  <td><strong>91</strong></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===== PARTICIPANT PROFILES ===== -->
-      <section class="section" id="section-profiles">
-        <div class="section-header-row">
-          <div>
-            <h2>Participant Profiles</h2>
-            <p>Official demographics and event assignments</p>
-          </div>
-          <button class="btn-primary" onclick="openModal('addParticipantModal')">
-            <i class="fa-solid fa-user-plus"></i> Add Participant
-          </button>
-        </div>
-        <!-- Search & Filter -->
-        <div class="profile-filters">
-          <div class="search-bar-inline">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Search participants…" id="profileSearch" oninput="filterProfiles()" />
-          </div>
-          <select class="filter-select" id="deptFilter" onchange="filterProfiles()">
-            <option value="">All Departments</option>
-            <option>CABE</option>
-            <option>CCIS</option>
-            <option>CEDAS</option>
-            <option>COE</option>
-            <option>CHS</option>
-          </select>
-          <select class="filter-select" id="yearFilter" onchange="filterProfiles()">
-            <option value="">All Year Levels</option>
-            <option>1st Year</option>
-            <option>2nd Year</option>
-            <option>3rd Year</option>
-            <option>4th Year</option>
-          </select>
-        </div>
-        <!-- Profile Cards -->
-        <div class="profile-grid" id="profileGrid">
-          <!-- Injected by JS -->
-        </div>
-      </section>
-
-      <!-- ===== ATTENDANCE ===== -->
-      <section class="section" id="section-attendance">
-        <div class="section-header">
-          <h2>Attendance Management</h2>
-          <p>Track participant attendance per event</p>
-        </div>
-        <div class="attendance-layout">
-          <div class="att-event-list">
-            <h4>Select Event</h4>
-            <div class="att-events">
-              <div class="att-event-item active" onclick="selectAttEvent(this, 'Basketball Semi Finals')">
-                <i class="fa-solid fa-basketball"></i>
-                <span>Basketball Semi Finals</span>
-              </div>
-              <div class="att-event-item" onclick="selectAttEvent(this, 'Volleyball Finals')">
-                <i class="fa-solid fa-volleyball"></i>
-                <span>Volleyball Finals</span>
-              </div>
-              <div class="att-event-item" onclick="selectAttEvent(this, 'Cheerdance Competition')">
-                <i class="fa-solid fa-music"></i>
-                <span>Cheerdance Competition</span>
-              </div>
-              <div class="att-event-item" onclick="selectAttEvent(this, 'Quiz Bee Finals')">
-                <i class="fa-solid fa-brain"></i>
-                <span>Quiz Bee Finals</span>
-              </div>
-            </div>
-          </div>
-          <div class="att-table-wrap">
-            <div class="att-table-header">
-              <h4 id="attEventTitle">Basketball Semi Finals</h4>
-              <div class="att-stats">
-                <span class="att-stat present">✓ 18 Present</span>
-                <span class="att-stat absent">✗ 2 Absent</span>
-                <span class="att-stat late">⏱ 1 Late</span>
-              </div>
-            </div>
-            <table class="att-table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Department</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="attTableBody">
-                <!-- Injected by JS -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===== ANNOUNCEMENTS ===== -->
-      <section class="section" id="section-announcements">
-        <div class="section-header-row">
-          <div>
-            <h2>Announcements</h2>
-            <p>Official communications to all participants and viewers</p>
-          </div>
-          <button class="btn-primary" onclick="openModal('addAnnModal')">
-            <i class="fa-solid fa-plus"></i> New Announcement
-          </button>
-        </div>
-        <div class="ann-full-list" id="annFullList">
-          <!-- Injected by JS -->
-        </div>
-      </section>
-
-      <!-- ===== REPORTS ===== -->
-      <section class="section" id="section-reports">
-        <div class="section-header">
-          <h2>Reports & Analytics</h2>
-          <p>Comprehensive summaries and data exports</p>
-        </div>
-        <div class="reports-grid">
-          <!-- Mini Charts -->
-          <div class="report-card chart-card span-2">
-            <div class="card-header">
-              <h3>Points Progression</h3>
-              <select class="filter-select-sm">
-                <option>All Departments</option>
-                <option>CABE</option>
-                <option>CCIS</option>
-                <option>CEDAS</option>
-                <option>COE</option>
-                <option>CHS</option>
-              </select>
-            </div>
-            <div class="bar-chart-wrap">
-              <div class="bar-chart" id="barChart">
-                <!-- Rendered by JS -->
-              </div>
-              <div class="bar-labels">
-                <span>Day 1</span><span>Day 2</span><span>Day 3</span><span>Day 4</span><span>Day 5</span>
-              </div>
-            </div>
-          </div>
-          <!-- Quick Stats -->
-          <div class="report-card">
-            <h3>Participation Rate</h3>
-            <div class="donut-wrap">
-              <div class="donut">
-                <svg viewBox="0 0 100 100" class="donut-svg">
-                  <circle cx="50" cy="50" r="40" fill="none" stroke="var(--surface-2)" stroke-width="12"/>
-                  <circle cx="50" cy="50" r="40" fill="none" stroke="var(--accent-crimson)" stroke-width="12"
-                    stroke-dasharray="226" stroke-dashoffset="40" transform="rotate(-90 50 50)" class="donut-arc"/>
-                </svg>
-                <div class="donut-label">83%</div>
-              </div>
-            </div>
-            <p class="report-note">400 of 482 participants attended all events</p>
-          </div>
-          <!-- Export buttons -->
-          <div class="report-card">
-            <h3>Export Reports</h3>
-            <div class="export-buttons">
-              <button class="export-btn" onclick="showToast('Generating PDF…')">
-                <i class="fa-solid fa-file-pdf"></i> Participant Report
-              </button>
-              <button class="export-btn" onclick="showToast('Generating PDF…')">
-                <i class="fa-solid fa-table"></i> Score Summary
-              </button>
-              <button class="export-btn" onclick="showToast('Generating Excel…')">
-                <i class="fa-solid fa-file-excel"></i> Attendance Report
-              </button>
-              <button class="export-btn" onclick="showToast('Generating PDF…')">
-                <i class="fa-solid fa-ranking-star"></i> Final Rankings
-              </button>
-            </div>
-          </div>
-          <!-- Summary Table -->
-          <div class="report-card span-2">
-            <div class="card-header"><h3>Event Summary</h3></div>
-            <table class="data-table">
-              <thead>
-                <tr><th>Event</th><th>Category</th><th>Status</th><th>Winner</th><th>Participants</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Basketball</td><td><span class="cat-badge sport">Sport</span></td><td><span class="status-badge ongoing">Ongoing</span></td><td>TBD</td><td>40</td></tr>
-                <tr><td>Volleyball</td><td><span class="cat-badge sport">Sport</span></td><td><span class="status-badge ongoing">Ongoing</span></td><td>TBD</td><td>24</td></tr>
-                <tr><td>Cheerdance</td><td><span class="cat-badge socio">Socio</span></td><td><span class="status-badge upcoming">Upcoming</span></td><td>—</td><td>48</td></tr>
-                <tr><td>Quiz Bee</td><td><span class="cat-badge academic">Academic</span></td><td><span class="status-badge done">Completed</span></td><td><span class="team-inline"><img class="team-logo xs" src="./image/teams/CEDAS.jpg" alt="CEDAS logo" /> <span>CEDAS</span></span></td><td>16</td></tr>
-                <tr><td>Mr. & Ms. Intramurals</td><td><span class="cat-badge special">Special</span></td><td><span class="status-badge upcoming">Upcoming</span></td><td>—</td><td>8</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===== SETTINGS ===== -->
-      <section class="section" id="section-settings">
-        <div class="section-header">
-          <h2>Settings</h2>
-          <p>System configuration and account preferences</p>
-        </div>
-        <div class="settings-grid">
-          <div class="settings-card">
-            <h4><i class="fa-solid fa-palette"></i> Appearance</h4>
-            <div class="setting-row">
-              <label>Theme</label>
-              <div class="toggle-group">
-                <button class="toggle-btn active" id="themeLight" onclick="setTheme('light')">Light</button>
-                <button class="toggle-btn" id="themeDark" onclick="setTheme('dark')">Dark</button>
-              </div>
-            </div>
-            <div class="setting-row">
-              <label>Accent Color</label>
-              <div class="color-swatches">
-                <span class="swatch active" style="background:#c1121f" onclick="setAccent('#c1121f', this)"></span>
-                <span class="swatch" style="background:#457b9d" onclick="setAccent('#457b9d', this)"></span>
-                <span class="swatch" style="background:#f4a261" onclick="setAccent('#f4a261', this)"></span>
-                <span class="swatch" style="background:#e9c46a" onclick="setAccent('#e9c46a', this)"></span>
-                <span class="swatch" style="background:#ec4899" onclick="setAccent('#ec4899', this)"></span>
-              </div>
-            </div>
-          </div>
-          <div class="settings-card">
-            <h4><i class="fa-solid fa-bell"></i> Notifications</h4>
-            <div class="setting-row">
-              <label>Score Updates</label>
-              <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
-            </div>
-            <div class="setting-row">
-              <label>Announcements</label>
-              <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
-            </div>
-            <div class="setting-row">
-              <label>Email Notifications</label>
-              <label class="switch"><input type="checkbox" /><span class="slider"></span></label>
-            </div>
-          </div>
-          <div class="settings-card">
-            <h4><i class="fa-solid fa-user-shield"></i> Account</h4>
-            <div class="setting-row">
-              <label>Name</label>
-              <input class="setting-input" value="CSG Officer" type="text" />
-            </div>
-            <div class="setting-row">
-              <label>Email</label>
-              <input class="setting-input" value="csg@cjc.edu.ph" type="email" />
-            </div>
-            <button class="btn-primary mt-1" onclick="showToast('Settings saved!')">Save Changes</button>
-          </div>
-          <div class="settings-card">
-            <h4><i class="fa-solid fa-gear"></i> System</h4>
-            <div class="setting-row">
-              <label>Auto-publish Scores</label>
-              <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
-            </div>
-            <div class="setting-row">
-              <label>AI Chatbot Active</label>
-              <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
-            </div>
-            <div class="setting-row">
-              <label>QR Attendance</label>
-              <label class="switch"><input type="checkbox" /><span class="slider"></span></label>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </main><!-- end content-area -->
-  </div><!-- end main-wrapper -->
-
-  <!-- ===== MODALS ===== -->
-
-  <!-- Add Event Modal -->
   <div class="modal-overlay" id="addEventModal">
     <div class="modal">
       <div class="modal-header">
         <h3>Add New Event</h3>
-        <button class="modal-close" onclick="closeModal('addEventModal')"><i class="fa-solid fa-xmark"></i></button>
+        <button class="modal-close" type="button" onclick="closeModal('addEventModal')"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="modal-body">
         <div class="form-group">
           <label>Event Name</label>
-          <input type="text" class="form-input" placeholder="e.g. Basketball Tournament" />
+          <input type="text" class="form-input" placeholder="Basketball Tournament" />
         </div>
         <div class="form-row">
           <div class="form-group">
@@ -1107,33 +1256,22 @@
           </div>
           <div class="form-group">
             <label>Venue</label>
-            <input type="text" class="form-input" placeholder="e.g. Main Gymnasium" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Participating Teams</label>
-          <div class="checkbox-group">
-            <label class="chk-label"><input type="checkbox" checked /> <img class="team-logo xs" src="./image/teams/CABE.png" alt="CABE logo" /> CABE</label>
-            <label class="chk-label"><input type="checkbox" checked /> <img class="team-logo xs" src="./image/teams/CCIS.jpg" alt="CCIS logo" /> CCIS</label>
-            <label class="chk-label"><input type="checkbox" checked /> <img class="team-logo xs" src="./image/teams/CEDAS.jpg" alt="CEDAS logo" /> CEDAS</label>
-            <label class="chk-label"><input type="checkbox" /> <img class="team-logo xs" src="./image/teams/COE.jpg" alt="COE logo" /> COE</label>
-            <label class="chk-label"><input type="checkbox" /> <img class="team-logo xs" src="./image/teams/CHS.jpg" alt="CHS logo" /> CHS</label>
+            <input type="text" class="form-input" placeholder="Main Gymnasium" />
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn-secondary" onclick="closeModal('addEventModal')">Cancel</button>
-        <button class="btn-primary" onclick="closeModal('addEventModal'); showToast('Event added successfully!')">Add Event</button>
+        <button class="btn-secondary" type="button" onclick="closeModal('addEventModal')">Cancel</button>
+        <button class="btn-primary" type="button" onclick="closeModal('addEventModal'); showToast('Event added successfully!')">Add Event</button>
       </div>
     </div>
   </div>
 
-  <!-- Add Participant Modal -->
   <div class="modal-overlay" id="addParticipantModal">
     <div class="modal">
       <div class="modal-header">
         <h3>Add Participant</h3>
-        <button class="modal-close" onclick="closeModal('addParticipantModal')"><i class="fa-solid fa-xmark"></i></button>
+        <button class="modal-close" type="button" onclick="closeModal('addParticipantModal')"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="modal-body">
         <div class="form-row">
@@ -1167,37 +1305,19 @@
             </select>
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Age</label>
-            <input type="number" class="form-input" min="16" max="30" placeholder="Age" />
-          </div>
-          <div class="form-group">
-            <label>Sex</label>
-            <select class="form-input">
-              <option>Male</option>
-              <option>Female</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Events Joined</label>
-          <input type="text" class="form-input" placeholder="e.g. Basketball, Quiz Bee" />
-        </div>
       </div>
       <div class="modal-footer">
-        <button class="btn-secondary" onclick="closeModal('addParticipantModal')">Cancel</button>
-        <button class="btn-primary" onclick="closeModal('addParticipantModal'); showToast('Participant added!')">Add Participant</button>
+        <button class="btn-secondary" type="button" onclick="closeModal('addParticipantModal')">Cancel</button>
+        <button class="btn-primary" type="button" onclick="closeModal('addParticipantModal'); showToast('Participant added!')">Add Participant</button>
       </div>
     </div>
   </div>
 
-  <!-- Add Announcement Modal -->
   <div class="modal-overlay" id="addAnnModal">
     <div class="modal">
       <div class="modal-header">
         <h3>New Announcement</h3>
-        <button class="modal-close" onclick="closeModal('addAnnModal')"><i class="fa-solid fa-xmark"></i></button>
+        <button class="modal-close" type="button" onclick="closeModal('addAnnModal')"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="modal-body">
         <div class="form-group">
@@ -1215,20 +1335,17 @@
         </div>
         <div class="form-group">
           <label>Message</label>
-          <textarea class="form-input" rows="4" placeholder="Enter announcement message…"></textarea>
+          <textarea class="form-input" rows="4" placeholder="Enter announcement message..."></textarea>
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn-secondary" onclick="closeModal('addAnnModal')">Cancel</button>
-        <button class="btn-primary" onclick="closeModal('addAnnModal'); showToast('Announcement posted!')">Post</button>
+        <button class="btn-secondary" type="button" onclick="closeModal('addAnnModal')">Cancel</button>
+        <button class="btn-primary" type="button" onclick="closeModal('addAnnModal'); showToast('Announcement posted!')">Post</button>
       </div>
     </div>
   </div>
 
-  <!-- TOAST -->
   <div class="toast" id="toast"></div>
-
-  <!-- Mobile Overlay -->
   <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileSidebar()"></div>
 
   <script src="./js/script.js"></script>
