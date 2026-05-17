@@ -1470,6 +1470,7 @@ svg {
 .standings-table-wrap,
 .att-table-wrap {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .medal-table,
@@ -2962,8 +2963,53 @@ textarea.form-input {
     border-radius: 20px;
   }
 
+  .breadcrumb-year {
+    display: none;
+  }
+
+  .breadcrumb-section {
+    font-size: 1rem;
+  }
+
   .topbar-search {
     display: none;
+  }
+
+  .topbar-right {
+    justify-content: flex-end;
+    gap: 0.65rem;
+  }
+
+  .topbar-btn,
+  .topbar-avatar {
+    width: 44px;
+    height: 44px;
+  }
+
+  .section-header,
+  .section-header-row,
+  .card-header,
+  .guideline-record-top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .section-header-row > .btn-primary,
+  .scanner-action-row > .btn-primary,
+  .scanner-action-row > .btn-secondary,
+  .verification-actions > .btn-primary,
+  .verification-actions > .btn-secondary,
+  .guideline-actions > .btn-sm,
+  .export-buttons > .export-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .verification-actions,
+  .scanner-action-row,
+  .guideline-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .content-area {
@@ -2987,6 +3033,119 @@ textarea.form-input {
 
   .hero-title {
     font-size: 2.3rem;
+  }
+
+  .hero-sub,
+  .score-num,
+  .scanner-result-item strong {
+    word-break: break-word;
+  }
+
+  .podium {
+    justify-content: flex-start;
+    gap: 0.8rem;
+    overflow-x: auto;
+    padding-bottom: 0.45rem;
+    scrollbar-width: none;
+  }
+
+  .podium::-webkit-scrollbar {
+    display: none;
+  }
+
+  .podium-slot {
+    min-width: 110px;
+  }
+
+  .medal-table thead,
+  .standings-table thead,
+  .att-table thead,
+  .data-table thead {
+    display: none;
+  }
+
+  .medal-table,
+  .standings-table,
+  .att-table,
+  .data-table,
+  .medal-table tbody,
+  .standings-table tbody,
+  .att-table tbody,
+  .data-table tbody {
+    display: block;
+  }
+
+  .medal-table tr,
+  .standings-table tr,
+  .att-table tr,
+  .data-table tr {
+    display: block;
+    margin-bottom: 0.85rem;
+    overflow: hidden;
+    border-radius: 18px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+  }
+
+  .medal-table tbody tr:hover,
+  .standings-table tbody tr:hover,
+  .att-table tbody tr:hover,
+  .data-table tbody tr:hover {
+    background: var(--surface-2);
+  }
+
+  .medal-table td,
+  .standings-table td,
+  .att-table td,
+  .data-table td {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.82rem 0.95rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+
+  .medal-table td:last-child,
+  .standings-table td:last-child,
+  .att-table td:last-child,
+  .data-table td:last-child {
+    border-bottom: 0;
+  }
+
+  .medal-table td::before,
+  .standings-table td::before,
+  .att-table td::before,
+  .data-table td::before {
+    content: attr(data-label);
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    min-width: 92px;
+  }
+
+  .medal-table td > strong,
+  .standings-table td > strong,
+  .att-table td > strong,
+  .data-table td > strong,
+  .medal-table td > span,
+  .standings-table td > span,
+  .att-table td > span,
+  .data-table td > span,
+  .medal-table td > div,
+  .standings-table td > div,
+  .att-table td > div,
+  .data-table td > div {
+    margin-left: auto;
+  }
+
+  .att-table td .table-btn-group {
+    width: 100%;
+    justify-content: flex-end;
   }
 
   .notif-dropdown {

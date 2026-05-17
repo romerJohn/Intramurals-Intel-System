@@ -650,12 +650,12 @@ function renderDashboardMedalTable() {
 
   tbody.innerHTML = sorted.map((entry, index) => `
     <tr class="${index === 0 ? "top-row" : ""}">
-      <td><span class="rank-badge-sm">${index + 1}</span></td>
-      <td>${renderTeamInline(entry.team, "xs")}</td>
-      <td class="gold-val">${entry.gold}</td>
-      <td class="silver-val">${entry.silver}</td>
-      <td class="bronze-val">${entry.bronze}</td>
-      <td><strong>${entry.gold + entry.silver + entry.bronze}</strong></td>
+      <td data-label="Rank"><span class="rank-badge-sm">${index + 1}</span></td>
+      <td data-label="Department">${renderTeamInline(entry.team, "xs")}</td>
+      <td class="gold-val" data-label="Gold">${entry.gold}</td>
+      <td class="silver-val" data-label="Silver">${entry.silver}</td>
+      <td class="bronze-val" data-label="Bronze">${entry.bronze}</td>
+      <td data-label="Total"><strong>${entry.gold + entry.silver + entry.bronze}</strong></td>
     </tr>
   `).join("");
 }
@@ -696,14 +696,14 @@ function renderStandingsSection() {
 
   tbody.innerHTML = sorted.map((entry, index) => `
     <tr class="${index === 0 ? "highlight-row" : ""}">
-      <td><span class="pos-badge ${index === 0 ? "gold-pos" : index === 1 ? "silver-pos" : index === 2 ? "bronze-pos" : ""}">${index + 1}</span></td>
-      <td>${renderTeamInline(entry.team, "xs")}</td>
-      <td>${entry.wins}</td>
-      <td>${entry.losses}</td>
-      <td class="gold-val">${entry.gold}</td>
-      <td class="silver-val">${entry.silver}</td>
-      <td class="bronze-val">${entry.bronze}</td>
-      <td><strong>${entry.points}</strong></td>
+      <td data-label="Position"><span class="pos-badge ${index === 0 ? "gold-pos" : index === 1 ? "silver-pos" : index === 2 ? "bronze-pos" : ""}">${index + 1}</span></td>
+      <td data-label="Department">${renderTeamInline(entry.team, "xs")}</td>
+      <td data-label="Wins">${entry.wins}</td>
+      <td data-label="Losses">${entry.losses}</td>
+      <td class="gold-val" data-label="Gold">${entry.gold}</td>
+      <td class="silver-val" data-label="Silver">${entry.silver}</td>
+      <td class="bronze-val" data-label="Bronze">${entry.bronze}</td>
+      <td data-label="Points"><strong>${entry.points}</strong></td>
     </tr>
   `).join("");
 }
@@ -984,11 +984,11 @@ function renderAttendance(eventName) {
 
   tbody.innerHTML = records.map((attendee, index) => `
     <tr>
-      <td>${index + 1}</td>
-      <td>${attendee.name}</td>
-      <td>${renderTeamInline(attendee.department, "xs")}</td>
-      <td><span class="att-status-badge ${attendee.status.toLowerCase()}">${attendee.status}</span></td>
-      <td>
+      <td data-label="No.">${index + 1}</td>
+      <td data-label="Name">${attendee.name}</td>
+      <td data-label="Department">${renderTeamInline(attendee.department, "xs")}</td>
+      <td data-label="Status"><span class="att-status-badge ${attendee.status.toLowerCase()}">${attendee.status}</span></td>
+      <td data-label="Action">
         <div class="table-btn-group">
           <button class="table-action-btn present" type="button" onclick="markAttendance('${eventName}', ${index}, 'Present')">Present</button>
           <button class="table-action-btn late" type="button" onclick="markAttendance('${eventName}', ${index}, 'Late')">Late</button>
