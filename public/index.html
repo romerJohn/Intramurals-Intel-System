@@ -154,13 +154,21 @@
             <i class="fa-solid fa-id-card"></i>
             <span class="nav-label">Participant Profiles</span>
           </li>
-          <li class="nav-item" data-section="attendance" data-role-visibility="admin">
+          <li class="nav-item" data-section="attendance" data-role-visibility="admin student">
             <i class="fa-solid fa-clipboard-check"></i>
-            <span class="nav-label">Attendance</span>
+            <span class="nav-label" data-role-copy data-admin-copy="Attendance" data-student-copy="My Attendance">Attendance</span>
           </li>
           <li class="nav-item" data-section="announcements" data-role-visibility="admin student">
             <i class="fa-solid fa-bullhorn"></i>
             <span class="nav-label">Announcements</span>
+          </li>
+          <li class="nav-item" data-section="gallery" data-role-visibility="admin student">
+            <i class="fa-solid fa-images"></i>
+            <span class="nav-label">Gallery</span>
+          </li>
+          <li class="nav-item" data-section="feedback" data-role-visibility="admin student">
+            <i class="fa-solid fa-star-half-stroke"></i>
+            <span class="nav-label">Feedback</span>
           </li>
         </ul>
 
@@ -494,6 +502,14 @@
                 <div class="ann-list" id="studentAnnouncementsPreview"></div>
               </div>
 
+              <div class="dash-card">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-qrcode"></i> My Attendance</h3>
+                  <a href="#" class="card-link" data-section="attendance">Open full page</a>
+                </div>
+                <div class="student-attendance-card" id="studentAttendancePreview"></div>
+              </div>
+
               <div class="dash-card span-2">
                 <div class="card-header">
                   <h3><i class="fa-solid fa-file-lines"></i> Official Guidelines</h3>
@@ -738,6 +754,26 @@
               </div>
             </div>
           </div>
+
+          <div class="scoring-ops-grid" data-role-visibility="admin">
+            <div class="dash-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-user-gear"></i> Judge and Scorer Console</h3>
+                <span class="view-state-badge admin-only">Admin Only</span>
+              </div>
+              <p class="verification-caption">Assigned judges and scorers can encode event tallies only for their designated modules during the backend phase.</p>
+              <div class="assignment-list" id="judgeAssignmentList"></div>
+            </div>
+
+            <div class="dash-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-scale-balanced"></i> Score Verification and Dispute Handling</h3>
+                <span class="view-state-badge pending-state">Pending Verification</span>
+              </div>
+              <p class="verification-caption">Coaches or department representatives can raise disputes, then the CSG office reviews and resolves them before records change.</p>
+              <div class="dispute-queue" id="disputeQueueList"></div>
+            </div>
+          </div>
         </section>
 
         <section class="section" id="section-scanner" data-role-visibility="admin">
@@ -947,60 +983,198 @@
             </select>
           </div>
 
-          <div class="profile-grid" id="profileGrid"></div>
-        </section>
-
-        <section class="section" id="section-attendance" data-role-visibility="admin">
-          <div class="section-header">
-            <div>
-              <div class="section-view-banner compact">
+          <div class="profile-tools-grid">
+            <div class="dash-card profile-tool-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-file-import"></i> Participant File Upload and Auto-Import</h3>
                 <span class="view-state-badge admin-only">Admin Only</span>
               </div>
-              <h2>Attendance Management</h2>
-              <p>Track participant attendance per event</p>
+              <div class="tool-form-grid">
+                <div class="form-group">
+                  <label for="participantFileInput">Upload participant file</label>
+                  <input id="participantFileInput" type="file" class="form-input file-input" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.png,.jpg,.jpeg" />
+                </div>
+                <div class="form-group">
+                  <label for="participantImportSource">Source type</label>
+                  <select id="participantImportSource" class="form-input">
+                    <option>Department Masterlist</option>
+                    <option>Participant Registration Sheet</option>
+                    <option>Printed Participant List</option>
+                  </select>
+                </div>
+                <button class="btn-primary" id="importParticipantsBtn" type="button">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i> Import Participant File
+                </button>
+              </div>
+              <p class="scanner-note">AI-assisted participant file extraction is simulated in the frontend. Printed list OCR will connect in the backend phase.</p>
+              <div class="mini-record-list" id="participantImportList"></div>
+            </div>
+
+            <div class="dash-card profile-tool-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-camera"></i> Participant Photo Upload and Linking</h3>
+                <span class="view-state-badge admin-only">Admin Only</span>
+              </div>
+              <div class="tool-form-grid">
+                <div class="form-group">
+                  <label for="participantPhotoInput">Upload participant photo</label>
+                  <input id="participantPhotoInput" type="file" class="form-input file-input" accept="image/*" />
+                </div>
+                <div class="form-group">
+                  <label for="photoParticipantSelect">Link photo to participant</label>
+                  <select id="photoParticipantSelect" class="form-input"></select>
+                </div>
+                <button class="btn-primary" id="linkParticipantPhotoBtn" type="button">
+                  <i class="fa-solid fa-link"></i> Link Photo
+                </button>
+              </div>
+              <div class="photo-link-layout">
+                <div class="photo-preview-box" id="participantPhotoPreviewBox">
+                  <div class="photo-preview-empty" id="participantPhotoPreviewEmpty">
+                    <i class="fa-solid fa-user"></i>
+                    <p>Select a participant photo to preview before linking.</p>
+                  </div>
+                  <img id="participantPhotoPreviewImage" class="photo-preview-image" alt="Participant photo preview" />
+                </div>
+                <div class="mini-record-list" id="participantPhotoList"></div>
+              </div>
             </div>
           </div>
 
-          <div class="attendance-layout">
-            <div class="att-event-list">
-              <h4>Select Event</h4>
-              <div class="att-events">
-                <div class="att-event-item active" onclick="selectAttEvent(this, 'Basketball Semi Finals')">
-                  <i class="fa-solid fa-basketball"></i>
-                  <span>Basketball Semi Finals</span>
+          <div class="profile-grid" id="profileGrid"></div>
+        </section>
+
+        <section class="section" id="section-attendance" data-role-visibility="admin student">
+          <div class="role-view" data-role-view="admin">
+            <div class="section-header">
+              <div>
+                <div class="section-view-banner compact">
+                  <span class="view-state-badge admin-only">Admin Only</span>
                 </div>
-                <div class="att-event-item" onclick="selectAttEvent(this, 'Volleyball Finals')">
-                  <i class="fa-solid fa-volleyball"></i>
-                  <span>Volleyball Finals</span>
-                </div>
-                <div class="att-event-item" onclick="selectAttEvent(this, 'Cheerdance Competition')">
-                  <i class="fa-solid fa-music"></i>
-                  <span>Cheerdance Competition</span>
-                </div>
-                <div class="att-event-item" onclick="selectAttEvent(this, 'Quiz Bee Finals')">
-                  <i class="fa-solid fa-brain"></i>
-                  <span>Quiz Bee Finals</span>
-                </div>
+                <h2>Attendance Management</h2>
+                <p>Track participant attendance per event</p>
               </div>
             </div>
 
-            <div class="att-table-wrap">
-              <div class="att-table-header">
-                <h4 id="attEventTitle">Basketball Semi Finals</h4>
-                <div class="att-stats"></div>
+            <div class="attendance-layout">
+              <div class="att-event-list">
+                <h4>Select Event</h4>
+                <div class="att-events">
+                  <div class="att-event-item active" onclick="selectAttEvent(this, 'Basketball Semi Finals')">
+                    <i class="fa-solid fa-basketball"></i>
+                    <span>Basketball Semi Finals</span>
+                  </div>
+                  <div class="att-event-item" onclick="selectAttEvent(this, 'Volleyball Finals')">
+                    <i class="fa-solid fa-volleyball"></i>
+                    <span>Volleyball Finals</span>
+                  </div>
+                  <div class="att-event-item" onclick="selectAttEvent(this, 'Cheerdance Competition')">
+                    <i class="fa-solid fa-music"></i>
+                    <span>Cheerdance Competition</span>
+                  </div>
+                  <div class="att-event-item" onclick="selectAttEvent(this, 'Quiz Bee Finals')">
+                    <i class="fa-solid fa-brain"></i>
+                    <span>Quiz Bee Finals</span>
+                  </div>
+                </div>
               </div>
-              <table class="att-table">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Department</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
+
+              <div class="att-table-wrap">
+                <div class="att-table-header">
+                  <h4 id="attEventTitle">Basketball Semi Finals</h4>
+                  <div class="att-stats"></div>
+                </div>
+                <table class="att-table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Department</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
                 <tbody id="attTableBody"></tbody>
-              </table>
+                </table>
+              </div>
+            </div>
+
+            <div class="attendance-tools-grid">
+              <div class="dash-card qr-tool-card">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-qrcode"></i> QR Code Attendance Management</h3>
+                  <span class="view-state-badge admin-only">Admin Only</span>
+                </div>
+                <div class="qr-prototype-grid">
+                  <div class="qr-code-box">
+                    <div class="qr-code-placeholder">
+                      <span>CJC</span>
+                      <small>ATTEND</small>
+                    </div>
+                    <p class="scanner-note">Camera-based QR scanning is simulated here. Real device camera scanning will connect in the backend phase.</p>
+                  </div>
+                  <div class="qr-scan-controls">
+                    <div class="form-group">
+                      <label>Active event</label>
+                      <div class="qr-event-pill" id="qrActiveEventBadge">Basketball Semi Finals</div>
+                    </div>
+                    <div class="form-group">
+                      <label for="qrParticipantSelect">Participant for QR scan</label>
+                      <select id="qrParticipantSelect" class="form-input"></select>
+                    </div>
+                    <button class="btn-primary" id="simulateQrScanBtn" type="button">
+                      <i class="fa-solid fa-camera"></i> Simulate QR Scan
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="dash-card">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-list-check"></i> Recent QR Scan Logs</h3>
+                  <span class="view-state-badge pending-state">Live Device Queue</span>
+                </div>
+                <div class="qr-log-list" id="qrScanLogList"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="role-view" data-role-view="student" hidden>
+            <div class="section-header-row">
+              <div>
+                <div class="section-view-banner compact">
+                  <span class="view-state-badge student-view">Student View</span>
+                  <span class="view-state-badge live-state">Approved Records Only</span>
+                </div>
+                <h2>My Attendance</h2>
+                <p>View your approved attendance records, recent check-ins, and upcoming event attendance reminders.</p>
+              </div>
+            </div>
+
+            <div class="student-attendance-page-grid">
+              <div class="dash-card student-attendance-summary-card">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-id-badge"></i> Attendance Summary</h3>
+                  <span class="view-state-badge student-view">Read Only</span>
+                </div>
+                <div class="student-attendance-summary-grid" id="studentAttendanceSummaryGrid"></div>
+              </div>
+
+              <div class="dash-card student-attendance-history-card">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-clock-rotate-left"></i> Attendance History</h3>
+                  <span class="view-state-badge live-state">Verified</span>
+                </div>
+                <div class="student-attendance-history-list" id="studentAttendanceHistoryList"></div>
+              </div>
+
+              <div class="dash-card student-attendance-upcoming-card">
+                <div class="card-header">
+                  <h3><i class="fa-solid fa-calendar-check"></i> Upcoming Check-In</h3>
+                  <span class="view-state-badge pending-state">Next Event</span>
+                </div>
+                <div class="student-attendance-upcoming" id="studentAttendanceUpcoming"></div>
+              </div>
             </div>
           </div>
         </section>
@@ -1020,6 +1194,92 @@
           </div>
 
           <div class="ann-full-list" id="annFullList"></div>
+        </section>
+
+        <section class="section" id="section-gallery">
+          <div class="section-header-row">
+            <div>
+              <div class="section-view-banner compact">
+                <span class="view-state-badge" data-role-copy data-admin-copy="Admin Controls" data-student-copy="Student View">Admin Controls</span>
+                <span class="view-state-badge live-state">Published Highlights</span>
+              </div>
+              <h2>Gallery and Event Highlights</h2>
+              <p>Approved campus highlights, winning moments, and event snapshots for public viewing.</p>
+            </div>
+            <button class="btn-primary" id="uploadHighlightBtn" type="button" data-role-visibility="admin">
+              <i class="fa-solid fa-image"></i> Upload Highlight
+            </button>
+          </div>
+
+          <div class="gallery-grid" id="galleryGrid"></div>
+        </section>
+
+        <section class="section" id="section-feedback">
+          <div class="section-header-row">
+            <div>
+              <div class="section-view-banner compact">
+                <span class="view-state-badge" data-role-copy data-admin-copy="Admin Review" data-student-copy="Student View">Admin Review</span>
+                <span class="view-state-badge live-state">Feedback and Rating</span>
+              </div>
+              <h2>Feedback and Rating</h2>
+              <p>Collect event experience feedback from viewers and review service quality signals from the operations team.</p>
+            </div>
+          </div>
+
+          <div class="feedback-layout">
+            <div class="dash-card feedback-form-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-comment-dots"></i> Submit Feedback</h3>
+                <span class="view-state-badge student-view">Student View</span>
+              </div>
+              <div class="feedback-form-grid">
+                <div class="form-group">
+                  <label for="feedbackTopicSelect">Topic</label>
+                  <select id="feedbackTopicSelect" class="form-input">
+                    <option>Live Scores</option>
+                    <option>Event Schedule</option>
+                    <option>Guidelines Access</option>
+                    <option>Attendance Status</option>
+                    <option>Announcements</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="feedbackRatingSelect">Rating</label>
+                  <select id="feedbackRatingSelect" class="form-input">
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Good</option>
+                    <option value="3">3 - Fair</option>
+                    <option value="2">2 - Needs Work</option>
+                    <option value="1">1 - Poor</option>
+                  </select>
+                </div>
+                <div class="form-group feedback-message-group">
+                  <label for="feedbackMessageInput">Message</label>
+                  <textarea id="feedbackMessageInput" class="form-input" rows="4" placeholder="Share your event or viewing experience..."></textarea>
+                </div>
+                <button class="btn-primary" id="submitFeedbackBtn" type="button">
+                  <i class="fa-solid fa-paper-plane"></i> Submit Feedback
+                </button>
+              </div>
+            </div>
+
+            <div class="dash-card" data-role-visibility="admin">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-chart-simple"></i> Feedback Overview</h3>
+                <span class="view-state-badge admin-only">Admin Only</span>
+              </div>
+              <div class="feedback-metrics" id="feedbackMetrics"></div>
+              <div class="feedback-list" id="feedbackList"></div>
+            </div>
+
+            <div class="dash-card" data-role-view="student" hidden>
+              <div class="card-header">
+                <h3><i class="fa-solid fa-star"></i> Recent Published Feedback</h3>
+                <span class="view-state-badge student-view">Student View</span>
+              </div>
+              <div class="feedback-list" id="studentFeedbackList"></div>
+            </div>
+          </div>
         </section>
 
         <section class="section" id="section-reports" data-role-visibility="admin">
@@ -1082,6 +1342,15 @@
                   <i class="fa-solid fa-file-excel"></i> Export Excel
                 </button>
               </div>
+            </div>
+
+            <div class="report-card">
+              <div class="card-header">
+                <h3>Security and Audit Trail</h3>
+                <span class="view-state-badge admin-only">Admin Only</span>
+              </div>
+              <p class="report-note report-note-left">Official actions on score approvals, imports, uploads, and exports are logged here for the prototype.</p>
+              <div class="audit-trail-list" id="auditTrailList"></div>
             </div>
 
             <div class="report-card span-2">
@@ -1215,6 +1484,42 @@
               <div class="setting-row">
                 <label>QR Attendance</label>
                 <label class="switch"><input type="checkbox" /><span class="slider"></span></label>
+              </div>
+            </div>
+
+            <div class="settings-card">
+              <h4><i class="fa-solid fa-user-lock"></i> Data Privacy and Consent</h4>
+              <div class="privacy-list">
+                <div class="privacy-item">
+                  <strong>Participant consent forms</strong>
+                  <span class="status-badge approved-state">Approved</span>
+                </div>
+                <div class="privacy-item">
+                  <strong>Public score publication</strong>
+                  <span class="status-badge approved-state">Enabled</span>
+                </div>
+                <div class="privacy-item">
+                  <strong>Photo use permission</strong>
+                  <span class="status-badge pending-state">Pending Review</span>
+                </div>
+                <div class="privacy-item">
+                  <strong>OCR file retention policy</strong>
+                  <span class="status-badge pending-state">30 Days</span>
+                </div>
+              </div>
+              <button class="btn-secondary mt-1" id="reviewPrivacyBtn" type="button">Review Consent Records</button>
+            </div>
+
+            <div class="settings-card">
+              <h4><i class="fa-solid fa-database"></i> Backup and Recovery</h4>
+              <div class="backup-list" id="backupSnapshotList"></div>
+              <div class="settings-action-row">
+                <button class="btn-primary" id="createBackupBtn" type="button">
+                  <i class="fa-solid fa-hard-drive"></i> Create Backup Snapshot
+                </button>
+                <button class="btn-secondary" id="restoreBackupBtn" type="button">
+                  <i class="fa-solid fa-rotate-left"></i> Restore Last Snapshot
+                </button>
               </div>
             </div>
           </div>

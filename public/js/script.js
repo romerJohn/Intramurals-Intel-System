@@ -311,6 +311,222 @@ const guidelineRecords = [
   }
 ];
 
+const participantImportRecords = [
+  {
+    id: 1,
+    fileName: "CEDAS_Masterlist_May2026.pdf",
+    source: "Department Masterlist",
+    imported: 82,
+    linkedPhotos: 54,
+    status: "Imported",
+    uploaded: "Today, 9:10 AM"
+  },
+  {
+    id: 2,
+    fileName: "QuizBee_Participants.xlsx",
+    source: "Participant Registration Sheet",
+    imported: 16,
+    linkedPhotos: 11,
+    status: "Imported",
+    uploaded: "Yesterday, 4:28 PM"
+  }
+];
+
+const participantPhotoLinks = [
+  {
+    id: 1,
+    name: "Ariana Mendoza",
+    department: "CEDAS",
+    photoName: "ariana-mendoza.jpg",
+    status: "Linked",
+    updated: "Today, 9:24 AM"
+  },
+  {
+    id: 2,
+    name: "Leonardo Cruz",
+    department: "CCIS",
+    photoName: "leonardo-cruz.jpg",
+    status: "Linked",
+    updated: "Today, 9:26 AM"
+  },
+  {
+    id: 3,
+    name: "Miguel Santos",
+    department: "COE",
+    photoName: "pending-upload.png",
+    status: "Pending",
+    updated: "Today, 9:35 AM"
+  }
+];
+
+const judgeAssignments = [
+  {
+    id: 1,
+    event: "Basketball Semi Finals",
+    scorer: "Janelle Orquia",
+    judge: "Arman Velasco",
+    access: "Live score encoder"
+  },
+  {
+    id: 2,
+    event: "Cheerdance Competition",
+    scorer: "Maria Lopez",
+    judge: "Panel 1",
+    access: "Criteria tally input"
+  },
+  {
+    id: 3,
+    event: "Quiz Bee Finals",
+    scorer: "Neil Fernandez",
+    judge: "Academic Board",
+    access: "Result confirmation"
+  }
+];
+
+const disputeRecords = [
+  {
+    id: 1,
+    event: "Quiz Bee Finals",
+    department: "CHS",
+    submittedBy: "Coach Marissa Tan",
+    concern: "Requested review of the tie-break answer credit on the final question.",
+    evidence: "Answer sheet photo attached",
+    status: "Pending"
+  },
+  {
+    id: 2,
+    event: "Basketball Semi Finals",
+    department: "CCIS",
+    submittedBy: "Coach Allan Dizon",
+    concern: "Asked to validate a late third-quarter score adjustment before posting.",
+    evidence: "Bench scorer note",
+    status: "Under Review"
+  }
+];
+
+const qrScanLogs = [
+  {
+    id: 1,
+    name: "Paolo Navarro",
+    department: "CCIS",
+    event: "Basketball Semi Finals",
+    time: "2:06 PM",
+    device: "Mobile Camera Scanner",
+    status: "Present"
+  },
+  {
+    id: 2,
+    name: "Miguel Santos",
+    department: "COE",
+    event: "Volleyball Finals",
+    time: "3:41 PM",
+    device: "Registration Tablet",
+    status: "Present"
+  }
+];
+
+const galleryHighlights = [
+  {
+    id: 1,
+    title: "CEDAS takes the Quiz Bee crown",
+    event: "Quiz Bee Finals",
+    caption: "The lightning round wrapped with a decisive final answer as the academic hall erupted in cheers.",
+    time: "Yesterday",
+    accent: "#e63946"
+  },
+  {
+    id: 2,
+    title: "Cheerdance warmups fill the covered court",
+    event: "Cheerdance Competition",
+    caption: "Teams completed costume checks and synced final formations before the crowd entered.",
+    time: "Today",
+    accent: "#457b9d"
+  },
+  {
+    id: 3,
+    title: "Volleyball finals momentum swings",
+    event: "Volleyball Finals",
+    caption: "COE and CABE traded runs in the second set as table officials logged every point change.",
+    time: "Today",
+    accent: "#f4a261"
+  }
+];
+
+const feedbackEntries = [
+  {
+    id: 1,
+    name: "Trisha Valdez",
+    role: "Student / Viewer",
+    topic: "Live Scores",
+    rating: 5,
+    message: "The scoreboard refreshed quickly after approval and was easy to read on mobile.",
+    time: "Today, 9:42 AM",
+    status: "Published"
+  },
+  {
+    id: 2,
+    name: "Coach Allan Dizon",
+    role: "Department Representative",
+    topic: "Guidelines Access",
+    rating: 4,
+    message: "Rules were easy to find, but adding event-specific summary notes would help coaches prepare faster.",
+    time: "Today, 8:12 AM",
+    status: "Published"
+  },
+  {
+    id: 3,
+    name: "Danica Flores",
+    role: "Student / Viewer",
+    topic: "Announcements",
+    rating: 5,
+    message: "Announcements helped us adjust quickly when the finals venue changed.",
+    time: "Yesterday, 5:30 PM",
+    status: "Published"
+  }
+];
+
+const auditTrailRecords = [
+  {
+    id: 1,
+    time: "Today, 10:41 AM",
+    actor: "CSG Officer",
+    action: "Approved Basketball Semi Finals OCR result",
+    module: "Score Sheet Scanner",
+    status: "Approved"
+  },
+  {
+    id: 2,
+    time: "Today, 9:24 AM",
+    actor: "CSG Officer",
+    action: "Linked participant photo to Ariana Mendoza",
+    module: "Participant Profiles",
+    status: "Linked"
+  },
+  {
+    id: 3,
+    time: "Yesterday, 4:28 PM",
+    actor: "CSG Officer",
+    action: "Imported Quiz Bee participant file",
+    module: "Participant Profiles",
+    status: "Imported"
+  }
+];
+
+const backupSnapshots = [
+  {
+    id: 1,
+    label: "Daily Snapshot",
+    time: "Today, 6:00 AM",
+    status: "Ready"
+  },
+  {
+    id: 2,
+    label: "Pre-Finals Backup",
+    time: "Yesterday, 7:30 PM",
+    status: "Ready"
+  }
+];
+
 const chartData = [
   { label: "Day 1", value: 28, team: "CABE", color: "#e9c46a" },
   { label: "Day 2", value: 41, team: "CCIS", color: "#457b9d" },
@@ -397,6 +613,29 @@ let toastTimerId = null;
 
 function getById(id) {
   return document.getElementById(id);
+}
+
+function getCurrentTimestamp() {
+  return new Date().toLocaleString("en-US", {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit"
+  });
+}
+
+function getStatusTone(status) {
+  const normalized = String(status || "").toLowerCase();
+
+  if (["approved", "published", "linked", "imported", "ready", "resolved", "present"].includes(normalized)) {
+    return "approved-state";
+  }
+
+  if (["rejected", "dismissed", "absent"].includes(normalized)) {
+    return "rejected-state";
+  }
+
+  return "pending-state";
 }
 
 function savePreference(key, value) {
@@ -509,6 +748,19 @@ function showToast(message) {
   toastTimerId = window.setTimeout(() => {
     toast.classList.remove("show");
   }, 2800);
+}
+
+function addAuditRecord(action, module, status) {
+  auditTrailRecords.unshift({
+    id: Date.now(),
+    time: getCurrentTimestamp(),
+    actor: appState.currentUser.name || "CSG Officer",
+    action,
+    module,
+    status
+  });
+
+  renderAuditTrail();
 }
 
 function closeAllOpenModals() {
@@ -793,6 +1045,494 @@ function renderStudentGuidelinesPreview() {
   `).join("");
 }
 
+function getStudentAttendanceSnapshot() {
+  const requestedName = (appState.currentUser.name || "").trim().toLowerCase();
+  const fallbackName = "Ariana Mendoza";
+  const matches = [];
+
+  Object.entries(attendanceRecords).forEach(([eventName, records]) => {
+    records.forEach((record) => {
+      if (record.name.toLowerCase() === requestedName) {
+        matches.push({
+          event: eventName,
+          ...record
+        });
+      }
+    });
+  });
+
+  if (matches.length) {
+    return matches;
+  }
+
+  Object.entries(attendanceRecords).forEach(([eventName, records]) => {
+    records.forEach((record) => {
+      if (record.name === fallbackName) {
+        matches.push({
+          event: eventName,
+          ...record
+        });
+      }
+    });
+  });
+
+  return matches;
+}
+
+function getStudentAttendanceViewModel() {
+  const snapshot = getStudentAttendanceSnapshot();
+  const actualName = (appState.currentUser.name || "").trim();
+  const usesSampleRecord = Boolean(snapshot.length && snapshot[0].name !== actualName);
+  const displayName = snapshot.length
+    ? (usesSampleRecord ? `${snapshot[0].name} (sample record)` : snapshot[0].name)
+    : (actualName || "Student Viewer");
+  const department = snapshot[0]?.department || "No department yet";
+  const latestRecord = snapshot[0] || null;
+  const featuredEvent = scheduleData[0] || null;
+
+  const summary = snapshot.reduce((counts, record) => {
+    counts[record.status.toLowerCase()] = (counts[record.status.toLowerCase()] || 0) + 1;
+    return counts;
+  }, {});
+
+  return {
+    snapshot,
+    displayName,
+    department,
+    latestRecord,
+    featuredEvent,
+    usesSampleRecord,
+    summary: {
+      present: summary.present || 0,
+      late: summary.late || 0,
+      absent: summary.absent || 0
+    }
+  };
+}
+
+function renderStudentAttendancePreview() {
+  const target = getById("studentAttendancePreview");
+
+  if (!target) {
+    return;
+  }
+
+  const attendance = getStudentAttendanceViewModel();
+  const { snapshot } = attendance;
+
+  if (!snapshot.length) {
+    target.innerHTML = `
+      <div class="record-empty-state">
+        <strong>No attendance status available yet.</strong>
+        <p>Student attendance will appear here after approved event check-ins are recorded.</p>
+      </div>
+    `;
+    return;
+  }
+
+  target.innerHTML = `
+    <div class="student-attendance-head">
+      <strong>${attendance.usesSampleRecord ? `${attendance.displayName.replace("(sample record)", "(sample preview)")}` : attendance.displayName}</strong>
+      <span class="status-badge ${getStatusTone(snapshot[0].status)}">${attendance.department}</span>
+    </div>
+    <div class="student-attendance-stats">
+      <span>Present ${attendance.summary.present}</span>
+      <span>Late ${attendance.summary.late}</span>
+      <span>Absent ${attendance.summary.absent}</span>
+    </div>
+    <div class="student-attendance-list">
+      ${snapshot.slice(0, 3).map((record) => `
+        <div class="student-attendance-item">
+          <div>
+            <strong>${record.event}</strong>
+            <small>${record.department}</small>
+          </div>
+          <span class="status-badge ${getStatusTone(record.status)}">${record.status}</span>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function renderStudentAttendancePage() {
+  const summaryGrid = getById("studentAttendanceSummaryGrid");
+  const historyList = getById("studentAttendanceHistoryList");
+  const upcoming = getById("studentAttendanceUpcoming");
+
+  if (!summaryGrid || !historyList || !upcoming) {
+    return;
+  }
+
+  const attendance = getStudentAttendanceViewModel();
+  const { snapshot, featuredEvent, latestRecord } = attendance;
+
+  if (!snapshot.length) {
+    summaryGrid.innerHTML = `
+      <div class="record-empty-state">
+        <strong>No attendance record yet.</strong>
+        <p>Your attendance history will appear here after an approved event check-in is recorded.</p>
+      </div>
+    `;
+    historyList.innerHTML = `
+      <div class="record-empty-state">
+        <strong>No attendance history yet.</strong>
+        <p>Only approved and published attendance records are shown in student view.</p>
+      </div>
+    `;
+    upcoming.innerHTML = `
+      <div class="record-empty-state">
+        <strong>No upcoming check-in posted.</strong>
+        <p>Watch the schedule and announcement modules for the next attendance call time.</p>
+      </div>
+    `;
+    return;
+  }
+
+  summaryGrid.innerHTML = `
+    <article class="attendance-summary-stat emphasis">
+      <span>Student Record</span>
+      <strong>${attendance.displayName}</strong>
+      <small>${attendance.usesSampleRecord ? "Sample attendance record shown for prototype preview." : "Matched to the current student login."}</small>
+    </article>
+    <article class="attendance-summary-stat">
+      <span>Department</span>
+      <strong>${attendance.department}</strong>
+      <small>Official attendance profile</small>
+    </article>
+    <article class="attendance-summary-stat">
+      <span>Present Count</span>
+      <strong>${attendance.summary.present}</strong>
+      <small>Approved event check-ins</small>
+    </article>
+    <article class="attendance-summary-stat">
+      <span>Latest Status</span>
+      <strong>${latestRecord.status}</strong>
+      <small>${latestRecord.event}</small>
+    </article>
+  `;
+
+  historyList.innerHTML = snapshot.map((record) => `
+    <article class="student-history-item">
+      <div>
+        <strong>${record.event}</strong>
+        <small>${record.department} participant attendance</small>
+      </div>
+      <div class="record-meta-stack">
+        <span class="status-badge ${getStatusTone(record.status)}">${record.status}</span>
+      </div>
+    </article>
+  `).join("");
+
+  upcoming.innerHTML = featuredEvent ? `
+    <article class="upcoming-attendance-card">
+      <div class="upcoming-attendance-top">
+        <strong>${featuredEvent.title}</strong>
+        <span class="status-badge pending-state">Check-in Reminder</span>
+      </div>
+      <p>${featuredEvent.eventDate} at ${featuredEvent.time}</p>
+      <div class="student-attendance-stats">
+        <span>Venue: ${featuredEvent.venue}</span>
+        <span>Bring school ID</span>
+      </div>
+      <p class="scanner-note">Student view only shows approved attendance history. Check-in status changes after official event verification.</p>
+    </article>
+  ` : `
+    <div class="record-empty-state">
+      <strong>No upcoming check-in posted.</strong>
+      <p>Watch the schedule and announcement modules for the next attendance call time.</p>
+    </div>
+  `;
+}
+
+function renderParticipantImportRecords() {
+  const target = getById("participantImportList");
+
+  if (!target) {
+    return;
+  }
+
+  target.innerHTML = participantImportRecords.map((record) => `
+    <div class="record-item">
+      <div>
+        <strong>${record.fileName}</strong>
+        <small>${record.source} - ${record.uploaded}</small>
+      </div>
+      <div class="record-meta-stack">
+        <span>${record.imported} imported</span>
+        <span>${record.linkedPhotos} photos linked</span>
+        <span class="status-badge ${getStatusTone(record.status)}">${record.status}</span>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderParticipantPhotoOptions() {
+  const select = getById("photoParticipantSelect");
+
+  if (!select) {
+    return;
+  }
+
+  const currentValue = select.value;
+
+  select.innerHTML = profileData.map((profile) => `
+    <option value="${profile.name}">${profile.name} - ${profile.department}</option>
+  `).join("");
+
+  if (currentValue && [...select.options].some((option) => option.value === currentValue)) {
+    select.value = currentValue;
+  }
+}
+
+function renderParticipantPhotoLinks() {
+  const target = getById("participantPhotoList");
+
+  if (!target) {
+    return;
+  }
+
+  target.innerHTML = participantPhotoLinks.map((record) => `
+    <div class="record-item">
+      <div>
+        <strong>${record.name}</strong>
+        <small>${record.department} - ${record.photoName}</small>
+      </div>
+      <div class="record-meta-stack">
+        <span>${record.updated}</span>
+        <span class="status-badge ${getStatusTone(record.status)}">${record.status}</span>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderQrParticipantOptions() {
+  const target = getById("qrParticipantSelect");
+  const badge = getById("qrActiveEventBadge");
+  const records = attendanceRecords[appState.activeAttendanceEvent] || [];
+
+  if (badge) {
+    badge.textContent = appState.activeAttendanceEvent;
+  }
+
+  if (!target) {
+    return;
+  }
+
+  const currentValue = target.value;
+
+  target.innerHTML = records.map((record) => `
+    <option value="${record.name}">${record.name} - ${record.department}</option>
+  `).join("");
+
+  if (currentValue && [...target.options].some((option) => option.value === currentValue)) {
+    target.value = currentValue;
+  }
+}
+
+function renderQrScanLogs() {
+  const target = getById("qrScanLogList");
+
+  if (!target) {
+    return;
+  }
+
+  target.innerHTML = qrScanLogs.map((record) => `
+    <div class="record-item">
+      <div>
+        <strong>${record.name}</strong>
+        <small>${record.event} - ${record.device}</small>
+      </div>
+      <div class="record-meta-stack">
+        <span>${record.time}</span>
+        <span>${record.department}</span>
+        <span class="status-badge ${getStatusTone(record.status)}">${record.status}</span>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderJudgeAssignments() {
+  const target = getById("judgeAssignmentList");
+
+  if (!target) {
+    return;
+  }
+
+  target.innerHTML = judgeAssignments.map((assignment) => `
+    <div class="assignment-item">
+      <div class="assignment-top">
+        <strong>${assignment.event}</strong>
+        <span class="status-badge approved-state">${assignment.access}</span>
+      </div>
+      <div class="assignment-meta">
+        <span><i class="fa-solid fa-pen-to-square"></i> Scorer: ${assignment.scorer}</span>
+        <span><i class="fa-solid fa-scale-balanced"></i> Judge: ${assignment.judge}</span>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderDisputeQueue() {
+  const target = getById("disputeQueueList");
+
+  if (!target) {
+    return;
+  }
+
+  target.innerHTML = disputeRecords.map((record) => `
+    <article class="dispute-card">
+      <div class="dispute-card-top">
+        <div>
+          <strong>${record.event}</strong>
+          <small>${record.submittedBy} - ${record.department}</small>
+        </div>
+        <span class="status-badge ${getStatusTone(record.status)}">${record.status}</span>
+      </div>
+      <p>${record.concern}</p>
+      <div class="dispute-tags">
+        <span><i class="fa-solid fa-paperclip"></i> ${record.evidence}</span>
+      </div>
+      <div class="dispute-action-row">
+        <button class="btn-sm secondary" type="button" onclick="setDisputeStatus(${record.id}, 'Under Review')">Review</button>
+        <button class="btn-sm primary" type="button" onclick="setDisputeStatus(${record.id}, 'Resolved')">Resolve</button>
+        <button class="btn-sm secondary" type="button" onclick="setDisputeStatus(${record.id}, 'Dismissed')">Dismiss</button>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderGallery() {
+  const target = getById("galleryGrid");
+
+  if (!target) {
+    return;
+  }
+
+  const isAdmin = appState.currentRole === "admin";
+
+  target.innerHTML = galleryHighlights.map((item) => `
+    <article class="gallery-card">
+      <div class="gallery-cover" style="--highlight-color:${item.accent}">
+        <span class="gallery-event">${item.event}</span>
+        <div class="gallery-burst"></div>
+      </div>
+      <div class="gallery-body">
+        <div class="gallery-meta">
+          <span class="status-badge approved-state">Published</span>
+          <small>${item.time}</small>
+        </div>
+        <h3>${item.title}</h3>
+        <p>${item.caption}</p>
+        <div class="gallery-actions">
+          <button class="btn-sm secondary" type="button" onclick="showToast('Opening highlight preview...')">View Highlight</button>
+          ${isAdmin ? '<button class="btn-sm primary" type="button" onclick="showToast(\'Highlight pinned on the public gallery.\')">Feature</button>' : ""}
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderFeedback() {
+  const metrics = getById("feedbackMetrics");
+  const list = getById("feedbackList");
+  const studentList = getById("studentFeedbackList");
+  const average = feedbackEntries.length
+    ? (feedbackEntries.reduce((sum, entry) => sum + entry.rating, 0) / feedbackEntries.length).toFixed(1)
+    : "0.0";
+
+  if (metrics) {
+    metrics.innerHTML = `
+      <div class="feedback-metric">
+        <strong>${average}</strong>
+        <small>Average rating</small>
+      </div>
+      <div class="feedback-metric">
+        <strong>${feedbackEntries.length}</strong>
+        <small>Total responses</small>
+      </div>
+      <div class="feedback-metric">
+        <strong>${feedbackEntries.filter((entry) => entry.rating >= 4).length}</strong>
+        <small>Positive reviews</small>
+      </div>
+    `;
+  }
+
+  const listMarkup = feedbackEntries.map((entry) => `
+    <article class="feedback-card">
+      <div class="feedback-card-top">
+        <div>
+          <strong>${entry.topic}</strong>
+          <small>${entry.name} - ${entry.role}</small>
+        </div>
+        <span class="status-badge ${getStatusTone(entry.status)}">${entry.status}</span>
+      </div>
+      <div class="rating-stars" aria-label="${entry.rating} out of 5 stars">
+        ${Array.from({ length: 5 }, (_, index) => `<i class="fa-solid fa-star${index < entry.rating ? "" : " rating-off"}"></i>`).join("")}
+      </div>
+      <p>${entry.message}</p>
+      <small class="feedback-time">${entry.time}</small>
+    </article>
+  `).join("");
+
+  if (list) {
+    list.innerHTML = listMarkup;
+  }
+
+  if (studentList) {
+    studentList.innerHTML = feedbackEntries.slice(0, 3).map((entry) => `
+      <article class="feedback-card compact">
+        <div class="feedback-card-top">
+          <div>
+            <strong>${entry.topic}</strong>
+            <small>${entry.name}</small>
+          </div>
+          <span class="status-badge approved-state">${entry.rating}/5</span>
+        </div>
+        <p>${entry.message}</p>
+      </article>
+    `).join("");
+  }
+}
+
+function renderAuditTrail() {
+  const target = getById("auditTrailList");
+
+  if (!target) {
+    return;
+  }
+
+  target.innerHTML = auditTrailRecords.map((entry) => `
+    <div class="audit-entry">
+      <div>
+        <strong>${entry.action}</strong>
+        <small>${entry.actor} - ${entry.module}</small>
+      </div>
+      <div class="record-meta-stack">
+        <span>${entry.time}</span>
+        <span class="status-badge ${getStatusTone(entry.status)}">${entry.status}</span>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderBackupSnapshots() {
+  const target = getById("backupSnapshotList");
+
+  if (!target) {
+    return;
+  }
+
+  target.innerHTML = backupSnapshots.map((snapshot) => `
+    <div class="backup-item">
+      <div>
+        <strong>${snapshot.label}</strong>
+        <small>${snapshot.time}</small>
+      </div>
+      <span class="status-badge ${getStatusTone(snapshot.status)}">${snapshot.status}</span>
+    </div>
+  `).join("");
+}
+
 function renderSourceDocs() {
   const target = getById("sourceDocs");
 
@@ -932,6 +1672,7 @@ function renderProfiles() {
 
   profileGrid.innerHTML = filteredProfiles.map((profile) => {
     const department = getDepartment(profile.department);
+    const hasLinkedPhoto = participantPhotoLinks.some((record) => record.name === profile.name && record.status === "Linked");
 
     return `
       <article class="profile-card">
@@ -949,6 +1690,7 @@ function renderProfiles() {
           <span>${profile.sex}</span>
           <span>Age ${profile.age}</span>
           <span>${profile.events.length} events</span>
+          <span>${hasLinkedPhoto ? "Photo linked" : "Photo pending"}</span>
         </div>
         <div class="profile-events">
           ${profile.events.map((eventName) => `<span class="profile-event-tag">${eventName}</span>`).join("")}
@@ -969,6 +1711,7 @@ function renderAttendance(eventName) {
   }
 
   title.textContent = eventName;
+  renderQrParticipantOptions();
 
   const counts = records.reduce((summary, attendee) => {
     const key = attendee.status.toLowerCase();
@@ -1139,6 +1882,7 @@ function getBotReply(query) {
   const finalsSchedule = findScheduleItem("Basketball Finals");
   const sportsGuidelines = guidelineRecords.find((record) => record.title.toLowerCase().includes("sports"));
   const cheerdanceGuidelines = guidelineRecords.find((record) => record.event.toLowerCase().includes("cheerdance"));
+  const attendanceSnapshot = getStudentAttendanceSnapshot();
 
   if (normalized.includes("who is leading overall") || normalized.includes("leading overall") || normalized.includes("overall leader")) {
     return `${leader.team} is leading overall with ${leader.points} points, followed by ${runnerUp.team} with ${runnerUp.points}.`;
@@ -1171,8 +1915,22 @@ function getBotReply(query) {
     return `The Cheerdance guidelines require coordinated, school-appropriate costumes, safe footwear, and approved props only. Reference: ${cheerdanceGuidelines.title}.`;
   }
 
+  if (normalized.includes("attendance")) {
+    const latestAttendance = attendanceSnapshot[0];
+
+    if (latestAttendance) {
+      return `${latestAttendance.name}'s latest attendance record is ${latestAttendance.status} for ${latestAttendance.event}. Student view only shows approved attendance updates.`;
+    }
+
+    return "Attendance status will appear after an event check-in is recorded and approved for student viewing.";
+  }
+
   if (normalized.includes("guideline") || normalized.includes("rulebook")) {
     return `The latest official documents include ${guidelineRecords[0].title}, ${sportsGuidelines.title}, and ${guidelineRecords[2].title}. Ask me about a specific event if you want a summary.`;
+  }
+
+  if (normalized.includes("gallery") || normalized.includes("highlight")) {
+    return `Published highlights currently feature ${galleryHighlights[0].title}, ${galleryHighlights[1].title}, and ${galleryHighlights[2].title}.`;
   }
 
   if (normalized.includes("result")) {
@@ -1216,6 +1974,8 @@ function markAttendance(eventName, index, status) {
 
   records[index].status = status;
   renderAttendance(eventName);
+  renderStudentAttendancePreview();
+  renderStudentAttendancePage();
   showToast(`${records[index].name} marked ${status}.`);
 }
 
@@ -1664,6 +2424,7 @@ function approveScannedScore() {
     verificationNote.textContent = "Approved scanner result is now published on the live board.";
   }
 
+  addAuditRecord(`Approved ${appState.pendingScan.event} OCR result`, "Score Sheet Scanner", "Approved");
   showToast("Score approved and published");
 }
 
@@ -1674,6 +2435,7 @@ function rejectScannedScore() {
 
   appState.pendingScan.status = "Rejected";
   renderScannerState();
+  addAuditRecord(`Rejected ${appState.pendingScan.event} OCR result`, "Score Sheet Scanner", "Rejected");
   showToast("Scanned score rejected.");
 }
 
@@ -1711,6 +2473,7 @@ function uploadGuidelinePrototype() {
   renderGuidelineRecords();
   renderStudentGuidelinesPreview();
   renderSourceDocs();
+  addAuditRecord(`Uploaded guideline record for ${eventName}`, "Guidelines Management", "Published");
   showToast("Guideline uploaded to the prototype library.");
 }
 
@@ -1747,7 +2510,208 @@ function deleteGuideline(id) {
   renderGuidelineRecords();
   renderStudentGuidelinesPreview();
   renderSourceDocs();
+  addAuditRecord("Deleted a guideline record", "Guidelines Management", "Dismissed");
   showToast("Guideline removed from the prototype list.");
+}
+
+function importParticipantFilePrototype() {
+  const fileInput = getById("participantFileInput");
+  const sourceSelect = getById("participantImportSource");
+  const fileName = fileInput?.files?.[0]?.name || `participant-import-${Date.now()}.pdf`;
+  const source = sourceSelect?.value || "Participant Registration Sheet";
+
+  participantImportRecords.unshift({
+    id: Date.now(),
+    fileName,
+    source,
+    imported: 12 + Math.floor(Math.random() * 25),
+    linkedPhotos: 4 + Math.floor(Math.random() * 10),
+    status: "Imported",
+    uploaded: getCurrentTimestamp()
+  });
+
+  if (fileInput) {
+    fileInput.value = "";
+  }
+
+  renderParticipantImportRecords();
+  addAuditRecord(`Imported participant file ${fileName}`, "Participant Profiles", "Imported");
+  showToast("Participant file imported into the prototype queue.");
+}
+
+function handleParticipantPhotoPreview(event) {
+  const file = event.target.files?.[0];
+  const image = getById("participantPhotoPreviewImage");
+  const empty = getById("participantPhotoPreviewEmpty");
+
+  if (!image || !empty) {
+    return;
+  }
+
+  if (!file) {
+    image.removeAttribute("src");
+    image.classList.remove("show");
+    empty.hidden = false;
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    image.src = String(reader.result || "");
+    image.classList.add("show");
+    empty.hidden = true;
+  };
+  reader.readAsDataURL(file);
+}
+
+function linkParticipantPhotoPrototype() {
+  const select = getById("photoParticipantSelect");
+  const fileInput = getById("participantPhotoInput");
+  const image = getById("participantPhotoPreviewImage");
+  const empty = getById("participantPhotoPreviewEmpty");
+  const participantName = select?.value;
+  const profile = profileData.find((entry) => entry.name === participantName);
+
+  if (!participantName || !profile) {
+    showToast("Select a participant to link a photo.");
+    return;
+  }
+
+  const fileName = fileInput?.files?.[0]?.name || `${participantName.toLowerCase().replace(/\s+/g, "-")}.jpg`;
+  const existing = participantPhotoLinks.find((record) => record.name === participantName);
+
+  if (existing) {
+    existing.photoName = fileName;
+    existing.updated = getCurrentTimestamp();
+    existing.status = "Linked";
+  } else {
+    participantPhotoLinks.unshift({
+      id: Date.now(),
+      name: participantName,
+      department: profile.department,
+      photoName: fileName,
+      status: "Linked",
+      updated: getCurrentTimestamp()
+    });
+  }
+
+  if (fileInput) {
+    fileInput.value = "";
+  }
+
+  if (image) {
+    image.removeAttribute("src");
+    image.classList.remove("show");
+  }
+
+  if (empty) {
+    empty.hidden = false;
+  }
+
+  renderParticipantPhotoLinks();
+  renderProfiles();
+  addAuditRecord(`Linked participant photo to ${participantName}`, "Participant Profiles", "Linked");
+  showToast("Participant photo linked in the prototype.");
+}
+
+function simulateQrScan() {
+  const eventName = appState.activeAttendanceEvent;
+  const participantName = getById("qrParticipantSelect")?.value;
+  const records = attendanceRecords[eventName] || [];
+  const record = records.find((entry) => entry.name === participantName);
+
+  if (!record) {
+    showToast("Select a participant for QR attendance scanning.");
+    return;
+  }
+
+  record.status = "Present";
+
+  qrScanLogs.unshift({
+    id: Date.now(),
+    name: record.name,
+    department: record.department,
+    event: eventName,
+    time: new Date().toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit"
+    }),
+    device: "Mobile Camera Scanner",
+    status: "Present"
+  });
+
+  renderAttendance(eventName);
+  renderQrScanLogs();
+  renderStudentAttendancePreview();
+  renderStudentAttendancePage();
+  addAuditRecord(`QR attendance scan logged for ${record.name}`, "Attendance Management", "Present");
+  showToast(`${record.name} checked in through the QR attendance prototype.`);
+}
+
+function setDisputeStatus(id, status) {
+  const record = disputeRecords.find((item) => item.id === id);
+
+  if (!record) {
+    return;
+  }
+
+  record.status = status;
+  renderDisputeQueue();
+  addAuditRecord(`${status} dispute for ${record.event}`, "Score Verification", status);
+  showToast(`Dispute marked as ${status}.`);
+}
+
+function submitFeedbackPrototype() {
+  const topicSelect = getById("feedbackTopicSelect");
+  const ratingSelect = getById("feedbackRatingSelect");
+  const messageInput = getById("feedbackMessageInput");
+  const topic = topicSelect?.value || "General Feedback";
+  const rating = Number(ratingSelect?.value || 5);
+  const message = (messageInput?.value || "").trim() || "Frontend prototype feedback submission.";
+
+  feedbackEntries.unshift({
+    id: Date.now(),
+    name: appState.currentUser.name || "Student Viewer",
+    role: appState.currentRole === "admin" ? "Admin / CSG Officer" : "Student / Viewer",
+    topic,
+    rating,
+    message,
+    time: getCurrentTimestamp(),
+    status: "Published"
+  });
+
+  if (messageInput) {
+    messageInput.value = "";
+  }
+
+  renderFeedback();
+  addAuditRecord(`Submitted ${topic.toLowerCase()} feedback`, "Feedback and Rating", "Published");
+  showToast("Feedback submitted to the prototype inbox.");
+}
+
+function createBackupSnapshot() {
+  backupSnapshots.unshift({
+    id: Date.now(),
+    label: `Manual Snapshot ${backupSnapshots.length + 1}`,
+    time: getCurrentTimestamp(),
+    status: "Ready"
+  });
+
+  renderBackupSnapshots();
+  addAuditRecord("Created manual backup snapshot", "Backup and Recovery", "Ready");
+  showToast("Prototype backup snapshot created.");
+}
+
+function restoreLastBackup() {
+  const latest = backupSnapshots[0];
+
+  if (!latest) {
+    showToast("No backup snapshot is available.");
+    return;
+  }
+
+  addAuditRecord(`Restored ${latest.label}`, "Backup and Recovery", "Approved");
+  showToast("Last backup snapshot restored in prototype mode.");
 }
 
 function renderAll() {
@@ -1764,8 +2728,21 @@ function renderAll() {
   renderAnnouncementPreview("dashboardAnnouncementPreview", 3);
   renderAnnouncementPreview("studentAnnouncementsPreview", 3);
   renderStudentDashboardScores();
+  renderStudentAttendancePreview();
+  renderStudentAttendancePage();
   renderStudentGuidelinesPreview();
+  renderParticipantImportRecords();
+  renderParticipantPhotoOptions();
+  renderParticipantPhotoLinks();
+  renderQrParticipantOptions();
+  renderQrScanLogs();
+  renderJudgeAssignments();
+  renderDisputeQueue();
   renderGuidelineRecords();
+  renderGallery();
+  renderFeedback();
+  renderAuditTrail();
+  renderBackupSnapshots();
   renderSourceDocs();
   syncLiveScoreDisplays();
   updateDate();
@@ -1910,8 +2887,29 @@ document.addEventListener("DOMContentLoaded", () => {
   getById("approveScoreBtn")?.addEventListener("click", approveScannedScore);
   getById("rejectScoreBtn")?.addEventListener("click", rejectScannedScore);
   getById("guidelineUploadBtn")?.addEventListener("click", uploadGuidelinePrototype);
-  getById("exportPdfBtn")?.addEventListener("click", () => showToast("PDF report generated successfully"));
-  getById("exportExcelBtn")?.addEventListener("click", () => showToast("Excel report generated successfully"));
+  getById("importParticipantsBtn")?.addEventListener("click", importParticipantFilePrototype);
+  getById("participantPhotoInput")?.addEventListener("change", handleParticipantPhotoPreview);
+  getById("linkParticipantPhotoBtn")?.addEventListener("click", linkParticipantPhotoPrototype);
+  getById("simulateQrScanBtn")?.addEventListener("click", simulateQrScan);
+  getById("submitFeedbackBtn")?.addEventListener("click", submitFeedbackPrototype);
+  getById("exportPdfBtn")?.addEventListener("click", () => {
+    addAuditRecord("Generated PDF report", "Reports and Analytics", "Ready");
+    showToast("PDF report generated successfully");
+  });
+  getById("exportExcelBtn")?.addEventListener("click", () => {
+    addAuditRecord("Generated Excel report", "Reports and Analytics", "Ready");
+    showToast("Excel report generated successfully");
+  });
+  getById("uploadHighlightBtn")?.addEventListener("click", () => {
+    addAuditRecord("Queued gallery highlight for publishing", "Gallery and Highlights", "Pending");
+    showToast("Gallery highlight queued for publishing.");
+  });
+  getById("reviewPrivacyBtn")?.addEventListener("click", () => {
+    addAuditRecord("Reviewed consent and privacy checklist", "Data Privacy", "Approved");
+    showToast("Opening consent and privacy checklist...");
+  });
+  getById("createBackupBtn")?.addEventListener("click", createBackupSnapshot);
+  getById("restoreBackupBtn")?.addEventListener("click", restoreLastBackup);
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
@@ -1938,3 +2936,4 @@ window.markAttendance = markAttendance;
 window.changeScore = changeScore;
 window.editGuideline = editGuideline;
 window.deleteGuideline = deleteGuideline;
+window.setDisputeStatus = setDisputeStatus;

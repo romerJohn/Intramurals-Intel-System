@@ -3658,6 +3658,498 @@ textarea.form-input {
   margin-top: 1rem;
 }
 
+.student-attendance-card,
+.assignment-list,
+.dispute-queue,
+.mini-record-list,
+.qr-log-list,
+.feedback-list,
+.audit-trail-list,
+.backup-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.student-attendance-head,
+.student-attendance-item,
+.record-item,
+.assignment-top,
+.dispute-card-top,
+.feedback-card-top,
+.gallery-meta,
+.audit-entry,
+.backup-item,
+.privacy-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.9rem;
+}
+
+.student-attendance-stats,
+.gallery-actions,
+.dispute-action-row,
+.settings-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.student-attendance-stats span,
+.qr-event-pill,
+.feedback-metric,
+.record-empty-state {
+  padding: 0.82rem 0.92rem;
+  border-radius: 18px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.student-attendance-head strong,
+.student-attendance-item strong,
+.record-item strong,
+.assignment-item strong,
+.dispute-card strong,
+.feedback-card strong,
+.audit-entry strong,
+.backup-item strong,
+.privacy-item strong {
+  font-family: "Barlow Condensed", sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.student-attendance-stats span,
+.record-meta-stack span,
+.assignment-meta span,
+.dispute-tags span {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.record-item,
+.student-attendance-item,
+.assignment-item,
+.dispute-card,
+.feedback-card,
+.audit-entry,
+.backup-item,
+.privacy-item {
+  padding: 1rem;
+  border-radius: 20px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.record-item small,
+.assignment-meta span,
+.dispute-card small,
+.feedback-card small,
+.audit-entry small,
+.backup-item small {
+  color: var(--text-muted);
+}
+
+.record-meta-stack {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  color: var(--text-muted);
+}
+
+.student-attendance-list,
+.assignment-meta {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.student-attendance-page-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 1rem;
+}
+
+.student-attendance-history-card {
+  grid-row: span 2;
+}
+
+.student-attendance-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.attendance-summary-stat,
+.student-history-item,
+.upcoming-attendance-card {
+  padding: 1rem;
+  border-radius: 20px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.attendance-summary-stat span,
+.attendance-summary-stat small,
+.student-history-item small,
+.upcoming-attendance-card small {
+  display: block;
+}
+
+.attendance-summary-stat span {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.attendance-summary-stat strong,
+.student-history-item strong,
+.upcoming-attendance-card strong {
+  display: block;
+  margin-top: 0.38rem;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.38rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.attendance-summary-stat small,
+.student-history-item small,
+.upcoming-attendance-card small {
+  margin-top: 0.45rem;
+  color: var(--text-muted);
+}
+
+.attendance-summary-stat.emphasis {
+  background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.12), rgba(69, 123, 157, 0.08));
+}
+
+.student-attendance-history-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.student-history-item,
+.upcoming-attendance-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.85rem;
+}
+
+.student-history-item strong {
+  font-size: 1.16rem;
+}
+
+.upcoming-attendance-card p {
+  margin-top: 0.75rem;
+}
+
+.upcoming-attendance-card .student-attendance-stats {
+  margin-top: 0.95rem;
+}
+
+.student-attendance-item small,
+.record-empty-state p {
+  display: block;
+  margin-top: 0.22rem;
+  color: var(--text-muted);
+}
+
+.record-empty-state strong {
+  display: block;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.record-empty-state p {
+  margin-top: 0.5rem;
+}
+
+.scoring-ops-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.assignment-item,
+.dispute-card,
+.profile-tool-card,
+.feedback-form-card,
+.qr-tool-card {
+  padding: 1.2rem;
+}
+
+.assignment-meta {
+  margin-top: 0.85rem;
+}
+
+.dispute-card p {
+  margin-top: 0.65rem;
+}
+
+.dispute-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.85rem;
+  color: var(--text-muted);
+  font-size: 0.84rem;
+}
+
+.profile-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tool-form-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.photo-link-layout {
+  display: grid;
+  grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.photo-preview-box {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 22px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.photo-preview-empty {
+  display: grid;
+  place-items: center;
+  gap: 0.65rem;
+  padding: 1.25rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.photo-preview-empty i {
+  font-size: 1.8rem;
+  color: var(--primary);
+}
+
+.photo-preview-image {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-preview-image.show {
+  display: block;
+}
+
+.attendance-tools-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.qr-prototype-grid {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.qr-code-box {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.qr-code-placeholder {
+  position: relative;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 28px;
+  color: var(--text-main);
+  background:
+    linear-gradient(135deg, rgba(var(--primary-rgb), 0.18), rgba(69, 123, 157, 0.16)),
+    repeating-linear-gradient(0deg, rgba(23, 32, 51, 0.1) 0 9px, transparent 9px 18px),
+    repeating-linear-gradient(90deg, rgba(23, 32, 51, 0.08) 0 9px, transparent 9px 18px),
+    var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.qr-code-placeholder span,
+.qr-code-placeholder small {
+  position: relative;
+  z-index: 1;
+  display: block;
+  text-align: center;
+  font-family: "Barlow Condensed", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.qr-code-placeholder span {
+  font-size: 2.2rem;
+}
+
+.qr-code-placeholder small {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+
+.qr-scan-controls {
+  display: grid;
+  gap: 1rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.gallery-card {
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.gallery-cover {
+  position: relative;
+  min-height: 180px;
+  padding: 1rem;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.18), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, var(--highlight-color, var(--primary)) 84%, white 8%), #0d1a30 115%);
+}
+
+.gallery-event {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.72rem;
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.gallery-burst {
+  position: absolute;
+  right: -28px;
+  bottom: -32px;
+  width: 150px;
+  height: 150px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.gallery-body {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+.gallery-body h3 {
+  font-size: 1.42rem;
+}
+
+.feedback-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+  gap: 1rem;
+}
+
+.feedback-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.feedback-message-group,
+.feedback-form-grid > .btn-primary {
+  grid-column: span 2;
+}
+
+.feedback-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.feedback-metric {
+  text-align: center;
+}
+
+.feedback-metric strong {
+  display: block;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 2.1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.rating-stars {
+  display: flex;
+  gap: 0.28rem;
+  margin-top: 0.7rem;
+  color: var(--accent-gold);
+}
+
+.rating-stars .rating-off {
+  color: rgba(122, 133, 155, 0.45);
+}
+
+.feedback-card p {
+  margin-top: 0.6rem;
+}
+
+.feedback-time {
+  display: block;
+  margin-top: 0.75rem;
+}
+
+.report-note-left {
+  text-align: left;
+}
+
+.privacy-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.backup-list {
+  margin-top: 1rem;
+}
+
+[data-theme="dark"] .gallery-event {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 .score-control [data-role-visibility="admin"][hidden],
 .match-actions[hidden],
 [hidden] {
@@ -3673,14 +4165,28 @@ textarea.form-input {
     min-height: 0;
   }
 
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .student-guidelines-preview {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 1180px) {
+  .profile-tools-grid,
+  .attendance-tools-grid,
+  .scoring-ops-grid,
+  .student-attendance-page-grid,
+  .feedback-layout,
   .scanner-layout,
   .guidelines-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-link-layout,
+  .qr-prototype-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -3714,6 +4220,34 @@ textarea.form-input {
   .student-guidelines-preview {
     grid-template-columns: 1fr;
   }
+
+  .feedback-form-grid,
+  .feedback-metrics,
+  .student-attendance-summary-grid,
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feedback-message-group,
+  .feedback-form-grid > .btn-primary {
+    grid-column: span 1;
+  }
+
+  .student-attendance-head,
+  .student-attendance-item,
+  .student-history-item,
+  .upcoming-attendance-top,
+  .record-item,
+  .dispute-card-top,
+  .privacy-item,
+  .audit-entry,
+  .backup-item {
+    flex-direction: column;
+  }
+
+  .record-meta-stack {
+    justify-content: flex-start;
+  }
 }
 
 @media (max-width: 560px) {
@@ -3723,5 +4257,13 @@ textarea.form-input {
 
   .auth-mode-switch {
     width: 100%;
+  }
+
+  .gallery-actions > .btn-sm,
+  .dispute-action-row > .btn-sm,
+  .settings-action-row > .btn-primary,
+  .settings-action-row > .btn-secondary {
+    width: 100%;
+    justify-content: center;
   }
 }
