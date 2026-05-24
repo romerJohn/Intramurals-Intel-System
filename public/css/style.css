@@ -632,11 +632,19 @@ svg {
   height: 52px;
   display: grid;
   place-items: center;
+  overflow: hidden;
+  padding: 3px;
   border-radius: 16px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: #fff;
-  font-size: 1.3rem;
+  background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.28), rgba(69, 123, 157, 0.22));
+  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 18px 30px rgba(var(--primary-rgb), 0.3);
+}
+
+.logo-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 13px;
 }
 
 .logo-text {
@@ -3240,6 +3248,49 @@ textarea.form-input {
   z-index: 1;
 }
 
+.auth-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.auth-brand-seal {
+  width: 78px;
+  height: 78px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  padding: 4px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 18px 34px rgba(11, 18, 32, 0.24);
+}
+
+.auth-brand-seal img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.auth-brand-copy {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.auth-brand-name {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.74);
+}
+
 .auth-showcase-copy h1 {
   font-size: clamp(3.2rem, 7vw, 5.6rem);
   line-height: 0.94;
@@ -3256,7 +3307,6 @@ textarea.form-input {
   display: inline-flex;
   align-items: center;
   padding: 0.45rem 0.72rem;
-  margin-bottom: 1rem;
   border-radius: 999px;
   color: #fff;
   background: rgba(255, 255, 255, 0.14);
@@ -4219,6 +4269,16 @@ textarea.form-input {
   .scanner-result-grid,
   .student-guidelines-preview {
     grid-template-columns: 1fr;
+  }
+
+  .auth-brand-row {
+    align-items: flex-start;
+  }
+
+  .auth-brand-seal {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
   }
 
   .feedback-form-grid,
