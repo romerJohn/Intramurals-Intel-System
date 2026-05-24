@@ -607,6 +607,7 @@ svg {
 .sidebar-footer {
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
 }
 
 .sidebar-header {
@@ -684,8 +685,12 @@ svg {
   position: relative;
   z-index: 1;
   flex: 1;
+  min-height: 0;
   padding-right: 0.2rem;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
 .nav-group-label {
@@ -1581,36 +1586,36 @@ svg {
 
 /* ===== CHATBOT ===== */
 .chatbot-layout {
-  --chat-panel-height: clamp(560px, calc(100dvh - 190px), 860px);
+  --chat-panel-height: calc(100dvh - 190px);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
   align-items: stretch;
+  min-width: 0;
 }
 
 .chatbot-main {
   min-height: var(--chat-panel-height);
-  height: var(--chat-panel-height);
   padding: 1.2rem;
   position: relative;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .chat-window {
   flex: 1 1 auto;
   min-height: 320px;
-  padding: 0.25rem 0.35rem 0 0;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scroll-padding-bottom: 7rem;
+  padding: 0.25rem 0.15rem 0;
+  overflow: visible;
+  scroll-margin-bottom: 7rem;
 }
 
 .chat-msg {
   display: flex;
   align-items: flex-start;
   gap: 0.8rem;
+  scroll-margin-bottom: 7.5rem;
 }
 
 .chat-msg + .chat-msg {
@@ -1732,7 +1737,12 @@ svg {
 }
 
 .chat-input-bar {
+  position: sticky;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 8;
   flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -1742,12 +1752,15 @@ svg {
   border: 1px solid var(--border-strong);
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface-solid) 92%, #111827 8%);
-  box-shadow: var(--shadow-xs);
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.14);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
 .chat-input-bar input {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
   min-height: 48px;
   padding: 0.9rem 0.4rem;
   border: 0;
@@ -2121,10 +2134,12 @@ svg {
   display: grid;
   grid-template-columns: 360px minmax(0, 1fr);
   gap: 1rem;
+  min-width: 0;
 }
 
 .podium-wrap,
 .standings-table-wrap {
+  min-width: 0;
   padding: 1.35rem;
 }
 
@@ -2939,8 +2954,17 @@ textarea.form-input {
   }
 
   .sidebar {
+    width: min(var(--sidebar-width), calc(100vw - 42px));
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
     transform: translateX(-100%);
     transition: transform var(--transition);
+  }
+
+  .sidebar-nav {
+    padding-bottom: 1rem;
+    scrollbar-width: thin;
   }
 
   .sidebar.active {
@@ -3126,11 +3150,11 @@ textarea.form-input {
   }
 
   .podium {
-    justify-content: flex-start;
-    gap: 0.8rem;
-    overflow-x: auto;
-    padding-bottom: 0.45rem;
-    scrollbar-width: none;
+    justify-content: center;
+    gap: 0.45rem;
+    overflow-x: hidden;
+    padding-bottom: 0;
+    scrollbar-width: auto;
   }
 
   .podium::-webkit-scrollbar {
@@ -3138,7 +3162,38 @@ textarea.form-input {
   }
 
   .podium-slot {
-    min-width: 110px;
+    flex: 1 1 0;
+    min-width: 0;
+    gap: 0.55rem;
+  }
+
+  .podium-avatar {
+    width: clamp(48px, 15vw, 58px);
+    height: clamp(48px, 15vw, 58px);
+    border-radius: 18px;
+  }
+
+  .podium-name,
+  .podium-pts {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .podium-block {
+    width: min(76px, 24vw);
+    border-radius: 18px 18px 0 0;
+  }
+
+  .podium-rank {
+    font-size: 1.15rem;
+  }
+
+  .podium-crown {
+    font-size: 1.35rem;
+  }
+
+  .standings-table-wrap {
+    overflow-x: hidden;
   }
 
   .medal-table thead,
@@ -4400,7 +4455,7 @@ textarea.form-input {
 
 @media (max-width: 760px) {
   .chatbot-layout {
-    --chat-panel-height: clamp(540px, calc(100dvh - 140px), 760px);
+    --chat-panel-height: calc(100dvh - 120px);
   }
 
   .chatbot-main {
@@ -4409,7 +4464,7 @@ textarea.form-input {
   }
 
   .chat-window {
-    min-height: 360px;
+    min-height: 300px;
     padding-right: 0.1rem;
   }
 
@@ -4430,16 +4485,18 @@ textarea.form-input {
 
   .chat-input-bar {
     display: grid;
-    grid-template-columns: 46px minmax(0, 1fr) 52px;
+    grid-template-columns: 46px minmax(0, 1fr) minmax(112px, 150px) 52px;
     align-items: center;
     gap: 0.5rem;
     padding: 0.55rem;
     border-radius: 24px;
+    overflow: hidden;
   }
 
   .chat-input-bar input {
     grid-column: 2 / 3;
     min-width: 0;
+    font-size: 1rem;
     padding-inline: 0.2rem;
   }
 
@@ -4450,24 +4507,25 @@ textarea.form-input {
   }
 
   .chat-send-btn {
-    grid-column: 3 / 4;
+    grid-column: 4 / 5;
     grid-row: 1;
   }
 
   .ai-purpose-picker {
-    grid-column: 2 / 4;
-    grid-row: 2;
+    grid-column: 3 / 4;
+    grid-row: 1;
     width: 100%;
   }
 
   .ai-purpose-select {
     width: 100%;
     min-height: 44px;
+    min-width: 0;
   }
 
   .ai-selected-file-chip {
-    grid-column: 1 / 4;
-    grid-row: 3;
+    grid-column: 1 / 5;
+    grid-row: 2;
     max-width: 100%;
     width: 100%;
     justify-content: center;
@@ -4534,15 +4592,19 @@ textarea.form-input {
 
 @media (max-width: 560px) {
   .chatbot-layout {
-    --chat-panel-height: clamp(520px, calc(100dvh - 120px), 720px);
+    --chat-panel-height: calc(100dvh - 108px);
   }
 
   .chatbot-main {
     padding: 0.75rem;
   }
 
+  .chat-window {
+    min-height: 260px;
+  }
+
   .chat-input-bar {
-    grid-template-columns: 42px minmax(0, 1fr) 48px;
+    grid-template-columns: 42px minmax(0, 1fr) minmax(88px, 112px) 48px;
     border-radius: 22px;
   }
 

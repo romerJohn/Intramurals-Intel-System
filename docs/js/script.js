@@ -940,6 +940,31 @@ function openMobileSidebar() {
   }
 }
 
+function scrollAssistantToLatest(targetElement = null) {
+  if (appState.activeSection !== "chatbot") {
+    return;
+  }
+
+  const chatWindow = getById("chatWindow");
+  const latestMessage = targetElement || chatWindow?.lastElementChild;
+  const chatBar = document.querySelector(".chat-input-bar");
+
+  window.requestAnimationFrame(() => {
+    latestMessage?.scrollIntoView({ block: "end", behavior: "smooth" });
+    chatBar?.scrollIntoView({ block: "end", behavior: "smooth" });
+  });
+}
+
+function keepChatInputVisible() {
+  if (window.innerWidth > 760 || appState.activeSection !== "chatbot") {
+    return;
+  }
+
+  window.setTimeout(() => {
+    scrollAssistantToLatest();
+  }, 120);
+}
+
 function getSortedStandings() {
   return [...standingsData].sort((a, b) => {
     if (b.points !== a.points) {
@@ -2217,7 +2242,7 @@ function addChatMessage(role, text) {
   message.appendChild(bubble);
 
   chatWindow.appendChild(message);
-  chatWindow.scrollTop = chatWindow.scrollHeight;
+  scrollAssistantToLatest(message);
 }
 
 function addChatRichMessage(role, html, options = {}) {
@@ -2248,7 +2273,7 @@ function addChatRichMessage(role, html, options = {}) {
   message.appendChild(bubble);
 
   chatWindow.appendChild(message);
-  chatWindow.scrollTop = chatWindow.scrollHeight;
+  scrollAssistantToLatest(message);
 
   return message;
 }
@@ -3475,7 +3500,10 @@ document.addEventListener("DOMContentLoaded", () => {
         sendChatMessage();
       }
     });
+    chatInput.addEventListener("focus", keepChatInputVisible);
   }
+
+  window.visualViewport?.addEventListener("resize", keepChatInputVisible);
 
   aiFilePlusBtn?.addEventListener("click", () => {
     if (appState.currentRole !== "admin") {
