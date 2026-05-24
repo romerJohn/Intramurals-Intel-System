@@ -31,7 +31,7 @@
           <article class="auth-feature-card">
             <span class="feature-tag admin">Admin / CSG Officer</span>
             <h3>Operations Command</h3>
-            <p>Publish scores, scan score sheets, upload official guidelines, manage attendance, and export reports.</p>
+            <p>Publish scores, route files through the AI Assistant, manage attendance, and export reports.</p>
           </article>
           <article class="auth-feature-card">
             <span class="feature-tag student">Student / Viewer</span>
@@ -78,7 +78,7 @@
                 <span class="role-option-icon"><i class="fa-solid fa-user-shield"></i></span>
                 <span class="role-option-copy">
                   <strong>Admin / CSG Officer</strong>
-                  <small>Full access to modules, publishing, uploads, verification, and reports.</small>
+                  <small>Full access to modules, publishing, AI file routing, verification, and reports.</small>
                 </span>
               </label>
               <label class="role-option">
@@ -152,13 +152,9 @@
 
         <span class="nav-group-label">OPERATIONS</span>
         <ul class="nav-list">
-          <li class="nav-item" data-section="scanner" data-role-visibility="admin">
-            <i class="fa-solid fa-camera-retro"></i>
-            <span class="nav-label">Score Sheet Scanner</span>
-          </li>
           <li class="nav-item" data-section="guidelines" data-role-visibility="admin student">
-            <i class="fa-solid fa-file-arrow-up"></i>
-            <span class="nav-label" data-role-copy data-admin-copy="Guidelines Upload" data-student-copy="Guidelines">Guidelines Upload</span>
+            <i class="fa-solid fa-file-lines"></i>
+            <span class="nav-label" data-role-copy data-admin-copy="Guidelines" data-student-copy="Guidelines">Guidelines</span>
           </li>
           <li class="nav-item" data-section="profiles" data-role-visibility="admin">
             <i class="fa-solid fa-id-card"></i>
@@ -538,53 +534,62 @@
                 <span class="view-state-badge" id="assistantModeBadge" data-role-copy data-admin-copy="Admin Only" data-student-copy="Student View">Admin Only</span>
               </div>
               <h2>AI Assistant</h2>
-              <p>Ask about official guidelines, live scores, schedules, standings, and sample match results.</p>
+              <p data-role-copy data-admin-copy="Attach one file, choose its type, enter instructions, and let the AI prepare a pending update for the correct module." data-student-copy="Ask about approved guidelines, schedules, announcements, scores, rankings, attendance status, and published results.">Attach one file, choose its type, enter instructions, and let the AI prepare a pending update for the correct module.</p>
             </div>
           </div>
 
           <div class="chatbot-layout">
             <div class="chatbot-main">
               <div class="chat-window" id="chatWindow">
-                <div class="chat-msg bot-msg">
+                <div class="chat-msg bot-msg" data-role-view="admin">
                   <div class="chat-avatar bot-av"><i class="fa-solid fa-robot"></i></div>
                   <div class="chat-bubble">
-                    <p>Hello. I am the CJC Intramurals AI Assistant. I can answer questions using this prototype's guidelines, schedules, standings, announcements, and verified score records.</p>
+                    <p>Hello. Attach a file with the plus button, choose its file type from the right side of the chat bar, add your instruction, then send it for AI preparation and module confirmation.</p>
+                  </div>
+                </div>
+                <div class="chat-msg bot-msg" data-role-view="student" hidden>
+                  <div class="chat-avatar bot-av"><i class="fa-solid fa-robot"></i></div>
+                  <div class="chat-bubble">
+                    <p>Hello. I can answer questions using approved guidelines, schedules, announcements, verified scores, standings, attendance status, and published results.</p>
                     <p>Try one of these sample prompts:</p>
                     <div class="chat-suggestions">
                       <button class="chat-sug-btn" type="button" onclick="insertSuggestion(this)">Who is leading overall?</button>
                       <button class="chat-sug-btn" type="button" onclick="insertSuggestion(this)">What is the score of CEDAS vs CCIS?</button>
                       <button class="chat-sug-btn" type="button" onclick="insertSuggestion(this)">When is the basketball finals?</button>
                       <button class="chat-sug-btn" type="button" onclick="insertSuggestion(this)">Who won the Quiz Bee?</button>
-                      <button class="chat-sug-btn" type="button" onclick="insertSuggestion(this)">What is the dress code for cheerdance?</button>
+                      <button class="chat-sug-btn" type="button" onclick="insertSuggestion(this)">What is my attendance status?</button>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div class="chat-input-bar">
+                <button class="chat-attach-btn" id="aiFilePlusBtn" type="button" data-role-visibility="admin" aria-label="Upload file">
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+                <input id="aiChatFileInput" type="file" class="ai-chat-file-input" data-role-visibility="admin" />
                 <input type="text" id="chatInput" placeholder="Ask about guidelines, scores, schedules, or standings..." />
+                <span class="ai-selected-file-chip" id="aiSelectedFileChip" data-role-visibility="admin" hidden></span>
+                <div class="ai-purpose-picker" data-role-visibility="admin">
+                  <select id="aiPurposeSelect" class="ai-purpose-select" aria-label="File type">
+                    <option value="">File type</option>
+                    <option value="guidelines">Guidelines</option>
+                    <option value="participant-list">Participant List</option>
+                    <option value="participant-photos">Participant Photos</option>
+                    <option value="tally-sheet">Tally Sheet</option>
+                    <option value="score-sheet-image">Score Sheet Image</option>
+                    <option value="event-highlights">Event Highlights</option>
+                    <option value="announcement">Announcement</option>
+                    <option value="published-results">Published Results</option>
+                    <option value="other">Other Document</option>
+                  </select>
+                </div>
                 <button class="chat-send-btn" id="chatSendBtn" type="button">
                   <i class="fa-solid fa-paper-plane"></i>
                 </button>
               </div>
             </div>
 
-            <div class="chatbot-sidebar">
-              <h4>Quick Topics</h4>
-              <div class="topic-tags">
-                <span class="topic-tag" onclick="insertSuggestion(this)">Dress Code</span>
-                <span class="topic-tag" onclick="insertSuggestion(this)">Player Eligibility</span>
-                <span class="topic-tag" onclick="insertSuggestion(this)">Live Scores</span>
-                <span class="topic-tag" onclick="insertSuggestion(this)">Standings</span>
-                <span class="topic-tag" onclick="insertSuggestion(this)">Event Schedule</span>
-                <span class="topic-tag" onclick="insertSuggestion(this)">Quiz Bee Result</span>
-                <span class="topic-tag" onclick="insertSuggestion(this)">Guidelines</span>
-                <span class="topic-tag" onclick="insertSuggestion(this)">Basketball Finals</span>
-              </div>
-
-              <h4>Source Documents</h4>
-              <div class="source-docs" id="sourceDocs"></div>
-            </div>
           </div>
         </section>
 
@@ -624,6 +629,8 @@
             </div>
             <span class="live-pill"><span class="live-dot"></span> 3 Active Matches</span>
           </div>
+
+          <div class="pending-confirmation-list" id="scoringPendingAutomation" data-role-visibility="admin"></div>
 
           <div class="scoring-grid">
             <div class="scoring-card active-match">
@@ -786,88 +793,6 @@
           </div>
         </section>
 
-        <section class="section" id="section-scanner" data-role-visibility="admin">
-          <div class="section-header-row">
-            <div>
-              <div class="section-view-banner compact">
-                <span class="view-state-badge admin-only">Admin Only</span>
-                <span class="view-state-badge pending-state" id="scannerHeaderStatus">Pending Verification</span>
-              </div>
-              <h2>AI Score Sheet Scanner</h2>
-              <p>Upload a score sheet image, simulate OCR extraction, and verify results before they reach the live dashboard.</p>
-            </div>
-          </div>
-
-          <div class="scanner-layout">
-            <div class="scoring-card scanner-card">
-              <div class="card-header">
-                <h3><i class="fa-solid fa-image"></i> Score Sheet Upload</h3>
-              </div>
-
-              <div class="scanner-form">
-                <div class="form-group">
-                  <label for="scoreSheetUpload">Upload score sheet image</label>
-                  <input type="file" id="scoreSheetUpload" class="form-input file-input" accept="image/*" />
-                </div>
-
-                <div class="scanner-preview-box" id="scannerPreviewBox">
-                  <div class="scanner-preview-empty" id="scannerPreviewEmpty">
-                    <i class="fa-solid fa-images"></i>
-                    <p>Select an image to preview the uploaded score sheet.</p>
-                  </div>
-                  <img id="scoreSheetPreviewImage" class="scanner-preview-image" alt="Uploaded score sheet preview" />
-                </div>
-
-                <p class="scanner-note">Google Drive integration and real OCR processing will be connected in the backend phase.</p>
-
-                <div class="scanner-action-row">
-                  <button class="btn-primary" id="scanScoreBtn" type="button">
-                    <i class="fa-solid fa-magnifying-glass-chart"></i> Scan Score Sheet
-                  </button>
-                  <button class="btn-secondary" id="clearScannerBtn" type="button">Clear Preview</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="scoring-card scanner-card">
-              <div class="card-header">
-                <h3><i class="fa-solid fa-file-waveform"></i> Extracted Result Preview</h3>
-                <span class="status-badge pending-state" id="scannerStatusBadge">Pending Verification</span>
-              </div>
-
-              <div class="scanner-result-grid">
-                <div class="scanner-result-item">
-                  <span>Detected Event</span>
-                  <strong id="scannerEvent">Awaiting scan</strong>
-                </div>
-                <div class="scanner-result-item">
-                  <span>Detected Teams</span>
-                  <strong id="scannerTeams">-</strong>
-                </div>
-                <div class="scanner-result-item">
-                  <span>Detected Scores</span>
-                  <strong id="scannerScores">-</strong>
-                </div>
-                <div class="scanner-result-item">
-                  <span>Confidence</span>
-                  <strong id="scannerConfidence">-</strong>
-                </div>
-                <div class="scanner-result-item">
-                  <span>Status</span>
-                  <strong id="scannerStatusText">Pending Verification</strong>
-                </div>
-              </div>
-
-              <div class="verification-actions">
-                <button class="btn-secondary" id="rejectScoreBtn" type="button" disabled>Reject Score</button>
-                <button class="btn-primary" id="approveScoreBtn" type="button" disabled>Approve Score</button>
-              </div>
-
-              <div class="verification-caption" id="scannerResultNote">No simulated OCR result yet. Scan a score sheet image to continue.</div>
-            </div>
-          </div>
-        </section>
-
         <section class="section" id="section-guidelines">
           <div class="section-header-row">
             <div>
@@ -875,42 +800,13 @@
                 <span class="view-state-badge" id="guidelinesModeBadge" data-role-copy data-admin-copy="Admin Only" data-student-copy="Student View">Admin Only</span>
               </div>
               <h2 id="guidelinesSectionTitle" data-role-copy data-admin-copy="Guidelines Management" data-student-copy="Official Guidelines">Guidelines Management</h2>
-              <p id="guidelinesSectionDescription" data-role-copy data-admin-copy="Upload and manage guideline files by event or category" data-student-copy="Browse the official guidelines shared by the CSG office">Upload and manage guideline files by event or category</p>
+              <p id="guidelinesSectionDescription" data-role-copy data-admin-copy="Review approved guidelines and confirm AI-prepared guideline updates." data-student-copy="Browse the official guidelines shared by the CSG office">Review approved guidelines and confirm AI-prepared guideline updates.</p>
             </div>
           </div>
 
+          <div class="pending-confirmation-list" id="guidelinesPendingAutomation" data-role-visibility="admin"></div>
+
           <div class="guidelines-layout">
-            <div class="dash-card guideline-form-card" data-role-visibility="admin">
-              <div class="card-header">
-                <h3><i class="fa-solid fa-file-circle-plus"></i> Guidelines Management</h3>
-                <span class="view-state-badge admin-only">Admin Only</span>
-              </div>
-
-              <div class="guideline-form-grid">
-                <div class="form-group">
-                  <label for="guidelineTitleInput">Guideline title</label>
-                  <input id="guidelineTitleInput" type="text" class="form-input" placeholder="Basketball Finals Rules and Format" />
-                </div>
-                <div class="form-group">
-                  <label for="guidelineEventSelect">Event or category</label>
-                  <select id="guidelineEventSelect" class="form-input">
-                    <option>Basketball</option>
-                    <option>Volleyball</option>
-                    <option>Cheerdance</option>
-                    <option>Quiz Bee</option>
-                    <option>General Intramurals</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="guidelineFileInput">Upload guideline file</label>
-                  <input id="guidelineFileInput" type="file" class="form-input file-input" />
-                </div>
-                <button class="btn-primary" id="guidelineUploadBtn" type="button">
-                  <i class="fa-solid fa-upload"></i> Upload Guideline
-                </button>
-              </div>
-            </div>
-
             <div class="dash-card guideline-library-card">
               <div class="card-header">
                 <h3><i class="fa-solid fa-folder-open"></i> Official Guidelines Library</h3>
@@ -931,6 +827,8 @@
               <p>Official leaderboard that refreshes after verified score approvals.</p>
             </div>
           </div>
+
+          <div class="pending-confirmation-list" id="standingsPendingAutomation" data-role-visibility="admin"></div>
 
           <div class="standings-layout">
             <div class="podium-wrap">
@@ -993,61 +891,25 @@
             </select>
           </div>
 
+          <div class="pending-confirmation-list" id="profilesPendingAutomation" data-role-visibility="admin"></div>
+
           <div class="profile-tools-grid">
             <div class="dash-card profile-tool-card">
               <div class="card-header">
-                <h3><i class="fa-solid fa-file-import"></i> Participant File Upload and Auto-Import</h3>
-                <span class="view-state-badge admin-only">Admin Only</span>
+                <h3><i class="fa-solid fa-file-import"></i> Participant Import Records</h3>
+                <span class="view-state-badge live-state">AI Routed</span>
               </div>
-              <div class="tool-form-grid">
-                <div class="form-group">
-                  <label for="participantFileInput">Upload participant file</label>
-                  <input id="participantFileInput" type="file" class="form-input file-input" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.png,.jpg,.jpeg" />
-                </div>
-                <div class="form-group">
-                  <label for="participantImportSource">Source type</label>
-                  <select id="participantImportSource" class="form-input">
-                    <option>Department Masterlist</option>
-                    <option>Participant Registration Sheet</option>
-                    <option>Printed Participant List</option>
-                  </select>
-                </div>
-                <button class="btn-primary" id="importParticipantsBtn" type="button">
-                  <i class="fa-solid fa-wand-magic-sparkles"></i> Import Participant File
-                </button>
-              </div>
-              <p class="scanner-note">AI-assisted participant file extraction is simulated in the frontend. Printed list OCR will connect in the backend phase.</p>
+              <p class="scanner-note">Participant files are uploaded only through the AI Assistant. Approved imports appear here as official records.</p>
               <div class="mini-record-list" id="participantImportList"></div>
             </div>
 
             <div class="dash-card profile-tool-card">
               <div class="card-header">
-                <h3><i class="fa-solid fa-camera"></i> Participant Photo Upload and Linking</h3>
-                <span class="view-state-badge admin-only">Admin Only</span>
+                <h3><i class="fa-solid fa-camera"></i> Participant Photo Links</h3>
+                <span class="view-state-badge live-state">Confirmed Links</span>
               </div>
-              <div class="tool-form-grid">
-                <div class="form-group">
-                  <label for="participantPhotoInput">Upload participant photo</label>
-                  <input id="participantPhotoInput" type="file" class="form-input file-input" accept="image/*" />
-                </div>
-                <div class="form-group">
-                  <label for="photoParticipantSelect">Link photo to participant</label>
-                  <select id="photoParticipantSelect" class="form-input"></select>
-                </div>
-                <button class="btn-primary" id="linkParticipantPhotoBtn" type="button">
-                  <i class="fa-solid fa-link"></i> Link Photo
-                </button>
-              </div>
-              <div class="photo-link-layout">
-                <div class="photo-preview-box" id="participantPhotoPreviewBox">
-                  <div class="photo-preview-empty" id="participantPhotoPreviewEmpty">
-                    <i class="fa-solid fa-user"></i>
-                    <p>Select a participant photo to preview before linking.</p>
-                  </div>
-                  <img id="participantPhotoPreviewImage" class="photo-preview-image" alt="Participant photo preview" />
-                </div>
-                <div class="mini-record-list" id="participantPhotoList"></div>
-              </div>
+              <p class="scanner-note">Participant photos are uploaded only through the AI Assistant. Approved matches appear here after confirmation.</p>
+              <div class="mini-record-list" id="participantPhotoList"></div>
             </div>
           </div>
 
@@ -1203,6 +1065,8 @@
             </button>
           </div>
 
+          <div class="pending-confirmation-list" id="announcementsPendingAutomation" data-role-visibility="admin"></div>
+
           <div class="ann-full-list" id="annFullList"></div>
         </section>
 
@@ -1216,10 +1080,9 @@
               <h2>Gallery and Event Highlights</h2>
               <p>Approved campus highlights, winning moments, and event snapshots for public viewing.</p>
             </div>
-            <button class="btn-primary" id="uploadHighlightBtn" type="button" data-role-visibility="admin">
-              <i class="fa-solid fa-image"></i> Upload Highlight
-            </button>
           </div>
+
+          <div class="pending-confirmation-list" id="galleryPendingAutomation" data-role-visibility="admin"></div>
 
           <div class="gallery-grid" id="galleryGrid"></div>
         </section>

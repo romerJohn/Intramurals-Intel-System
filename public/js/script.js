@@ -596,6 +596,110 @@ const categoryClassMap = {
   special: "special"
 };
 
+const aiFilePurposeConfigs = {
+  guidelines: {
+    label: "Guidelines",
+    moduleSection: "guidelines",
+    moduleLabel: "Guidelines",
+    pendingTitle: "Pending Guideline Confirmation",
+    summary: "Extracted eligibility rules, protest windows, attire reminders, safety notes, and event conduct policies.",
+    recordTitle: "AI Prepared Intramurals Guidelines",
+    icon: "fa-file-lines"
+  },
+  "participant-list": {
+    label: "Participant List",
+    moduleSection: "profiles",
+    moduleLabel: "Participants",
+    pendingTitle: "Pending Participant Import Confirmation",
+    summary: "Extracted 32 participant entries with departments, year levels, event assignments, and duplicate-name checks.",
+    recordTitle: "AI Participant Import",
+    icon: "fa-users"
+  },
+  "participant-photos": {
+    label: "Participant Photos",
+    moduleSection: "profiles",
+    moduleLabel: "Participant Profiles",
+    pendingTitle: "Pending Photo Linking Confirmation",
+    summary: "Matched uploaded photo names to participant records and flagged three high-confidence profile links.",
+    recordTitle: "AI Photo Matching Batch",
+    icon: "fa-id-card"
+  },
+  "tally-sheet": {
+    label: "Tally Sheet",
+    moduleSection: "scoring",
+    moduleLabel: "Scoring",
+    pendingTitle: "Pending Tally Sheet Confirmation",
+    summary: "Extracted a Cheerdance scoring template with synchronization, choreography, costumes, props, and crowd impact criteria.",
+    recordTitle: "AI Tally Criteria",
+    icon: "fa-scale-balanced"
+  },
+  "score-sheet-image": {
+    label: "Score Sheet Image",
+    moduleSection: "scoring",
+    moduleLabel: "Real-Time Scoring",
+    pendingTitle: "Pending Score Verification",
+    summary: "Extracted Basketball Semi Finals scores: CEDAS 81, CCIS 76, with a verification confidence of 94%.",
+    recordTitle: "AI Score Sheet Extraction",
+    icon: "fa-stopwatch"
+  },
+  "event-highlights": {
+    label: "Event Highlights",
+    moduleSection: "gallery",
+    moduleLabel: "Gallery",
+    pendingTitle: "Pending Highlight Approval",
+    summary: "Prepared a highlight caption, event tag, and publish-ready gallery entry for the uploaded media.",
+    recordTitle: "AI Event Highlight",
+    icon: "fa-images"
+  },
+  announcement: {
+    label: "Announcement",
+    moduleSection: "announcements",
+    moduleLabel: "Announcements",
+    pendingTitle: "Pending Announcement Approval",
+    summary: "Formatted the message for campus-wide posting with a concise title, audience label, and announcement copy.",
+    recordTitle: "AI Formatted Announcement",
+    icon: "fa-bullhorn"
+  },
+  "published-results": {
+    label: "Published Results",
+    moduleSection: "standings",
+    moduleLabel: "Standings/Public Results",
+    pendingTitle: "Pending Results Verification",
+    summary: "Extracted final rankings and winners: CEDAS first, CCIS second, COE third, pending verification before publication.",
+    recordTitle: "AI Published Results Import",
+    icon: "fa-trophy"
+  },
+  other: {
+    label: "Other Intramurals Document",
+    moduleSection: "",
+    moduleLabel: "Route after review",
+    pendingTitle: "Pending General Document Routing",
+    summary: "Extracted a general intramurals summary with dates, responsible committees, action items, and possible destination modules.",
+    recordTitle: "AI General Document Summary",
+    icon: "fa-file-circle-question"
+  }
+};
+
+const aiOtherRouteOptions = [
+  "guidelines",
+  "participant-list",
+  "participant-photos",
+  "tally-sheet",
+  "score-sheet-image",
+  "event-highlights",
+  "announcement",
+  "published-results"
+];
+
+const pendingAutomationContainers = {
+  guidelines: "guidelinesPendingAutomation",
+  profiles: "profilesPendingAutomation",
+  scoring: "scoringPendingAutomation",
+  announcements: "announcementsPendingAutomation",
+  gallery: "galleryPendingAutomation",
+  standings: "standingsPendingAutomation"
+};
+
 const appState = {
   activeSection: "dashboard",
   activeEventFilter: "all",
@@ -606,13 +710,27 @@ const appState = {
     name: "CSG Officer",
     email: "csg@cjc.edu.ph"
   },
-  pendingScan: null
+  pendingScan: null,
+  aiAssistant: {
+    selectedPurpose: null,
+    lastOtherExtraction: null
+  },
+  pendingAutomation: []
 };
 
 let toastTimerId = null;
 
 function getById(id) {
   return document.getElementById(id);
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 function getCurrentTimestamp() {
@@ -1533,22 +1651,255 @@ function renderBackupSnapshots() {
   `).join("");
 }
 
-function renderSourceDocs() {
-  const target = getById("sourceDocs");
+function renderPendingAutomationCard(item) {
+  return `
+    <article class="pending-confirmation-card">
+      <div class="pending-confirmation-head">
+        <div>
+          <span class="view-state-badge pending-state">${escapeHtml(item.pendingTitle)}</span>
+          <h3><i class="fa-solid ${escapeHtml(item.icon)}"></i> ${escapeHtml(item.recordTitle)}</h3>
+        </div>
+        <span class="status-badge pending-state">${escapeHtml(item.status)}</span>
+      </div>
+      <div class="pending-confirmation-grid">
+        <div>
+          <span>Selected Purpose</span>
+          <strong>${escapeHtml(item.purposeLabel)}</strong>
+        </div>
+        <div>
+          <span>Uploaded File</span>
+          <strong>${escapeHtml(item.fileName)}</strong>
+        </div>
+        <div>
+          <span>Suggested Module</span>
+          <strong>${escapeHtml(item.moduleLabel)}</strong>
+        </div>
+        <div>
+          <span>Forwarded</span>
+          <strong>${escapeHtml(item.createdAt)}</strong>
+        </div>
+      </div>
+      <p>${escapeHtml(item.summary)}</p>
+      ${item.instruction ? `<p class="pending-instruction"><strong>Instruction:</strong> ${escapeHtml(item.instruction)}</p>` : ""}
+      <div class="pending-confirmation-actions">
+        <button class="btn-sm primary" type="button" onclick="approvePendingAutomation(${item.id})">Approve</button>
+        <button class="btn-sm secondary" type="button" onclick="editPendingAutomation(${item.id})">Edit</button>
+        <button class="btn-sm secondary" type="button" onclick="rejectPendingAutomation(${item.id})">Reject</button>
+      </div>
+    </article>
+  `;
+}
 
-  if (!target) {
+function renderPendingConfirmations() {
+  Object.entries(pendingAutomationContainers).forEach(([moduleSection, targetId]) => {
+    const target = getById(targetId);
+
+    if (!target) {
+      return;
+    }
+
+    const pendingItems = appState.pendingAutomation.filter((item) => (
+      item.moduleSection === moduleSection && item.status === "Pending Confirmation"
+    ));
+
+    const shouldHide = appState.currentRole !== "admin" || pendingItems.length === 0;
+    target.hidden = shouldHide;
+    target.innerHTML = shouldHide ? "" : pendingItems.map(renderPendingAutomationCard).join("");
+  });
+}
+
+function findPendingAutomation(id) {
+  return appState.pendingAutomation.find((item) => item.id === id);
+}
+
+function applyPendingAutomationUpdate(item) {
+  const applyAs = item.applyAs || item.purposeId;
+  const officialDate = new Date().toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+  });
+
+  if (applyAs === "guidelines") {
+    guidelineRecords.unshift({
+      id: Date.now(),
+      title: item.recordTitle,
+      category: "general",
+      event: "General Intramurals",
+      updated: officialDate,
+      summary: item.summary
+    });
+    renderGuidelineRecords();
+    renderStudentGuidelinesPreview();
     return;
   }
 
-  target.innerHTML = guidelineRecords.slice(0, 3).map((record) => `
-    <div class="source-doc">
-      <i class="fa-solid fa-file-pdf"></i>
-      <div>
-        <span>${record.title}</span>
-        <small>Updated ${record.updated}</small>
-      </div>
-    </div>
-  `).join("");
+  if (applyAs === "participant-list") {
+    participantImportRecords.unshift({
+      id: Date.now(),
+      fileName: item.fileName,
+      source: item.purposeId === "other" ? "AI Routed General Document" : "AI Participant List Extraction",
+      imported: 32,
+      linkedPhotos: 0,
+      status: "Imported",
+      uploaded: getCurrentTimestamp()
+    });
+    renderParticipantImportRecords();
+    return;
+  }
+
+  if (applyAs === "participant-photos") {
+    profileData.slice(0, 3).forEach((profile, index) => {
+      const existing = participantPhotoLinks.find((record) => record.name === profile.name);
+      const photoName = index === 0 ? item.fileName : `${profile.name.toLowerCase().replace(/\s+/g, "-")}-${item.fileName}`;
+
+      if (existing) {
+        existing.photoName = photoName;
+        existing.status = "Linked";
+        existing.updated = getCurrentTimestamp();
+      } else {
+        participantPhotoLinks.unshift({
+          id: Date.now() + index,
+          name: profile.name,
+          department: profile.department,
+          photoName,
+          status: "Linked",
+          updated: getCurrentTimestamp()
+        });
+      }
+    });
+    renderParticipantPhotoLinks();
+    renderProfiles();
+    return;
+  }
+
+  if (applyAs === "tally-sheet") {
+    const nextScores = [91, 93, 88, 90];
+    document.querySelectorAll(".tally-input").forEach((input, index) => {
+      if (nextScores[index] !== undefined) {
+        input.value = nextScores[index];
+      }
+    });
+    updateTallyTotal();
+    return;
+  }
+
+  if (applyAs === "score-sheet-image") {
+    const approvedScan = {
+      event: "Basketball Semi Finals",
+      home: "CEDAS",
+      away: "CCIS",
+      homeScore: 81,
+      awayScore: 76
+    };
+    liveMatches.basketballSemi.homeScore = approvedScan.homeScore;
+    liveMatches.basketballSemi.awayScore = approvedScan.awayScore;
+    liveMatches.basketballSemi.scoreMeta = "AI verified result";
+    liveMatches.basketballSemi.periodLabel = "Final score after AI confirmation";
+    applyApprovedResultToStandings(approvedScan);
+    syncLiveScoreDisplays();
+    renderDashboardRankings();
+    renderDashboardMedalTable();
+    renderStandingsSection();
+
+    const verificationNote = getById("basketballVerificationNote");
+    if (verificationNote) {
+      verificationNote.textContent = "Approved AI Assistant score is now published on the live board.";
+    }
+    return;
+  }
+
+  if (applyAs === "event-highlights") {
+    galleryHighlights.unshift({
+      id: Date.now(),
+      title: item.recordTitle,
+      event: "Intramurals Highlights",
+      caption: item.summary,
+      time: "Just now",
+      accent: "#2d6a4f"
+    });
+    renderGallery();
+    return;
+  }
+
+  if (applyAs === "announcement") {
+    announcementData.unshift({
+      type: "info",
+      title: item.recordTitle,
+      copy: item.summary,
+      time: getCurrentTimestamp(),
+      audience: "All departments"
+    });
+    renderAnnouncements();
+    renderAnnouncementPreview("dashboardAnnouncementPreview", 3);
+    renderAnnouncementPreview("studentAnnouncementsPreview", 3);
+    return;
+  }
+
+  if (applyAs === "published-results") {
+    const champion = standingsData.find((entry) => entry.team === "CEDAS");
+    const runnerUp = standingsData.find((entry) => entry.team === "CCIS");
+
+    if (champion) {
+      champion.gold += 1;
+      champion.points += 5;
+    }
+
+    if (runnerUp) {
+      runnerUp.silver += 1;
+      runnerUp.points += 3;
+    }
+
+    renderStandingsSection();
+    renderDashboardRankings();
+    renderDashboardMedalTable();
+  }
+}
+
+function approvePendingAutomation(id) {
+  const item = findPendingAutomation(id);
+
+  if (!item || item.status !== "Pending Confirmation") {
+    return;
+  }
+
+  item.status = "Approved";
+  applyPendingAutomationUpdate(item);
+  renderPendingConfirmations();
+  addAuditRecord(`Approved ${item.pendingTitle}`, item.moduleLabel, "Approved");
+  showToast(`${item.moduleLabel} update approved.`);
+}
+
+function editPendingAutomation(id) {
+  const item = findPendingAutomation(id);
+
+  if (!item || item.status !== "Pending Confirmation") {
+    return;
+  }
+
+  const nextSummary = window.prompt("Edit the extracted summary before approval:", item.summary);
+
+  if (nextSummary === null) {
+    return;
+  }
+
+  item.summary = nextSummary.trim() || item.summary;
+  renderPendingConfirmations();
+  addAuditRecord(`Edited ${item.pendingTitle}`, item.moduleLabel, "Pending");
+  showToast("Pending update edited. It still needs approval.");
+}
+
+function rejectPendingAutomation(id) {
+  const item = findPendingAutomation(id);
+
+  if (!item || item.status !== "Pending Confirmation") {
+    return;
+  }
+
+  item.status = "Rejected";
+  renderPendingConfirmations();
+  addAuditRecord(`Rejected ${item.pendingTitle}`, item.moduleLabel, "Rejected");
+  showToast(`${item.moduleLabel} update rejected.`);
 }
 
 function renderGuidelineRecords() {
@@ -1869,6 +2220,285 @@ function addChatMessage(role, text) {
   chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
+function addChatRichMessage(role, html, options = {}) {
+  const chatWindow = getById("chatWindow");
+
+  if (!chatWindow) {
+    return null;
+  }
+
+  const message = document.createElement("div");
+  message.className = `chat-msg ${role === "user" ? "user-msg" : "bot-msg"}${options.extraClass ? ` ${options.extraClass}` : ""}`;
+
+  if (options.adminOnly) {
+    message.dataset.roleView = "admin";
+    message.hidden = appState.currentRole !== "admin";
+  }
+
+  if (role === "bot") {
+    const avatar = document.createElement("div");
+    avatar.className = "chat-avatar bot-av";
+    avatar.innerHTML = '<i class="fa-solid fa-robot"></i>';
+    message.appendChild(avatar);
+  }
+
+  const bubble = document.createElement("div");
+  bubble.className = "chat-bubble";
+  bubble.innerHTML = html;
+  message.appendChild(bubble);
+
+  chatWindow.appendChild(message);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+
+  return message;
+}
+
+function clearAiUploadPrompts() {
+  document.querySelectorAll(".ai-upload-chat-msg").forEach((message) => message.remove());
+}
+
+function renderAiSelectedFileChip() {
+  const input = getById("aiChatFileInput");
+  const chip = getById("aiSelectedFileChip");
+  const file = input?.files?.[0];
+  const showAutomationControls = Boolean(file && appState.currentRole === "admin");
+
+  if (chip) {
+    chip.hidden = !showAutomationControls;
+    chip.textContent = file ? file.name : "";
+  }
+}
+
+function resetAiChatFileInput(options = {}) {
+  const input = getById("aiChatFileInput");
+  const chatInput = getById("chatInput");
+  const purposeSelect = getById("aiPurposeSelect");
+
+  if (input) {
+    input.value = "";
+    input.accept = "";
+  }
+
+  if (options.clearPurpose !== false) {
+    appState.aiAssistant.selectedPurpose = null;
+    setAiPurposeButtonState("");
+    if (purposeSelect) {
+      purposeSelect.value = "";
+    }
+  }
+
+  if (chatInput) {
+    chatInput.placeholder = "Ask about guidelines, scores, schedules, or standings...";
+  }
+
+  renderAiSelectedFileChip();
+}
+
+function getAiPurposeConfig(purposeId) {
+  return aiFilePurposeConfigs[purposeId] || aiFilePurposeConfigs.other;
+}
+
+function getAiFileAccept(purposeId) {
+  if (["participant-photos", "score-sheet-image", "event-highlights"].includes(purposeId)) {
+    return "image/*";
+  }
+
+  if (purposeId === "participant-list") {
+    return ".pdf,.doc,.docx,.xls,.xlsx,.csv,.png,.jpg,.jpeg";
+  }
+
+  return ".pdf,.doc,.docx,.xls,.xlsx,.csv,.png,.jpg,.jpeg,image/*";
+}
+
+function setAiPurposeButtonState(purposeId) {
+  const purposeSelect = getById("aiPurposeSelect");
+  if (purposeSelect && purposeSelect.value !== purposeId) {
+    purposeSelect.value = purposeId || "";
+  }
+}
+
+function selectAiFilePurpose(purposeId) {
+  if (appState.currentRole !== "admin") {
+    return;
+  }
+
+  const config = getAiPurposeConfig(purposeId);
+  const fileInput = getById("aiChatFileInput");
+
+  appState.aiAssistant.selectedPurpose = purposeId;
+  appState.aiAssistant.lastOtherExtraction = null;
+  setAiPurposeButtonState(purposeId);
+  clearAiUploadPrompts();
+
+  if (fileInput) {
+    fileInput.accept = getAiFileAccept(purposeId);
+  }
+
+  showToast(`File type set to ${config.label}.`);
+}
+
+function buildPendingAutomationItem(applyAsPurposeId, fileName, sourcePurposeId = applyAsPurposeId, instruction = "") {
+  const config = getAiPurposeConfig(applyAsPurposeId);
+  const sourceConfig = getAiPurposeConfig(sourcePurposeId);
+  const isOtherSource = sourcePurposeId === "other";
+  const instructionText = instruction.trim();
+
+  return {
+    id: Date.now() + Math.floor(Math.random() * 1000),
+    purposeId: sourcePurposeId,
+    applyAs: applyAsPurposeId,
+    purposeLabel: sourceConfig.label,
+    fileName,
+    summary: isOtherSource
+      ? `${aiFilePurposeConfigs.other.summary} Routed to the ${config.moduleLabel} module for confirmation.`
+      : config.summary,
+    instruction: instructionText,
+    moduleSection: config.moduleSection,
+    moduleLabel: config.moduleLabel,
+    pendingTitle: config.pendingTitle,
+    recordTitle: isOtherSource ? `${config.recordTitle} from General Document` : config.recordTitle,
+    icon: config.icon,
+    status: "Pending Confirmation",
+    createdAt: getCurrentTimestamp()
+  };
+}
+
+function addAiProcessingPreview(item, options = {}) {
+  const awaitingRoute = Boolean(options.awaitingRoute);
+  const routeSelectId = `aiOtherRouteSelect-${Date.now()}`;
+  const statusLabel = awaitingRoute ? "Awaiting Route Selection" : "Sent for Admin Confirmation";
+  const moduleLabel = awaitingRoute ? "Choose destination module" : item.moduleLabel;
+  const openingLine = awaitingRoute
+    ? "AI Processing Complete. This general document needs a destination module before it can be sent for confirmation."
+    : `AI Processing Complete. This file has been prepared for the ${escapeHtml(item.moduleLabel)} module.`;
+  const routeControls = awaitingRoute ? `
+    <div class="chat-route-panel">
+      <label for="${routeSelectId}">Route this summary to</label>
+      <select id="${routeSelectId}" class="form-input">
+        ${aiOtherRouteOptions.map((purposeId) => {
+          const config = getAiPurposeConfig(purposeId);
+          return `<option value="${purposeId}">${escapeHtml(config.moduleLabel)} - ${escapeHtml(config.pendingTitle)}</option>`;
+        }).join("")}
+      </select>
+      <button class="btn-primary" type="button" onclick="routeOtherAiDocument('${routeSelectId}')">
+        <i class="fa-solid fa-share-from-square"></i> Send to Module
+      </button>
+    </div>
+  ` : `
+    <button class="btn-sm primary" type="button" onclick="openPendingAutomationModule(${item.id})">
+      <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Related Module
+    </button>
+  `;
+
+  addChatRichMessage("bot", `
+    <p>${openingLine}</p>
+    <div class="ai-processing-preview">
+      <div><span>Selected Purpose</span><strong>${escapeHtml(item.purposeLabel)}</strong></div>
+      <div><span>Uploaded File Name</span><strong>${escapeHtml(item.fileName)}</strong></div>
+      <div><span>Extracted Summary</span><strong>${escapeHtml(item.summary)}</strong></div>
+      ${item.instruction ? `<div><span>Admin Instruction</span><strong>${escapeHtml(item.instruction)}</strong></div>` : ""}
+      <div><span>Suggested Module</span><strong>${escapeHtml(moduleLabel)}</strong></div>
+      <div><span>Status</span><strong>${escapeHtml(statusLabel)}</strong></div>
+    </div>
+    ${routeControls}
+  `, {
+    adminOnly: true,
+    extraClass: "ai-preview-chat-msg"
+  });
+}
+
+function processAiSelectedFile(purposeId, inputId, instruction = "") {
+  if (appState.currentRole !== "admin") {
+    return;
+  }
+
+  const selectedPurpose = purposeId || appState.aiAssistant.selectedPurpose;
+  const config = getAiPurposeConfig(selectedPurpose);
+  const input = inputId ? getById(inputId) : getById("aiChatFileInput");
+  const file = input?.files?.[0];
+
+  if (!selectedPurpose) {
+    showToast("Select a file purpose first.");
+    return;
+  }
+
+  if (!file) {
+    showToast("Upload one file before processing.");
+    return;
+  }
+
+  appState.aiAssistant.selectedPurpose = selectedPurpose;
+  addChatRichMessage("user", `
+    <p>Uploaded <strong>${escapeHtml(file.name)}</strong></p>
+    <p>Purpose: ${escapeHtml(config.label)}</p>
+    ${instruction ? `<p>Instruction: ${escapeHtml(instruction)}</p>` : ""}
+  `, {
+    adminOnly: true,
+    extraClass: "ai-uploaded-file-msg"
+  });
+
+  if (selectedPurpose === "other") {
+    const extraction = {
+      fileName: file.name,
+      purposeLabel: config.label,
+      moduleLabel: config.moduleLabel,
+      summary: config.summary,
+      instruction: instruction.trim()
+    };
+    appState.aiAssistant.lastOtherExtraction = extraction;
+    addAiProcessingPreview(extraction, { awaitingRoute: true });
+    resetAiChatFileInput();
+    showToast("General document summarized. Choose where to route it.");
+    return;
+  }
+
+  const item = buildPendingAutomationItem(selectedPurpose, file.name, selectedPurpose, instruction);
+  appState.pendingAutomation.unshift(item);
+  renderPendingConfirmations();
+  addAiProcessingPreview(item);
+  addAuditRecord(`Prepared ${item.fileName} for ${item.moduleLabel}`, "AI Assistant", "Pending");
+  resetAiChatFileInput();
+  showToast(`Prepared for ${item.moduleLabel} confirmation.`);
+}
+
+function routeOtherAiDocument(selectId) {
+  if (appState.currentRole !== "admin") {
+    return;
+  }
+
+  const select = getById(selectId);
+  const routePurposeId = select?.value || "guidelines";
+  const extraction = appState.aiAssistant.lastOtherExtraction;
+
+  if (!extraction) {
+    showToast("Process an Other Intramurals Document first.");
+    return;
+  }
+
+  const item = buildPendingAutomationItem(routePurposeId, extraction.fileName, "other", extraction.instruction || "");
+  appState.pendingAutomation.unshift(item);
+  renderPendingConfirmations();
+  addAiProcessingPreview(item);
+  addAuditRecord(`Routed ${item.fileName} to ${item.moduleLabel}`, "AI Assistant", "Pending");
+
+  if (select) {
+    select.disabled = true;
+    select.closest(".chat-route-panel")?.querySelector("button")?.setAttribute("disabled", "true");
+  }
+
+  showToast(`Sent to ${item.moduleLabel} for confirmation.`);
+}
+
+function openPendingAutomationModule(id) {
+  const item = appState.pendingAutomation.find((pending) => pending.id === id);
+
+  if (!item) {
+    return;
+  }
+
+  activateSection(item.moduleSection);
+}
+
 function findScheduleItem(titleFragment) {
   return scheduleData.find((item) => item.title.toLowerCase().includes(titleFragment.toLowerCase()));
 }
@@ -1909,6 +2539,11 @@ function getBotReply(query) {
       .map((item) => `${item.title} on ${item.eventDate} at ${item.time}`)
       .join("; ");
     return `Upcoming schedule highlights: ${nextTwo}.`;
+  }
+
+  if (normalized.includes("announcement") || normalized.includes("announcements")) {
+    const latestAnnouncement = announcementData[0];
+    return `Latest approved announcement: ${latestAnnouncement.title}. ${latestAnnouncement.copy}`;
   }
 
   if (normalized.includes("dress") && normalized.includes("cheerdance")) {
@@ -2472,7 +3107,6 @@ function uploadGuidelinePrototype() {
 
   renderGuidelineRecords();
   renderStudentGuidelinesPreview();
-  renderSourceDocs();
   addAuditRecord(`Uploaded guideline record for ${eventName}`, "Guidelines Management", "Published");
   showToast("Guideline uploaded to the prototype library.");
 }
@@ -2484,19 +3118,18 @@ function editGuideline(id) {
     return;
   }
 
-  const titleInput = getById("guidelineTitleInput");
-  const eventSelect = getById("guidelineEventSelect");
+  const nextSummary = window.prompt("Edit guideline summary:", record.summary);
 
-  if (titleInput) {
-    titleInput.value = record.title;
+  if (nextSummary === null) {
+    return;
   }
 
-  if (eventSelect) {
-    eventSelect.value = record.event;
-  }
-
-  activateSection("guidelines");
-  showToast("Guideline loaded into the prototype editor.");
+  record.summary = nextSummary.trim() || record.summary;
+  record.updated = getCurrentTimestamp();
+  renderGuidelineRecords();
+  renderStudentGuidelinesPreview();
+  addAuditRecord(`Edited guideline record ${record.title}`, "Guidelines Management", "Updated");
+  showToast("Guideline summary updated.");
 }
 
 function deleteGuideline(id) {
@@ -2509,7 +3142,6 @@ function deleteGuideline(id) {
   guidelineRecords.splice(index, 1);
   renderGuidelineRecords();
   renderStudentGuidelinesPreview();
-  renderSourceDocs();
   addAuditRecord("Deleted a guideline record", "Guidelines Management", "Dismissed");
   showToast("Guideline removed from the prototype list.");
 }
@@ -2743,7 +3375,8 @@ function renderAll() {
   renderFeedback();
   renderAuditTrail();
   renderBackupSnapshots();
-  renderSourceDocs();
+  renderPendingConfirmations();
+  renderAiSelectedFileChip();
   syncLiveScoreDisplays();
   updateDate();
   renderScannerState();
@@ -2755,6 +3388,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterTabs = [...document.querySelectorAll(".filter-tab")];
   const chatInput = getById("chatInput");
   const chatSendBtn = getById("chatSendBtn");
+  const aiFilePlusBtn = getById("aiFilePlusBtn");
+  const aiChatFileInput = getById("aiChatFileInput");
+  const aiPurposeSelect = getById("aiPurposeSelect");
   const notifBtn = getById("notifBtn");
   const notifDropdown = getById("notifDropdown");
   const mobileMenuBtn = getById("mobileMenuBtn");
@@ -2806,6 +3442,19 @@ document.addEventListener("DOMContentLoaded", () => {
   if (chatInput && chatSendBtn) {
     const sendChatMessage = () => {
       const text = chatInput.value.trim();
+      const selectedFile = aiChatFileInput?.files?.[0];
+
+      if (selectedFile && appState.currentRole === "admin") {
+        if (!appState.aiAssistant.selectedPurpose) {
+          showToast("Choose the file type before sending.");
+          return;
+        }
+
+        processAiSelectedFile(appState.aiAssistant.selectedPurpose, null, text);
+        chatInput.value = "";
+
+        return;
+      }
 
       if (!text) {
         return;
@@ -2827,6 +3476,38 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  aiFilePlusBtn?.addEventListener("click", () => {
+    if (appState.currentRole !== "admin") {
+      return;
+    }
+
+    if (aiPurposeSelect?.value && aiPurposeSelect.value !== appState.aiAssistant.selectedPurpose) {
+      selectAiFilePurpose(aiPurposeSelect.value);
+    }
+
+    aiChatFileInput?.click();
+  });
+
+  aiPurposeSelect?.addEventListener("change", () => {
+    if (aiPurposeSelect.value) {
+      selectAiFilePurpose(aiPurposeSelect.value);
+    } else {
+      appState.aiAssistant.selectedPurpose = null;
+      setAiPurposeButtonState("");
+      if (aiChatFileInput) {
+        aiChatFileInput.accept = "";
+      }
+    }
+  });
+
+  aiChatFileInput?.addEventListener("change", () => {
+    renderAiSelectedFileChip();
+
+    if (aiChatFileInput.files?.[0]) {
+      chatInput.placeholder = "Enter instruction for this document...";
+    }
+  });
 
   if (notifBtn && notifDropdown) {
     notifBtn.addEventListener("click", (event) => {
@@ -2937,3 +3618,10 @@ window.changeScore = changeScore;
 window.editGuideline = editGuideline;
 window.deleteGuideline = deleteGuideline;
 window.setDisputeStatus = setDisputeStatus;
+window.selectAiFilePurpose = selectAiFilePurpose;
+window.processAiSelectedFile = processAiSelectedFile;
+window.routeOtherAiDocument = routeOtherAiDocument;
+window.openPendingAutomationModule = openPendingAutomationModule;
+window.approvePendingAutomation = approvePendingAutomation;
+window.editPendingAutomation = editPendingAutomation;
+window.rejectPendingAutomation = rejectPendingAutomation;
