@@ -12,6 +12,8 @@
 
   --sidebar-width: 288px;
   --header-height: 84px;
+  --topbar-top: 0.85rem;
+  --topbar-x: 1rem;
   --radius-xl: 28px;
   --radius-lg: 22px;
   --radius-md: 16px;
@@ -431,10 +433,6 @@ svg {
   opacity: 0.9;
 }
 
-.card-link:hover {
-  opacity: 1;
-}
-
 .card-badge.live,
 .live-pill,
 .live-indicator {
@@ -731,11 +729,6 @@ svg {
   font-weight: 600;
 }
 
-.nav-item:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.06);
-}
-
 .nav-item.active {
   color: #fff;
   background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.82), rgba(var(--primary-rgb), 0.64));
@@ -852,8 +845,10 @@ svg {
 }
 
 .topbar {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: var(--topbar-top);
+  right: var(--topbar-x);
+  left: calc(var(--sidebar-width) + var(--topbar-x));
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -861,7 +856,7 @@ svg {
   gap: 1.2rem;
   min-height: var(--header-height);
   padding: 1rem 2rem;
-  margin: 0.85rem 1rem 0;
+  margin: 0;
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -948,7 +943,7 @@ svg {
 
 .notif-dropdown {
   position: fixed;
-  top: calc(1rem + var(--header-height));
+  top: calc(var(--topbar-top) + var(--header-height) + 0.55rem);
   right: 2rem;
   width: min(360px, calc(100vw - 2rem));
   padding: 1rem;
@@ -1020,7 +1015,7 @@ svg {
 }
 
 .content-area {
-  padding: 1.5rem 2rem 2rem;
+  padding: calc(var(--header-height) + var(--topbar-top) + 1.5rem) 2rem 2rem;
 }
 
 .section {
@@ -1176,17 +1171,6 @@ svg {
   height: 170px;
   border-radius: 50%;
   background: rgba(var(--primary-rgb), 0.08);
-}
-
-.stat-card:hover,
-.dash-card:hover,
-.event-card:hover,
-.profile-card:hover,
-.ann-card:hover,
-.report-card:hover,
-.settings-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
 }
 
 .stat-icon {
@@ -1513,13 +1497,6 @@ svg {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.medal-table tbody tr:hover,
-.standings-table tbody tr:hover,
-.att-table tbody tr:hover,
-.data-table tbody tr:hover {
-  background: rgba(var(--primary-rgb), 0.04);
 }
 
 .top-row,
@@ -2938,8 +2915,11 @@ textarea.form-input {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  :root {
+    --topbar-x: 0.75rem;
+  }
+
   .topbar {
-    margin-inline: 0.75rem;
     padding-inline: 1.2rem;
   }
 
@@ -2975,6 +2955,10 @@ textarea.form-input {
     margin-left: 0;
   }
 
+  .topbar {
+    left: var(--topbar-x);
+  }
+
   .sidebar-toggle,
   .mobile-menu-btn {
     display: grid;
@@ -2995,6 +2979,10 @@ textarea.form-input {
 }
 
 @media (max-width: 760px) {
+  :root {
+    --header-height: 148px;
+  }
+
   .topbar {
     flex-wrap: wrap;
     align-items: stretch;
@@ -3068,6 +3056,10 @@ textarea.form-input {
 }
 
 @media (max-width: 560px) {
+  :root {
+    --topbar-top: 0.65rem;
+  }
+
   .topbar {
     border-radius: 20px;
   }
@@ -3122,7 +3114,7 @@ textarea.form-input {
   }
 
   .content-area {
-    padding: 1rem;
+    padding: calc(var(--header-height) + var(--topbar-top) + 1rem) 1rem 1rem;
   }
 
   .section-hero,
@@ -3226,13 +3218,6 @@ textarea.form-input {
     border: 1px solid var(--border);
   }
 
-  .medal-table tbody tr:hover,
-  .standings-table tbody tr:hover,
-  .att-table tbody tr:hover,
-  .data-table tbody tr:hover {
-    background: var(--surface-2);
-  }
-
   .medal-table td,
   .standings-table td,
   .att-table td,
@@ -3288,7 +3273,7 @@ textarea.form-input {
   }
 
   .notif-dropdown {
-    top: calc(0.8rem + var(--header-height));
+    top: calc(var(--topbar-top) + var(--header-height) + 0.55rem);
     right: 0.8rem;
     width: calc(100vw - 1.6rem);
   }
